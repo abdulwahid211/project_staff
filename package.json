@@ -1,5 +1,5 @@
 {
-  "name": "Land Sea Staffing",
+  "name": "Land_Sea_Staffing",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -17,8 +17,10 @@
     "@types/react": "^17.0.22",
     "@types/react-dom": "^17.0.9",
     "bootstrap": "^5.1.1",
+    "cors": "^2.8.5",
     "css-loader": "^6.3.0",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sass": "^1.41.1",

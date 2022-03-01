@@ -28,3 +28,6 @@ CREATE TABLE AppliedJobs (
     ApplicantID int,
     VacancyID int
 );
+
+INSERT INTO Applicants (ApplicantID, LastName, FirstName, City)
+VALUES (25, 'Erichsen', 'Skagen 21', 'Mosko');
