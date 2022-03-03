@@ -1,29 +1,27 @@
 import * as express from 'express';
-const sql = require("../../db/sql/db.js");
+import applicantsRouter from './api/routes/Applicants';
+
+const routers = express.Router();
+
+// router.get('/api/hello', (req, res, next) => {
+//   sql.query("SELECT * FROM Applicants;",  (err:any, result:any[]) => {
+//           if (err) throw err;
+//           res.json(result);
+//           console.log(result);
+//         });
+// });
+
+routers.use('/apple', applicantsRouter)
 
 
-
-const router = express.Router();
-
-router.get('/api/hello', (req, res, next) => {
-    sql.connect(function(err,connection) {
-        if (err) throw err;
-        connection.query("SELECT * FROM Applicants = 'Park Lane 38'", function (err, result) {
-          if (err) throw err;
-          res.json('Result:'+result);
-          console.log(result);
-        });
-      });
-});
-
-
-router.get('/api/hena', (req, res, next) => {
+routers.get('/api/hena', (req, res, next) => {
     res.json('Ms Hena Aktar');
 });
 
 
-router.get('/api/abzy', (req, res, next) => {
+routers.get('/api/abzy', (req, res, next) => {
     res.json('Abzy was here!');
+    next()
 });
 
-export default router;
+export default routers
