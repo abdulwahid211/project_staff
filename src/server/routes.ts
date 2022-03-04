@@ -1,5 +1,5 @@
 import * as express from 'express';
-import applicantsRouter from './api/routes/Applicants';
+import applicantsRouter from './api/routes/applicantRoutes';
 
 const routers = express.Router();
 

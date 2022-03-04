@@ -30,4 +30,4 @@ CREATE TABLE AppliedJobs (
 );
 
 INSERT INTO Applicants (ApplicantID, LastName, FirstName, City)
-VALUES (29, 'Hena', 'Aktar', 'Birmingham');
+VALUES (12, 'James', 'Robertson', 'Manchester');

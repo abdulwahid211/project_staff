@@ -1,14 +1,23 @@
-import { Router, Request, Response} from 'express'
+import { Router, Request, Response } from 'express'
 import * as applicantsController from '../controllers/applicantController'
-import { CreateApplicantDTO, FilterApplicantsDTO, UpdateApplicantDTO } from '../dto/applicantDto'
+import { GetAllApplicantsFilters } from '../../db/dal/types'
+
 const applicantsRouter = Router()
+
 applicantsRouter.get('/', async (req: Request, res: Response) => {
-    console.log("TEST 1 2 3")
-    const filters: FilterApplicantsDTO = req.query
+    const filters: GetAllApplicantsFilters = req.query
     console.log(filters)
     const results = await applicantsController.getAll(filters)
     return res.status(200).send(results)
 
+})
+
+applicantsRouter.get('/:id', async (req: Request, res: Response) => {
+    console.log("GOt a fukin problem!! "+req.params.id)
+    const applicantId = Number(req.params.id)
+    console.log("GOt a fukin problem!! "+applicantId)
+    const results = await applicantsController.findById(applicantId)
+    return res.status(200).send(results)
 })
 // applicantsRouter.put('/:id', () => {
 //     // update ingredient

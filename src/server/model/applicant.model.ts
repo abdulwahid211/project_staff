@@ -3,7 +3,7 @@ import { SequeliseConnection } from '../../../db/sql/config';
 import {IApplicants} from '../interfaces/applicantInterfaces'
 
 export interface ApplicantInput extends Optional<IApplicants, 'ApplicantID'> { }
-export interface ApplicantOutput extends Required<IApplicants> { }
+export interface ApplicantOutput extends Required<Applicants> { }
 
 export class Applicants extends Model<ApplicantInput, ApplicantOutput> implements IApplicants {
     public ApplicantID!: number;
@@ -11,7 +11,6 @@ export class Applicants extends Model<ApplicantInput, ApplicantOutput> implement
     public FirstName!: string;
     public Address!: string;
     public City!: string;
-
 }
 
  Applicants.init({
