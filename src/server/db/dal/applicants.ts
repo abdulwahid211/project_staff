@@ -32,3 +32,10 @@ export const findById = async (applicantId: number): Promise<ApplicantOutput> =>
     const Applicant = await Applicants.findByPk(applicantId)
     return Applicant;
 }
+
+export const updateApplicant = async (applicantId:number, payload:ApplicantInput): Promise<ApplicantOutput> =>{
+    const Applicant = await Applicants.findByPk(applicantId)
+
+    const updatedApplicant = await Applicant.update(payload)
+    return updatedApplicant
+}

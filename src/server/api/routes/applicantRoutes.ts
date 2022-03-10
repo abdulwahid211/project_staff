@@ -1,9 +1,11 @@
 import { Router, Request, Response } from 'express'
 import * as applicantsController from '../controllers/applicantController'
 import { GetAllApplicantsFilters } from '../../db/dal/types'
+import { Applicants, ApplicantInput } from '../../model/applicant.model';
 
 const applicantsRouter = Router()
 
+// get all applicants 
 applicantsRouter.get('/', async (req: Request, res: Response) => {
     const filters: GetAllApplicantsFilters = req.query
     console.log(filters)
@@ -12,16 +14,25 @@ applicantsRouter.get('/', async (req: Request, res: Response) => {
 
 })
 
+// get individual applicant by id  
 applicantsRouter.get('/:id', async (req: Request, res: Response) => {
-    console.log("GOt a fukin problem!! "+req.params.id)
     const applicantId = Number(req.params.id)
-    console.log("GOt a fukin problem!! "+applicantId)
     const results = await applicantsController.findById(applicantId)
     return res.status(200).send(results)
 })
-// applicantsRouter.put('/:id', () => {
-//     // update ingredient
-// })
+
+
+applicantsRouter.put('/:id', async (req: Request, res:Response) => {
+    // update ingredient
+    const applicants:ApplicantInput = req.body;
+    const applicantsId = Number(req.params.id);
+
+
+
+
+
+
+})
 // applicantsRouter.delete('/:id', () => {
 //     // delete ingredient
 // })
