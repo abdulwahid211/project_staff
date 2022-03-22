@@ -11,7 +11,7 @@ const routers = express.Router();
 //         });
 // });
 
-routers.use('/apple', applicantsRouter)
+routers.use('/applicants', applicantsRouter)
 
 
 routers.get('/api/hena', (req, res, next) => {

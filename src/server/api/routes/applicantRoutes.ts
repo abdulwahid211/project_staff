@@ -22,16 +22,13 @@ applicantsRouter.get('/:id', async (req: Request, res: Response) => {
 })
 
 
-applicantsRouter.put('/:id', async (req: Request, res:Response) => {
+applicantsRouter.put('/update/:id', async (req: Request, res:Response) => {
+    console.log("yaaah");
     // update ingredient
-    const applicants:ApplicantInput = req.body;
+    const applicants: Applicants = req.body;
     const applicantsId = Number(req.params.id);
-
-
-
-
-
-
+    var updatedApplicants = await applicantsController.updateApplicants(applicantsId,applicants);
+    return res.status(200).send(updatedApplicants);
 })
 // applicantsRouter.delete('/:id', () => {
 //     // delete ingredient
