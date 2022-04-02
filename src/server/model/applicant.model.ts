@@ -11,6 +11,9 @@ export class Applicants extends Model<ApplicantInput, ApplicantOutput> implement
     public FirstName!: string;
     public Address!: string;
     public City!: string;
+    public Postcode!: string;
+    public Email!: string;
+    public Password!: string;
 }
 
  Applicants.init({
@@ -32,6 +35,16 @@ export class Applicants extends Model<ApplicantInput, ApplicantOutput> implement
     City: {
         type: DataTypes.TEXT
     },
+    Email: {
+        type: DataTypes.TEXT
+    },
+    Postcode: {
+        type: DataTypes.TEXT
+    },
+    Password: {
+        type: DataTypes.TEXT
+    }
+    
     
 },
     {

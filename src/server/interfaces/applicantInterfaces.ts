@@ -3,5 +3,8 @@ export interface IApplicants {
     LastName: string,
     FirstName: string,
     Address: string,
-    City: string
+    City: string,
+    Postcode: string,
+    Email: string,
+    Password:string 
 }

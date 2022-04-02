@@ -16,11 +16,14 @@ export const findById = async (applicantID: number): Promise<Applicants> => {
 export const updateApplicants = async(applicantsID:number,payload:Applicants): Promise<Applicants> =>{
     var result:Applicants =  (await applicantsDal.updateApplicant(applicantsID,payload));
     return result
-    
 }
 
 export const createApplicant = async(applicant:ApplicantInput): Promise<Boolean> =>{
     var result =  (await applicantsDal.createApplicant(applicant));
     return result
-    
+}
+
+export const deleteApplicant = async (applicantID: number): Promise<Boolean> => {
+  var result =  applicantsDal.deleteApplicant(applicantID)
+  return result
 }

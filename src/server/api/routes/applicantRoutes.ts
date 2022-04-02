@@ -22,16 +22,21 @@ applicantsRouter.get('/:id', async (req: Request, res: Response) => {
 })
 
 
-applicantsRouter.put('/update/:id', async (req: Request, res: Response) => {
-    // update ingredient
+applicantsRouter.put('/:id', async (req: Request, res: Response) => {
     const applicants: Applicants = req.body;
     const applicantsId = Number(req.params.id);
     var updatedApplicants = await applicantsController.updateApplicants(applicantsId, applicants);
     return res.status(200).send(updatedApplicants);
 })
-// applicantsRouter.delete('/:id', () => {
-//     // delete ingredient
-// })
+
+
+applicantsRouter.delete('/:id', async (req: Request, res: Response) => {
+    const applicantsId = Number(req.params.id);
+    var deleteApplicant = await applicantsController.deleteApplicant(applicantsId);
+    return res.status(200).send(deleteApplicant);
+})
+
+
 applicantsRouter.post('/', async (req: Request, res: Response) => {
     const applicant: ApplicantInput = req.body;
     var newApplicant = await applicantsController.createApplicant(applicant)

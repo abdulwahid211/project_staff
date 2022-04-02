@@ -21,7 +21,9 @@ export const findByApplicant = async (applicants: IApplicants): Promise<Applican
             LastName: applicants.LastName,
             ApplicantID: applicants.ApplicantID,
             Address: applicants.Address,
-            City: applicants.City
+            City: applicants.City,
+            Postcode: applicants.Postcode,
+            Email: applicants.Email
 
         }
     })
@@ -33,13 +35,26 @@ export const findById = async (applicantId: number): Promise<ApplicantOutput> =>
     return Applicant;
 }
 
-export const updateApplicant = async (applicantId:number, payload:ApplicantInput): Promise<ApplicantOutput> =>{
+export const updateApplicant = async (applicantId: number, payload: ApplicantInput): Promise<ApplicantOutput> => {
     const Applicant = await Applicants.findByPk(applicantId)
     const updatedApplicant = await Applicant.update(payload)
     return updatedApplicant
 }
 
-export const createApplicant = async (applicant:ApplicantInput): Promise<boolean> =>{
-    const newApplicant = await Applicants.create({FirstName: applicant.FirstName, LastName: applicant.LastName, Address: applicant.Address, City:applicant.City});
+export const createApplicant = async (applicant: ApplicantInput): Promise<boolean> => {
+    const newApplicant = await Applicants.create({
+        FirstName: applicant.FirstName, LastName: applicant.LastName, Address: applicant.Address, City: applicant.City,
+        Postcode: applicant.Postcode, Email: applicant.Email, Password: applicant.Password
+    });
     return !!newApplicant
+}
+
+
+export const deleteApplicant = async (applicantId: number): Promise<Boolean> => {
+    const Applicant = await Applicants.destroy({
+        where: {
+            ApplicantID: applicantId
+        }
+    })
+    return !!Applicant;
 }
