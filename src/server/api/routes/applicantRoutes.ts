@@ -22,18 +22,20 @@ applicantsRouter.get('/:id', async (req: Request, res: Response) => {
 })
 
 
-applicantsRouter.put('/update/:id', async (req: Request, res:Response) => {
-    console.log("yaaah");
+applicantsRouter.put('/update/:id', async (req: Request, res: Response) => {
     // update ingredient
     const applicants: Applicants = req.body;
     const applicantsId = Number(req.params.id);
-    var updatedApplicants = await applicantsController.updateApplicants(applicantsId,applicants);
+    var updatedApplicants = await applicantsController.updateApplicants(applicantsId, applicants);
     return res.status(200).send(updatedApplicants);
 })
 // applicantsRouter.delete('/:id', () => {
 //     // delete ingredient
 // })
-// applicantsRouter.post('/', () => {
-//     // create ingredient
+applicantsRouter.post('/', async (req: Request, res: Response) => {
+    const applicant: ApplicantInput = req.body;
+    var newApplicant = await applicantsController.createApplicant(applicant)
+    return res.status(200).send(newApplicant)
+})
 
 export default applicantsRouter

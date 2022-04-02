@@ -36,6 +36,10 @@ export const findById = async (applicantId: number): Promise<ApplicantOutput> =>
 export const updateApplicant = async (applicantId:number, payload:ApplicantInput): Promise<ApplicantOutput> =>{
     const Applicant = await Applicants.findByPk(applicantId)
     const updatedApplicant = await Applicant.update(payload)
-    console.log("resultsss "+JSON.stringify(updatedApplicant))
     return updatedApplicant
+}
+
+export const createApplicant = async (applicant:ApplicantInput): Promise<boolean> =>{
+    const newApplicant = await Applicants.create({FirstName: applicant.FirstName, LastName: applicant.LastName, Address: applicant.Address, City:applicant.City});
+    return !!newApplicant
 }
