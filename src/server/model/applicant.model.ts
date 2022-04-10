@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { SequeliseConnection } from '../../../db/sql/config';
-import {IApplicants} from '../interfaces/applicantInterfaces'
+import {IApplicants} from '../interfaces/Modelnterfaces'
 
 export interface ApplicantInput extends Optional<IApplicants, 'ApplicantID'> { }
 export interface ApplicantOutput extends Required<Applicants> { }
@@ -44,8 +44,6 @@ export class Applicants extends Model<ApplicantInput, ApplicantOutput> implement
     Password: {
         type: DataTypes.TEXT
     }
-    
-    
 },
     {
         sequelize: SequeliseConnection,

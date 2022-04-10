@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { SequeliseConnection } from '../../../db/sql/config';
-import {IEmployer} from '../interfaces/applicantInterfaces'
+import {IEmployer} from '../interfaces/Modelnterfaces'
 
 export interface EmployerInput extends Optional<IEmployer, 'EmployerID'> { }
 export interface EmployerOutput extends Required<Employer> { }

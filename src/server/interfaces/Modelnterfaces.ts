@@ -22,7 +22,7 @@ export interface IEmployer {
 export interface IVacancies {
     VacancyID: number,
     Title: string,
-    EmployerID: string,
+    EmployerID: number,
     Created: Date,
     Description: string
 }
