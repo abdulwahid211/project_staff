@@ -1,11 +1,9 @@
-import { IApplicants } from '../../interfaces/applicantInterfaces'
-import { GetAllApplicantsFilters } from '../../db/dal/types'
-import { ApplicantInput, ApplicantOutput, Applicants } from '../../model/applicant.model';
+import { IApplicants } from '../../interfaces/Modelnterfaces'
+import { GetAllFilters } from '../../db/dal/types'
+import { ApplicantInput, Applicants } from '../../model/applicant.model';
 import * as applicantsDal from '../../db/dal/applicants'
-import applicantsRouter from '../routes/applicantRoutes';
-import { updateApplicant } from '../../db/dal/applicants';
 
-export const getAll = async (filters: GetAllApplicantsFilters): Promise<IApplicants[]> => {
+export const getAll = async (filters: GetAllFilters): Promise<IApplicants[]> => {
     return (await applicantsDal.getAll(filters))
 }
 

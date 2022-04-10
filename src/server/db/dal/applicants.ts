@@ -1,11 +1,11 @@
 
 import { and, Op } from 'sequelize'
 import { Applicants } from '../../model/applicant.model';
-import { GetAllApplicantsFilters } from './types'
+import { GetAllFilters } from './types'
 import { ApplicantInput, ApplicantOutput } from '../../model/applicant.model'
-import { IApplicants } from '../../interfaces/applicantInterfaces';
+import { IApplicants } from '../../interfaces/Modelnterfaces';
 
-export const getAll = async (filters?: GetAllApplicantsFilters): Promise<ApplicantOutput[]> => {
+export const getAll = async (filters?: GetAllFilters): Promise<ApplicantOutput[]> => {
     return Applicants.findAll({
         where: {
             ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } })

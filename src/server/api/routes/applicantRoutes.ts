@@ -1,13 +1,13 @@
 import { Router, Request, Response } from 'express'
 import * as applicantsController from '../controllers/applicantController'
-import { GetAllApplicantsFilters } from '../../db/dal/types'
+import { GetAllFilters } from '../../db/dal/types'
 import { Applicants, ApplicantInput } from '../../model/applicant.model';
 
 const applicantsRouter = Router()
 
 // get all applicants 
 applicantsRouter.get('/', async (req: Request, res: Response) => {
-    const filters: GetAllApplicantsFilters = req.query
+    const filters: GetAllFilters = req.query
     console.log(filters)
     const results = await applicantsController.getAll(filters)
     return res.status(200).send(results)

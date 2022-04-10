@@ -1,17 +1,12 @@
 import * as express from 'express';
 import applicantsRouter from './api/routes/applicantRoutes';
-
+import employerssRouter from './api/routes/employerRoutes';
+import adminRouter from './api/routes/adminRoutes';
 const routers = express.Router();
 
-// router.get('/api/hello', (req, res, next) => {
-//   sql.query("SELECT * FROM Applicants;",  (err:any, result:any[]) => {
-//           if (err) throw err;
-//           res.json(result);
-//           console.log(result);
-//         });
-// });
-
 routers.use('/applicants', applicantsRouter)
+routers.use('/employers', employerssRouter)
+routers.use('/adminRouter', adminRouter)
 
 
 routers.get('/api/hena', (req, res, next) => {
