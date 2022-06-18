@@ -11,13 +11,19 @@ export const findById = async (applicantID: number): Promise<Applicants> => {
     return (await  applicantsDal.findById(applicantID))
 }
 
+export const findByEmail = async (email: string): Promise<Boolean> => {
+    return (await  applicantsDal.findByApplicantEmail(email))
+}
+
 export const updateApplicants = async(applicantsID:number,payload:Applicants): Promise<Applicants> =>{
-    var result:Applicants =  (await applicantsDal.updateApplicant(applicantsID,payload));
+    var result : Applicants =  (await applicantsDal.updateApplicant(applicantsID,payload));
     return result
 }
 
 export const createApplicant = async(applicant:ApplicantInput): Promise<Boolean> =>{
+  
     var result =  (await applicantsDal.createApplicant(applicant));
+    console.log("Results "+result)
     return result
 }
 

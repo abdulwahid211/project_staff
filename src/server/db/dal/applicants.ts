@@ -2,10 +2,11 @@
 import { and, Op } from 'sequelize'
 import { Applicants } from '../../model/applicant.model';
 import { GetAllFilters } from './types'
-import { ApplicantInput, ApplicantOutput } from '../../model/applicant.model'
+import { ApplicantInput } from '../../model/applicant.model'
 import { IApplicants } from '../../interfaces/Modelnterfaces';
+import { PasswordHash } from '../../util/passwordUtil';
 
-export const getAll = async (filters?: GetAllFilters): Promise<ApplicantOutput[]> => {
+export const getAll = async (filters?: GetAllFilters): Promise<ApplicantInput[]> => {
     return Applicants.findAll({
         where: {
             ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } })
@@ -14,8 +15,8 @@ export const getAll = async (filters?: GetAllFilters): Promise<ApplicantOutput[]
     })
 }
 
-export const findByApplicant = async (applicants: IApplicants): Promise<ApplicantOutput> => {
-    const Applicant = await Applicants.findOne({
+export const findByApplicant = async (applicants: IApplicants): Promise<ApplicantInput> => {
+    const applicant = await Applicants.findOne({
         where: {
             FirstName: applicants.FirstName,
             LastName: applicants.LastName,
@@ -24,27 +25,40 @@ export const findByApplicant = async (applicants: IApplicants): Promise<Applican
             City: applicants.City,
             Postcode: applicants.Postcode,
             Email: applicants.Email
-
         }
     })
-    return Applicant;
+    return applicant;
 }
 
-export const findById = async (applicantId: number): Promise<ApplicantOutput> => {
-    const Applicant = await Applicants.findByPk(applicantId)
-    return Applicant;
+export const findByApplicantEmail = async (email: string): Promise<Boolean> => {
+    const applicant = await Applicants.findOne({
+        where: {
+            Email: email
+        }
+    })
+
+    console.log(!!applicant);
+    return !!applicant;
 }
 
-export const updateApplicant = async (applicantId: number, payload: ApplicantInput): Promise<ApplicantOutput> => {
-    const Applicant = await Applicants.findByPk(applicantId)
-    const updatedApplicant = await Applicant.update(payload)
+export const findById = async (applicantId: number): Promise<ApplicantInput> => {
+    const applicant = await Applicants.findByPk(applicantId)
+    return applicant;
+}
+
+export const updateApplicant = async (applicantId: number, payload: ApplicantInput): Promise<Applicants> => {
+    const applicant = await Applicants.findByPk(applicantId)
+    const updatedApplicant = await applicant.update(payload)
     return updatedApplicant
 }
 
 export const createApplicant = async (applicant: ApplicantInput): Promise<boolean> => {
+
+    const en = await PasswordHash(applicant.Password);
+    console.log("Results "+en)
     const newApplicant = await Applicants.create({
         FirstName: applicant.FirstName, LastName: applicant.LastName, Address: applicant.Address, City: applicant.City,
-        Postcode: applicant.Postcode, Email: applicant.Email, Password: applicant.Password
+        Postcode: applicant.Postcode, Email: applicant.Email, Password:en
     });
     return !!newApplicant
 }

@@ -1,6 +1,6 @@
 import { IVacancies } from '../../interfaces/Modelnterfaces'
 import { GetAllFilters } from '../../db/dal/types'
-import { Vaccancy, VaccancyInput } from '../../model/vaccancy.model';
+import { Vacancy, VacancyInput } from '../../model/vacancy.model';
 import * as VacancyDal from '../../db/dal/vaccancies'
 
 export const getAll = async (filters: GetAllFilters): Promise<IVacancies[]> => {
@@ -11,17 +11,17 @@ export const findById = async (AppliedJobsID: number): Promise<IVacancies> => {
     return (await VacancyDal.findById(AppliedJobsID))
 }
 
-export const updateAppliedJobss = async (AppliedJobssID: number, payload: AppliedJobs): Promise<AppliedJobs> => {
-    var result: AppliedJobs = (await VacancyDal.updateAppliedJobs(AppliedJobssID, payload));
+export const updateVacancy = async (AppliedJobssID: number, payload: Vacancy): Promise<Vacancy> => {
+    var result: Vacancy = (await VacancyDal.updateVacancy(AppliedJobssID, payload));
     return result
 }
 
-export const createAppliedJobs = async (AppliedJobs: AppliedJobsInput): Promise<Boolean> => {
-    var result = (await VacancyDal.createAppliedJobs(AppliedJobs));
+export const createVacancy = async (AppliedJobs: VacancyInput): Promise<Boolean> => {
+    var result = (await VacancyDal.createVacancy(AppliedJobs));
     return result
 }
 
-export const deleteAppliedJobs = async (AppliedJobsID: number): Promise<Boolean> => {
-    var result = VacancyDal.deleteAppliedJobs(AppliedJobsID)
+export const deleteVacancy = async (AppliedJobsID: number): Promise<Boolean> => {
+    var result = VacancyDal.deleteVacancy(AppliedJobsID)
     return result
 }

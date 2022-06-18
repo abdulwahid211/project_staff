@@ -1,7 +1,16 @@
 import * as express from 'express';
 import apiRouter from './routes';
 import dbInit from './db/init';
+
+import * as dotenv from "dotenv";
+import { PasswordHash } from '../server/util/passwordUtil';
+// const en = PasswordHash("applicant.Password");
+// console.log("Results Password "+en)
+
+dotenv.config();
+
 dbInit();
+
 const cors = require("cors");
 var corsOptions = {
   origin: "http://localhost:3000"
@@ -15,8 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(apiRouter);
 
-const port = process.env.PORT || 3000;
-
+const port = process.env.PORT;
 try{
   app.listen(port, () => console.log(`Server listening on port: ${port}`));
 } catch(error){

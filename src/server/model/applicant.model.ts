@@ -3,9 +3,8 @@ import { SequeliseConnection } from '../../../db/sql/config';
 import {IApplicants} from '../interfaces/Modelnterfaces'
 
 export interface ApplicantInput extends Optional<IApplicants, 'ApplicantID'> { }
-export interface ApplicantOutput extends Required<Applicants> { }
 
-export class Applicants extends Model<ApplicantInput, ApplicantOutput> implements IApplicants {
+export class Applicants extends Model<ApplicantInput> implements IApplicants {
     public ApplicantID!: number;
     public LastName!: string;
     public FirstName!: string;

@@ -23,23 +23,23 @@ adminRouter.get('/:id', async (req: Request, res: Response) => {
 
 
 adminRouter.put('/:id', async (req: Request, res: Response) => {
-    const admin: Admin = req.body;
+    const admin: AppliedJobs = req.body;
     const adminId = Number(req.params.id);
-    var updatedadmin = await adminController.updateAdmins(adminId, admin);
+    var updatedadmin = await adminController.updateAppliedJobss(adminId, admin);
     return res.status(200).send(updatedadmin);
 })
 
 
 adminRouter.delete('/:id', async (req: Request, res: Response) => {
     const adminId = Number(req.params.id);
-    var deleteApplicant = await adminController.deleteAdmin(adminId);
+    var deleteApplicant = await adminController.deleteAppliedJobs(adminId);
     return res.status(200).send(deleteApplicant);
 })
 
 
 adminRouter.post('/', async (req: Request, res: Response) => {
-    const applicant: AdminInput = req.body;
-    var newApplicant = await adminController.createAdmin(applicant)
+    const applicant: AppliedJobsInput = req.body;
+    var newApplicant = await adminController.createAppliedJobs(applicant)
     return res.status(200).send(newApplicant)
 })
 

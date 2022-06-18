@@ -1,46 +1,46 @@
 import { Router, Request, Response } from 'express'
-import * as adminController from '../controllers/adminController'
+import * as VacancyController from '../controllers/vacancyController'
 import { GetAllFilters } from '../../db/dal/types'
-import { Admin, AdminInput } from '../../model/admin.model';
+import { Vacancy, VacancyInput } from '../../model/vacancy.model';
 
-const adminRouter = Router()
+const VacancyRouter = Router()
 
-// get all admin 
-adminRouter.get('/', async (req: Request, res: Response) => {
+// get all Vacancy 
+VacancyRouter.get('/', async (req: Request, res: Response) => {
     const filters: GetAllFilters = req.query
     console.log(filters)
-    const results = await adminController.getAll(filters)
+    const results = await VacancyController.getAll(filters)
     return res.status(200).send(results)
 
 })
 
 // get individual applicant by id  
-adminRouter.get('/:id', async (req: Request, res: Response) => {
+VacancyRouter.get('/:id', async (req: Request, res: Response) => {
     const applicantId = Number(req.params.id)
-    const results = await adminController.findById(applicantId)
+    const results = await VacancyController.findById(applicantId)
     return res.status(200).send(results)
 })
 
 
-adminRouter.put('/:id', async (req: Request, res: Response) => {
-    const admin: Admin = req.body;
-    const adminId = Number(req.params.id);
-    var updatedadmin = await adminController.updateAdmins(adminId, admin);
-    return res.status(200).send(updatedadmin);
+VacancyRouter.put('/:id', async (req: Request, res: Response) => {
+    const Vacancy: Vacancy = req.body;
+    const VacancyId = Number(req.params.id);
+    var updatedVacancy = await VacancyController.updateVacancy(VacancyId, Vacancy);
+    return res.status(200).send(updatedVacancy);
 })
 
 
-adminRouter.delete('/:id', async (req: Request, res: Response) => {
-    const adminId = Number(req.params.id);
-    var deleteApplicant = await adminController.deleteAdmin(adminId);
+VacancyRouter.delete('/:id', async (req: Request, res: Response) => {
+    const VacancyId = Number(req.params.id);
+    var deleteApplicant = await VacancyController.deleteVacancy(VacancyId);
     return res.status(200).send(deleteApplicant);
 })
 
 
-adminRouter.post('/', async (req: Request, res: Response) => {
-    const applicant: AdminInput = req.body;
-    var newApplicant = await adminController.createAdmin(applicant)
+VacancyRouter.post('/', async (req: Request, res: Response) => {
+    const applicant: VacancyInput = req.body;
+    var newApplicant = await VacancyController.createVacancy(applicant)
     return res.status(200).send(newApplicant)
 })
 
-export default adminRouter
+export default VacancyRouter

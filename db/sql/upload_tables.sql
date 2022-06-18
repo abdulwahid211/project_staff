@@ -21,16 +21,17 @@ CREATE TABLE Admin (
 );
 
 CREATE TABLE Vacancies (
-    VacancyID int,
+    VacancyID int NOT NULL AUTO_INCREMENT,
     Title varchar(255),
     EmployerID int,
     Created datetime,
+    Description varchar(255),
     PRIMARY KEY (VacancyID),
     FOREIGN KEY (EmployerID) REFERENCES Employer(EmployerID)
 );
 
 CREATE TABLE Employer (
-    EmployerID int,
+    EmployerID int NOT NULL AUTO_INCREMENT,
     Name varchar(255),
     Address varchar(255) NOT NULL,
     City varchar(255) NOT NULL,
@@ -41,7 +42,7 @@ CREATE TABLE Employer (
 );
 
 CREATE TABLE AppliedJobs (
-    AppliedJobsID int,
+    AppliedJobsID int NOT NULL AUTO_INCREMENT,
     ApplicantID int,
     VacancyID int,
     PRIMARY KEY (AppliedJobsID),
@@ -54,3 +55,6 @@ VALUES ( 'James', 'Robertson', 'Causeway', 'Manchester', 'EC1 ASD', 'ABDULK@GMAI
 
 INSERT INTO Applicants ( LastName, FirstName, Address, City, Postcode, Email, Password)
 VALUES ( 'Abdul', 'Wahid', 'Barking Causeway', 'London','EC9 ASD', 'absuhsuh@GMAIL.COM', 'PASSWORD123');
+
+INSERT INTO Employer ( Name, Address, City, Postcode, Email, Password)
+VALUES ( 'Apple', 'Peterbrough', 'London', 'E2 KIO', 'scadcsdfvf@gmail.com', 'PASSWORD');

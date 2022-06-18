@@ -37,10 +37,27 @@ applicantsRouter.delete('/:id', async (req: Request, res: Response) => {
 })
 
 
-applicantsRouter.post('/', async (req: Request, res: Response) => {
+applicantsRouter.post('/register', async (req: Request, res: Response) => {
+   
     const applicant: ApplicantInput = req.body;
-    var newApplicant = await applicantsController.createApplicant(applicant)
-    return res.status(200).send(newApplicant)
+    try {
+
+        const existedUser = await applicantsController.findByEmail(applicant.Email);
+
+        if (existedUser) {
+            res.send("User Already exists");
+        } else {
+
+            var newApplicant = await applicantsController.createApplicant(applicant)
+            return res.status(200).send(newApplicant)
+
+        }
+
+    }
+    catch (err) {
+        console.log("Error");
+        res.status(500).send(err.log)
+    }
 })
 
 export default applicantsRouter
