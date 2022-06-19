@@ -30,15 +30,13 @@ export const findByApplicant = async (applicants: IApplicants): Promise<Applican
     return applicant;
 }
 
-export const findByApplicantEmail = async (email: string): Promise<Boolean> => {
-    const applicant = await Applicants.findOne({
+export const findByApplicantEmail = async (email: string): Promise<Applicants> => {
+    const applicant : Applicants= await Applicants.findOne({
         where: {
             Email: email
         }
     })
-
-    console.log(!!applicant);
-    return !!applicant;
+    return applicant;
 }
 
 export const findById = async (applicantId: number): Promise<ApplicantInput> => {
@@ -54,11 +52,10 @@ export const updateApplicant = async (applicantId: number, payload: ApplicantInp
 
 export const createApplicant = async (applicant: ApplicantInput): Promise<boolean> => {
 
-    const en = await PasswordHash(applicant.Password);
-    console.log("Results "+en)
+    const securedPassword = await PasswordHash(applicant.Password);
     const newApplicant = await Applicants.create({
         FirstName: applicant.FirstName, LastName: applicant.LastName, Address: applicant.Address, City: applicant.City,
-        Postcode: applicant.Postcode, Email: applicant.Email, Password:en
+        Postcode: applicant.Postcode, Email: applicant.Email, Password:securedPassword
     });
     return !!newApplicant
 }
