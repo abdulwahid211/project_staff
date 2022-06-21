@@ -2,10 +2,11 @@
 import { and, Op } from 'sequelize'
 import { Employer } from '../../model/employer.model';
 import { GetAllFilters } from './types'
-import { EmployerInput, EmployerOutput } from '../../model/employer.model'
+import { EmployerAttributes } from '../../model/employer.model'
 import { IEmployer } from '../../interfaces/Modelnterfaces';
+import { PasswordHash } from '../../util/passwordUtil';
 
-export const getAll = async (filters?: GetAllFilters): Promise<EmployerOutput[]> => {
+export const getAll = async (filters?: GetAllFilters): Promise<EmployerAttributes[]> => {
     return Employer.findAll({
         where: {
             ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } })
@@ -14,8 +15,9 @@ export const getAll = async (filters?: GetAllFilters): Promise<EmployerOutput[]>
     })
 }
 
-export const findByEmployer = async (applicants: IEmployer): Promise<EmployerOutput> => {
-    const Applicant = await Employer.findOne({
+export const findByEmployer = async (applicants: IEmployer): Promise<EmployerAttributes> => {
+    let Applicant;
+    Applicant = await Employer.findOne({
         where: {
             Name: applicants.Name,
             Email: applicants.Email
@@ -24,21 +26,35 @@ export const findByEmployer = async (applicants: IEmployer): Promise<EmployerOut
     return Applicant;
 }
 
-export const findById = async (employerId: number): Promise<EmployerOutput> => {
-    const employer = await Employer.findByPk(employerId)
+export const findById = async (employerId: number): Promise<EmployerAttributes> => {
+    let employer;
+    employer = await Employer.findByPk(employerId)
     return employer;
 }
 
-export const updateEmployer = async (employerId: number, payload: EmployerInput): Promise<EmployerOutput> => {
-    const employer = await Employer.findByPk(employerId)
-    const updatedEmployer = await employer.update(payload)
+export const findByEmployerEmail = async (email: string): Promise<EmployerAttributes> => {
+    let result;
+    result = await Employer.findOne({
+        where: {
+            Email: email
+        }
+    })
+    return result;
+}
+
+export const updateEmployer = async (employerId: number, payload: EmployerAttributes): Promise<EmployerAttributes> => {
+    let employer;
+    let updatedEmployer;
+    employer = await Employer.findByPk(employerId)
+    updatedEmployer = await employer.update(payload)
     return updatedEmployer
 }
 
-export const createEmployer = async (employer: EmployerInput): Promise<boolean> => {
+export const createEmployer = async (employer: EmployerAttributes): Promise<boolean> => {
+    const securedPassword = await PasswordHash(employer.Password);
     const newApplicant = await Employer.create({
         Name: employer.Name, Address: employer.Address, City: employer.City, Email: employer.Email,
-        Postcode: employer.Postcode,  Password: employer.Password
+        Postcode: employer.Postcode, Password: securedPassword
     });
     return !!newApplicant
 }

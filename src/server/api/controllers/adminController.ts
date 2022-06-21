@@ -1,22 +1,26 @@
 import { IAdmin } from '../../interfaces/Modelnterfaces'
 import { GetAllFilters } from '../../db/dal/types'
-import { AdminInput, Admin } from '../../model/admin.model';
+import { AdminAttributes, Admin } from '../../model/admin.model'
 import * as AdminsDal from '../../db/dal/Admin'
 
-export const getAll = async (filters: GetAllFilters): Promise<IAdmin[]> => {
+export const getAll = async (filters: GetAllFilters): Promise<AdminAttributes[]> => {
     return (await AdminsDal.getAll(filters))
 }
 
-export const findById = async (AdminID: number): Promise<Admin> => {
+export const findById = async (AdminID: number): Promise<AdminAttributes> => {
     return (await  AdminsDal.findById(AdminID))
 }
 
-export const updateAdmins = async(AdminsID:number,payload:Admin): Promise<Admin> =>{
-    var result:Admin =  (await AdminsDal.updateAdmin(AdminsID,payload));
+export const findByEmail = async (email: string): Promise<AdminAttributes> => {
+    return (await  AdminsDal.findByAdminEmail(email))
+}
+
+export const updateAdmins = async(AdminsID:number,payload:Admin): Promise<AdminAttributes> =>{
+    var result =  (await AdminsDal.updateAdmin(AdminsID,payload));
     return result
 }
 
-export const createAdmin = async(Admin:AdminInput): Promise<Boolean> =>{
+export const createAdmin = async(Admin:AdminAttributes): Promise<Boolean> =>{
     var result =  (await AdminsDal.createAdmin(Admin));
     return result
 }

@@ -2,10 +2,9 @@ import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { SequeliseConnection } from '../../../db/sql/config';
 import {IAdmin} from '../interfaces/Modelnterfaces'
 
-export interface AdminInput extends Optional<IAdmin, 'AdminID'> { }
-export interface AdminOutput extends Required<Admin> { }
+export interface AdminAttributes extends Optional<IAdmin, 'AdminID'> { }
 
-export class Admin extends Model<AdminInput, AdminOutput> implements IAdmin {
+export class Admin extends Model<AdminAttributes> implements IAdmin {
     public AdminID!: number;
     public LastName!: string;
     public FirstName!: string;
@@ -14,7 +13,6 @@ export class Admin extends Model<AdminInput, AdminOutput> implements IAdmin {
 }
 
  Admin.init({
-
     AdminID: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,

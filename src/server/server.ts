@@ -3,12 +3,7 @@ import apiRouter from './routes';
 import dbInit from './db/init';
 
 import * as dotenv from "dotenv";
-import { PasswordHash } from '../server/util/passwordUtil';
-// const en = PasswordHash("applicant.Password");
-// console.log("Results Password "+en)
-
 dotenv.config();
-
 dbInit();
 
 const cors = require("cors");

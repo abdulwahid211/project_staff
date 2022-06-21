@@ -3,15 +3,15 @@ import { GetAllFilters } from '../../db/dal/types'
 import { ApplicantInput, Applicants } from '../../model/applicant.model';
 import * as applicantsDal from '../../db/dal/applicants'
 
-export const getAll = async (filters: GetAllFilters): Promise<IApplicants[]> => {
+export const getAll = async (filters: GetAllFilters): Promise<ApplicantInput[]> => {
     return (await applicantsDal.getAll(filters))
 }
 
-export const findById = async (applicantID: number): Promise<Applicants> => {
+export const findById = async (applicantID: number): Promise<ApplicantInput> => {
     return (await  applicantsDal.findById(applicantID))
 }
 
-export const findByEmail = async (email: string): Promise<Boolean> => {
+export const findByEmail = async (email: string): Promise<Applicants> => {
     return (await  applicantsDal.findByApplicantEmail(email))
 }
 
@@ -21,9 +21,7 @@ export const updateApplicants = async(applicantsID:number,payload:Applicants): P
 }
 
 export const createApplicant = async(applicant:ApplicantInput): Promise<Boolean> =>{
-  
     var result =  (await applicantsDal.createApplicant(applicant));
-    console.log("Results "+result)
     return result
 }
 

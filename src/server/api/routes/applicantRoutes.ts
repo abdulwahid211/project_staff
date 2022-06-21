@@ -13,18 +13,17 @@ applicantsRouter.get('/', authenticateToken, async (req: Request, res: Response)
     console.log(filters)
     const results = await applicantsController.getAll(filters)
     return res.status(200).send(results)
-
 })
 
 // get individual applicant by id  
-applicantsRouter.get('/:id',authenticateToken, async (req: Request, res: Response) => {
+applicantsRouter.get('/:id', authenticateToken, async (req: Request, res: Response) => {
     const applicantId = Number(req.params.id)
     const results = await applicantsController.findById(applicantId)
     return res.status(200).send(results)
 })
 
 
-applicantsRouter.put('/:id', authenticateToken,async (req: Request, res: Response) => {
+applicantsRouter.put('/:id', authenticateToken, async (req: Request, res: Response) => {
     const applicants: Applicants = req.body;
     const applicantsId = Number(req.params.id);
     var updatedApplicants = await applicantsController.updateApplicants(applicantsId, applicants);
@@ -32,7 +31,7 @@ applicantsRouter.put('/:id', authenticateToken,async (req: Request, res: Respons
 })
 
 
-applicantsRouter.delete('/:id',authenticateToken, async (req: Request, res: Response) => {
+applicantsRouter.delete('/:id', authenticateToken, async (req: Request, res: Response) => {
     const applicantsId = Number(req.params.id);
     var deleteApplicant = await applicantsController.deleteApplicant(applicantsId);
     return res.status(200).send(deleteApplicant);
@@ -52,7 +51,6 @@ applicantsRouter.post('/register', async (req: Request, res: Response) => {
 
             var newApplicantStatus = await applicantsController.createApplicant(applicant)
             return res.status(200).send("Success Applicant has been created " + newApplicantStatus)
-
         }
 
     }

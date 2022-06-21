@@ -2,10 +2,10 @@
 import { and, Op } from 'sequelize'
 import { Admin } from '../../model/admin.model';
 import { GetAllFilters } from './types'
-import { AdminInput, AdminOutput } from '../../model/admin.model'
+import { AdminAttributes } from '../../model/admin.model'
 import { IAdmin } from '../../interfaces/Modelnterfaces';
 
-export const getAll = async (filters?: GetAllFilters): Promise<AdminOutput[]> => {
+export const getAll = async (filters?: GetAllFilters): Promise<AdminAttributes[]> => {
     return Admin.findAll({
         where: {
             ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } })
@@ -14,8 +14,9 @@ export const getAll = async (filters?: GetAllFilters): Promise<AdminOutput[]> =>
     })
 }
 
-export const findByAdmin = async (_Admin: IAdmin): Promise<AdminOutput> => {
-    const _admin = await Admin.findOne({
+export const findByAdmin = async (_Admin: IAdmin): Promise<AdminAttributes> => {
+    var _admin;
+     _admin = await Admin.findOne({
         where: {
             FirstName: _Admin.FirstName,
             LastName: _Admin.LastName,
@@ -27,18 +28,32 @@ export const findByAdmin = async (_Admin: IAdmin): Promise<AdminOutput> => {
     return _admin;
 }
 
-export const findById = async (AdminId: number): Promise<AdminOutput> => {
-    const admin = await Admin.findByPk(AdminId)
+export const findById = async (AdminId: number): Promise<AdminAttributes> => {
+    var admin;
+    admin = await Admin.findByPk(AdminId)
     return admin;
 }
 
-export const updateAdmin = async (AdminId: number, payload: AdminInput): Promise<AdminOutput> => {
-    const admin = await Admin.findByPk(AdminId)
+export const updateAdmin = async (AdminId: number, payload: AdminAttributes): Promise<AdminAttributes> => {
+    var admin;
+    admin = await Admin.findByPk(AdminId)
     const updatedAdmin = await admin.update(payload)
     return updatedAdmin
 }
 
-export const createAdmin = async (admin: AdminInput): Promise<boolean> => {
+export const findByAdminEmail = async (email: string): Promise<Boolean> => {
+    
+    console.log("TEST 1 2 3 4 5"+email)
+    return true
+//    const result = await Admin.findOne({
+//         where: {
+//             Email: email
+//         }
+//     })
+//     return result;
+}
+
+export const createAdmin = async (admin: AdminAttributes): Promise<boolean> => {
     const newAdmin = await Admin.create({
         FirstName: admin.FirstName, LastName: admin.LastName, Email: admin.Email, Password: admin.Password
     });
