@@ -1,10 +1,10 @@
 import { gql } from 'apollo-server'
-import { Admin, GetAllAdmins, CreateAdmin } from '../model/adminModel'
+import { GetAllAdmins, CreateAdmin, DeleteAdmin, UpdateAdmin, GetAdmin } from '../model/adminModel'
 
-export const typeDefs = gql`
-     type Query {
+export const typeAdmins = gql`
+    extend type Query {
         admins: [Admin]
-        admin(ApplicantID: ID!): Admin
+        admin(Email: String!): Admin
     }
     type Admin {
         AdminID: ID!
@@ -14,24 +14,30 @@ export const typeDefs = gql`
         Password: String!
     }
 
-    type Mutation {
+    extend type Mutation {
         createAdmin(
             LastName: String!,
             FirstName: String!,
             Email: String!,
             Password: String!): Boolean!
+        deleteAdmin(
+            Email: String!): Boolean! 
+        updateAdmin(
+            LastName: String!,
+            FirstName: String!,
+            Email: String!,
+            Password: String!): Admin!  
     }
 `
-export const resolvers = {
+export const resolversAdmins = {
     Query: {
-        admins: async () => GetAllAdmins((err: Error, admin: Admin[]) => {
-            if (err) {
-                console.log(err)
-            }
-        })
+        admins: async () => GetAllAdmins(),
+        admin: async (obj, args, context, info) => GetAdmin(args.Email)
     },
 
     Mutation: {
-        createAdmin: async (obj, args, context, info) => CreateAdmin(args)
+        createAdmin: async (obj, args, context, info) => CreateAdmin(args),
+        deleteAdmin: async (obj, args, context, info) => DeleteAdmin(args.Email),
+        updateAdmin: async (obj, args, context, info) => UpdateAdmin(args)
     }
 }

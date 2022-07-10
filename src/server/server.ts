@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { ApolloServer } from 'apollo-server';
-import { typeDefs, resolvers } from './graphql/admin';
+import { typeAdmins, resolversAdmins } from './graphql/admin';
+import {typeApplicants,resolversApplicants} from './graphql/applicant'; 
+import {typeEmployer,resolversEmployers} from './graphql/Employer'; 
 import { Db } from '../server/db/sql/dbConfig'
 import * as dotenv from "dotenv";
 Db.connect();
@@ -21,18 +23,10 @@ app.use(express.static('public'));
 
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  csrfPrevention: true,
+  typeDefs: [typeEmployer,typeApplicants, typeAdmins],
+  resolvers:[resolversEmployers,resolversApplicants, resolversAdmins],
   cache: 'bounded',
 });
-
-
-
-
-// const server = new ApolloServer({
-//   modules: [require('../server/GraphQL/admin')]
-// })
 
 setupApp();
 

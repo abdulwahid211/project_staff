@@ -10,4 +10,13 @@ export const typeDefs = gql`
         ApplicantID: ID!
         VacancyID: ID!
     }
+
+    extend type Mutation {
+        createApplicant(
+            AppliedJobsID: ID!,
+            ApplicantID: ID!,
+            VacancyID: ID!): Boolean!
+        deleteApplicant(
+            AppliedJobsID: ID!): Boolean! 
+    }
 `
