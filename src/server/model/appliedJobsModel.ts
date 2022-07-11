@@ -1,5 +1,4 @@
 import { Db } from '../db/sql/dbConfig'
-import { PasswordHash, ComparePassword } from '../util/passwordUtil'
 
 export class AppliedJobs {
     public AppliedJobsID!: number;
@@ -56,7 +55,7 @@ export const GetAllAppliedJobs = async () => {
 }
 
 
-export const GetAppliedJobs = async (AppliedJobsID: number) => {
+export const GetAppliedJob = async (AppliedJobsID: number) => {
     const queryString = `
       SELECT * from AppliedJobs where AppliedJobsID=?;`
     const promisePool = Db.promise();

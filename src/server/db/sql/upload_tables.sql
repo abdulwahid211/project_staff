@@ -61,3 +61,9 @@ VALUES ( 'Apple', 'Peterbrough', 'London', 'E2 KIO', 'scadcsdfvf@gmail.com', 'PA
 
 INSERT INTO Admin ( LastName, FirstName, Email, Password)
 VALUES ( 'James', 'Robertson','ABDULK@GMAIL.COM', 'PASSWORD');
+
+INSERT INTO Vacancies ( Title, EmployerID, Created, Description)
+VALUES ( 'Apple', 2, '2020-09-14', 'bla bla sacndnvosdv doainvdivd indcodv');
+
+INSERT INTO AppliedJobs ( ApplicantID, VacancyID)
+VALUES ( 1,1);
