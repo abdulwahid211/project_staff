@@ -58,3 +58,12 @@ VALUES ( 'Abdul', 'Wahid', 'Barking Causeway', 'London','EC9 ASD', 'absuhsuh@GMA
 
 INSERT INTO Employer ( Name, Address, City, Postcode, Email, Password)
 VALUES ( 'Apple', 'Peterbrough', 'London', 'E2 KIO', 'scadcsdfvf@gmail.com', 'PASSWORD');
+
+INSERT INTO Admin ( LastName, FirstName, Email, Password)
+VALUES ( 'James', 'Robertson','ABDULK@GMAIL.COM', 'PASSWORD');
+
+INSERT INTO Vacancies ( Title, EmployerID, Created, Description)
+VALUES ( 'Apple', 2, '2020-09-14', 'bla bla sacndnvosdv doainvdivd indcodv');
+
+INSERT INTO AppliedJobs ( ApplicantID, VacancyID)
+VALUES ( 1,1);
