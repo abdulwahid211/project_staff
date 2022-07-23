@@ -41,3 +41,5 @@ export const resolversAdmins = {
         updateAdmin: async (obj, args, context, info) => UpdateAdmin(args)
     }
 }
+
+var a;
