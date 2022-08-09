@@ -1,5 +1,6 @@
 import { Db } from '../db/sql/dbConfig'
 import { PasswordHash, ComparePassword } from '../util/passwordUtil'
+import {AuthenticateToken} from '../util/tokenMethods'
 
 export class Applicants {
     public ApplicantID!: number;
@@ -31,7 +32,8 @@ export const CreateApplicant = async (object: Applicants) => {
     return row[0].Email === object.Email
 }
 
-export const UpdateApplicant = async (object: Applicants) => {
+export const UpdateApplicant = async (object: Applicants, req:any) => {
+    AuthenticateToken(req);
     const UpdateQueryString = "Update Applicants set FirstName=?,LastName=?,Password=?,Email=?,Address=?, City=?, Postcode=? where Email=?;"
     const SecuredPassword = await PasswordHash(object.Password)
     Db.query(
@@ -49,7 +51,6 @@ export const UpdateApplicant = async (object: Applicants) => {
 }
 
 export const DeleteApplicant = async (email: string) => {
-    console.log("Output: " + email)
     const CreateQueryString = "Delete from Applicants where Email=?;"
     Db.query(
         CreateQueryString,

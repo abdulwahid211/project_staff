@@ -31,15 +31,13 @@ export const typeAdmins = gql`
 `
 export const resolversAdmins = {
     Query: {
-        admins: async () => GetAllAdmins(),
-        admin: async (obj, args, context, info) => GetAdmin(args.Email)
+        admins: async (obj, args, context, info) => GetAllAdmins(context.req),
+        admin: async (obj, args, context, info) => GetAdmin(args.Email,context.req)
     },
 
     Mutation: {
-        createAdmin: async (obj, args, context, info) => CreateAdmin(args),
-        deleteAdmin: async (obj, args, context, info) => DeleteAdmin(args.Email),
-        updateAdmin: async (obj, args, context, info) => UpdateAdmin(args)
+        createAdmin: async (obj, args, context, info) => CreateAdmin(args,context.req),
+        deleteAdmin: async (obj, args, context, info) => DeleteAdmin(args.Email,context.req),
+        updateAdmin: async (obj, args, context, info) => UpdateAdmin(args,context.req)
     }
 }
-
-var a;

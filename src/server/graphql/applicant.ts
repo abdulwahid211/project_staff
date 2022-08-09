@@ -48,6 +48,6 @@ export const resolversApplicants = {
     Mutation: {
         createApplicant: async (obj, args, context, info) => CreateApplicant(args),
         deleteApplicant: async (obj, args, context, info) => DeleteApplicant(args.Email),
-        updateApplicant: async (obj, args, context, info) => UpdateApplicant(args)
+        updateApplicant: async (obj, args, context, info) => UpdateApplicant(args,context.req)
     }
 }

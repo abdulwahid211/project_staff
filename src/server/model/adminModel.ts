@@ -1,5 +1,8 @@
 import { Db } from '../db/sql/dbConfig'
-import {PasswordHash, ComparePassword} from '../util/passwordUtil'
+import {PasswordHash} from '../util/passwordUtil'
+import {AuthenticateToken} from '../util/tokenMethods'
+
+
 export class Admin {
     public AdminID!: number;
     public LastName!: string;
@@ -9,12 +12,13 @@ export class Admin {
 }
 
 
-export const CreateAdmin = async (object: Admin) => {
+export const CreateAdmin = async (object: Admin,req:any) => {
+    AuthenticateToken(req);
     const CreateQueryString = "INSERT INTO Admin (LastName, FirstName, Email, Password) VALUES (?,?,?,?)"
     const SecuredPassword = await PasswordHash(object.Password)
     Db.query(
         CreateQueryString,
-        [object.FirstName, object.LastName, object.Email,SecuredPassword], (err, results) => {
+        [object.FirstName, object.LastName, object.Email, SecuredPassword], (err, results) => {
             if (err)
                 console.log(err);
         }
@@ -27,7 +31,8 @@ export const CreateAdmin = async (object: Admin) => {
     return row[0].Email === object.Email
 }
 
-export const UpdateAdmin = async (object: Admin) => {
+export const UpdateAdmin = async (object: Admin,req:any) => {
+    AuthenticateToken(req);
     const UpdateQueryString = "Update Admin set FirstName=?,LastName=?,Password=?,Email=? where Email=?;"
     const SecuredPassword = await PasswordHash(object.Password)
     Db.query(
@@ -44,8 +49,8 @@ export const UpdateAdmin = async (object: Admin) => {
     return row[0]
 }
 
-export const DeleteAdmin = async (email: string) => {
-    console.log("Output: " + email)
+export const DeleteAdmin = async (email: string,req:any) => {
+    AuthenticateToken(req);
     const CreateQueryString = "Delete from Admin where Email=?;"
     Db.query(
         CreateQueryString,
@@ -66,22 +71,22 @@ export const DeleteAdmin = async (email: string) => {
     }
 }
 
-export const GetAllAdmins = async () => {
+export const GetAllAdmins = async (req:any) => {
+    AuthenticateToken(req);
     const queryString = `
       SELECT * from Admin;`
     const promisePool = Db.promise();
     const [rows] = await promisePool.execute(queryString);
-    console.log(JSON.stringify(rows))
     return rows
 }
 
 
-export const GetAdmin = async (email:string) => {
+export const GetAdmin = async (email:string,req:any) => {
+    AuthenticateToken(req);
     const queryString = `
       SELECT * from Admin where Email=?;`
     const promisePool = Db.promise();
     const [row] = await promisePool.execute(queryString,[email]);
-    console.log("Output: "+JSON.stringify(row))
     return row[0]
 }
 
