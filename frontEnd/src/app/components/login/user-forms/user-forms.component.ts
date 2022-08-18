@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'user-forms',
   templateUrl: './user-forms.component.html',
@@ -8,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFormsComponent  {
 
+  validation: boolean =false;
+
   onClickSubmit(result) {
-    console.log("You have entered username: " + result.username); 
-    console.log("You have entered password : " + result.password); 
+    if(result.value.username && result.value.password){
+    console.log("You have entered username: " + result.value.username); 
+    console.log("You have entered password : " + result.value.password); 
+    result.reset()
+    this.validation = false;
+    }
+    else{
+      this.validation = true;
+    }
  }
 
 }

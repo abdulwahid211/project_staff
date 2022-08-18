@@ -1,8 +1,11 @@
-<form #userName="ngForm" (ngSubmit)="onClickSubmit(userName.value)">
-    <input type="text" name="username" placeholder="Username" ngModel>
+<form #userName="ngForm" (ngSubmit)="onClickSubmit(userName)" required>
+    <div *ngIf="validation">
+        Username and Password are required!
+    </div>
+    <input type="text" id="username" name="username" placeholder="Username" ngModel required>
     <br/>
     <br/>
-    <input type="text" name="password" placeholder="Password" ngModel>
+    <input type="text" name="password" placeholder="Password" ngModel required>
     <br/>
     <input type="submit" value="submit">
 </form>
