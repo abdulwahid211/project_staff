@@ -9,6 +9,8 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavComponent } from './components/nav/nav.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NavComponent } from './components/nav/nav.component';
       { path: 'register', component: RegisterComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
-    ])
+    ]),
+    GraphQLModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [HomeComponent]

@@ -2,6 +2,9 @@
     <div *ngIf="validation">
         Username and Password are required!
     </div>
+    <div *ngIf="loginError">
+        {{loginErrorLabelText}}
+    </div>
     <input type="text" id="username" name="username" placeholder="Username" ngModel required>
     <br/>
     <br/>
