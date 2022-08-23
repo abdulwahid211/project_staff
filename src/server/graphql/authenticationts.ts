@@ -11,7 +11,8 @@ type Mutation {
       Password: String!): AuthPayLoad!
   }
   type AuthPayLoad {
-    token: String!
+    token: String!,
+    id:String!
   }
 `
 

@@ -12,11 +12,10 @@ export const AdminLogin = async (object: UserLoginInput) => {
     SELECT * from Admin where Email=?;`
     const promisePool = Db.promise();
     const [row] = await promisePool.execute(FindAdminQueryString, [object.Email]);
-
     if(row[0]){
     const passwordResult = await ComparePassword(object.Password, row[0].Password)
     if(row[0].Email == object.Email && passwordResult){
-          return {token:GenerateAccessToken(row[0].Email)}
+          return {token:GenerateAccessToken(row[0].Email),id:row[0].AdminID}
     }
     return {token:"Incorrect Details"}
     }
@@ -30,16 +29,17 @@ export const ApplicantLogin = async (object: UserLoginInput) => {
     SELECT * from Applicants where Email=?;`
     const promisePool = Db.promise();
     const [row] = await promisePool.execute(FindApplicantQueryString, [object.Email]);
-
     if(row[0]){
     const passwordResult = await ComparePassword(object.Password, row[0].Password)
     if(row[0].Email == object.Email && passwordResult){
-          return {token:GenerateAccessToken(row[0].Email)}
+        const Id = String(row[0].ApplicantID );
+        console.log(Id)
+        return {token:GenerateAccessToken(row[0].Email),id:row[0].ApplicantID}
     }
-    return {token:"Incorrect Details"}
+    return {token:"Incorrect Details",id:"0"}
     }
     else{
-        return {token:"Not Found"}
+        return {token:"Not Found",id:"0"}
     }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {UserFormsService} from './user-forms.service';
 import {NgForm } from '@angular/forms';
 import {AuthService} from './auth.service';
@@ -11,48 +11,52 @@ import {Router} from '@angular/router';
 })
 export class UserFormsComponent  implements OnInit{
 
-  validation: boolean =false;
+  protected validation: boolean =false;
 
-  applicantToken:any |undefined;
+  private applicantToken:any |undefined;
 
-  loginError:boolean = false;
+  protected  loginError:boolean = false;
 
-  loginErrorLabelText:string ="";
-  text:any;
+  protected loginErrorLabelText:string ="";
 
-  constructor(private userFormsService: UserFormsService, private authService: AuthService,private router: Router, private ngZone: NgZone ) { }
+  constructor(private userFormsService: UserFormsService, private authService: AuthService,private router: Router ) { }
 
   ngOnInit() {
-    console.log("Output "+localStorage.getItem("token"))
   }
 
    async onClickSubmit(result:NgForm) {
     if(result.value.username && result.value.password){
-    console.log("You have entered username: " + result.value.username); 
-    console.log("You have entered password : " + result.value.password); 
-
-     this.applicantToken = (await this.userFormsService.loginApplicant(result));
-
+    this.applicantToken = (await this.userFormsService.loginApplicant(result));
 
      this.applicantToken.subscribe(data=>{
+
       const token = data.data.applicantLogin.token;
-      this.saveUserData(token);
-      this.text = token;
+      const id = data.data.applicantLogin.id;
 
-       this.router.navigate(['/about']);
+      if(token != "Not Found" && id !="0" || token != "Incorrect Details" && id !="0"){
+        const enabledLogin = true;
+        this.saveUserData(token,id,enabledLogin, result.value.username);
+        this.router.navigate(['/appProfile']);
+      }
+      else{
+       
+        this.loginError = true;
+        this.loginErrorLabelText = token;
+        
+      }
+
      })
-
-
-     console.log(this.text)
-
     }
     else{
       this.validation = true;
     }
  }
 
- saveUserData( token: string) {
-  this.authService.saveUserData(token);
+
+
+
+ saveUserData( token:string, id:string, login:boolean, email:string) {
+  this.authService.saveApplicantData(token,id,login,email);
 }
  
 

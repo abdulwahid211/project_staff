@@ -11,8 +11,6 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    console.log("Output "+localStorage.getItem("token"))
-    console.log("TEST")
   }
 
 }
