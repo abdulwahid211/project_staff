@@ -14,7 +14,7 @@ export const AuthenticateToken = (req, requireAuth = true) => {
   }
 
   if (requireAuth) {
-    throw new Error('Login in to access resource');
+    throw new Error('Valid Token is required to access resource');
   } 
 
   return null

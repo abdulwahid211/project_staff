@@ -4,16 +4,19 @@ import { HomeComponent } from './components/home/home.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { UserFormsComponent } from './components/login/user-forms/user-forms.component';
-import { FormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { AboutComponent } from './components/about/about.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
-import { RegisterApplicantComponent } from './components/register/register-applicant.component';
+import { RegisterApplicantComponent } from './components/register/register-applicant/register-applicant.component';
+import { RegisterAdminComponent } from './components/register/register-admin/register-admin.component';
 import { NavComponent } from './components/nav/nav.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ApplicantsProfileComponent } from './components/applicants-profile/applicants-profile.component';
 import { ApplicantComponent } from './components/applicants-profile/applicant.components';
-
+import { CommonModule } from '@angular/common';
+import { RegisterEmployerComponent } from './components/register/register-employer/register-employer.component';
+import { RegisterVacancyComponent } from './components/register/register-vacancy/register-vacancy.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -22,6 +25,9 @@ import { ApplicantComponent } from './components/applicants-profile/applicant.co
     AboutComponent,
     ContactusComponent,
     RegisterApplicantComponent,
+    RegisterEmployerComponent,
+    RegisterVacancyComponent,
+    RegisterAdminComponent,
     NavComponent,
     ApplicantsProfileComponent,
     ApplicantComponent
@@ -29,12 +35,16 @@ import { ApplicantComponent } from './components/applicants-profile/applicant.co
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'appProfile', component: ApplicantsProfileComponent },
       { path: 'about', component: AboutComponent },
       { path: 'contactus', component: ContactusComponent },
       { path: 'register', component: RegisterApplicantComponent },
+      { path: 'registerAdmin', component: RegisterAdminComponent },
+      { path: 'registerEmployer', component: RegisterEmployerComponent },
+      { path: 'registerVacancy', component: RegisterVacancyComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
     ]),
