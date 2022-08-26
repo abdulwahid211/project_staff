@@ -7,7 +7,7 @@ import {
 } from 'src/app/graphql/constants';
 import {Apollo} from 'apollo-angular';
 import {GET_APPLICANT_PROFILE} from 'src/app/graphql/graphql.queries';
-import {Applicants} from 'src/app/models/applicants';
+import {Applicants} from 'src/app/types/applicants';
 import {last} from 'rxjs';
 
 @Component({

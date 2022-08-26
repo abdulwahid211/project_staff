@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Vacancy} from 'src/app/models/vacancy';
+import {Vacancy} from 'src/app/types/vacancy';
 import {Router} from '@angular/router';
 
 @Component({

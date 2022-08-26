@@ -130,3 +130,15 @@ export const GET_VACANCIES = gql`
     }
   }
 `;
+
+export const CREATE_APPLIED_JOBS = gql`
+  mutation Mutation($applicantId: ID!, $vacancyId: ID!) {
+    createAppliedJobs(ApplicantID: $applicantId, VacancyID: $vacancyId)
+  }
+`;
+
+export const CHECK_APPLIED_JOBS = gql`
+  query Query($applicantId: ID!, $vacancyId: ID!) {
+    verifyAlreadyAppliedJob(ApplicantID: $applicantId, VacancyID: $vacancyId)
+  }
+`;

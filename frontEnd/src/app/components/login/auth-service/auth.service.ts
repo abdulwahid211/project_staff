@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Observable,BehaviorSubject} from 'rxjs';
-import { USER_ID,  AUTH_TOKEN, ADMIN_LOGIN, APPLICANT_LOGIN,APPLICANT_EMAIL} from 'src/app/graphql/constants';
+import {Observable, BehaviorSubject} from 'rxjs';
+import {
+  USER_ID,
+  AUTH_TOKEN,
+  ADMIN_LOGIN,
+  APPLICANT_LOGIN,
+  APPLICANT_EMAIL,
+} from 'src/app/graphql/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private userId: string | undefined;
@@ -12,8 +18,7 @@ export class AuthService {
   private userEmail: string | undefined;
   private _isAuthenticated = new BehaviorSubject(false);
 
-  constructor() {
-  }
+  constructor() {}
 
   // Providing a observable to listen the authentication state
   get isAuthenticated(): Observable<boolean> {
@@ -48,7 +53,12 @@ export class AuthService {
     this._isAuthenticated.next(true);
   }
 
-  saveApplicantData( token: string, id:string, enabled:boolean, email:string) {
+  saveApplicantData(
+    token: string,
+    id: string,
+    enabled: boolean,
+    email: string,
+  ) {
     localStorage.setItem(USER_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(APPLICANT_LOGIN, String(enabled));
@@ -58,7 +68,7 @@ export class AuthService {
     this.setUserId(id);
   }
 
-  saveAdminData( token: string, id:string, enabled:boolean) {
+  saveAdminData(token: string, id: string, enabled: boolean) {
     localStorage.setItem(USER_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(ADMIN_LOGIN, String(enabled));
@@ -77,7 +87,6 @@ export class AuthService {
     this._isAuthenticated.next(false);
   }
 
-  
   logoutAdmin() {
     // Removing user data from local storage and the service
     localStorage.removeItem(USER_ID);

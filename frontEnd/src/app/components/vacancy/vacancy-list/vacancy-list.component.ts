@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Vacancy} from 'src/app/models/vacancy';
+import {Vacancy} from 'src/app/types/vacancy';
 import {GET_VACANCIES} from 'src/app/graphql/graphql.queries';
 
 import {Apollo} from 'apollo-angular';

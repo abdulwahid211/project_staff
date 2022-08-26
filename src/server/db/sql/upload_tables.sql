@@ -46,8 +46,7 @@ CREATE TABLE AppliedJobs (
     ApplicantID int,
     VacancyID int,
     PRIMARY KEY (AppliedJobsID),
-    FOREIGN KEY (ApplicantID) REFERENCES Applicants(ApplicantID),
-    FOREIGN KEY (VacancyID) REFERENCES Vacancies(VacancyID)
+    UNIQUE  KEY uniq_id (ApplicantID,VacancyID)
 );
 
 INSERT INTO Applicants ( LastName, FirstName, Address, City, Postcode, Email, Password)

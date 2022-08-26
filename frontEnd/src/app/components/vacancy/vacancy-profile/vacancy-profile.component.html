@@ -4,4 +4,13 @@
     <h1>{{ vacancy.Title }}</h1>
     <h1>{{ vacancy.Description }}</h1>
     <h1>{{ vacancy.Created }}</h1>
+    <div *ngIf="JobAlreadyApplied">
+        <h1>{{ TextAlreadyJobApplied }}</h1>
+    </div>
+    <div *ngIf="JobAppliedSucessful">
+        <h1>{{ TextJobAppliedSucess }}</h1>
+    </div>
+    <button [disabled]="disableButton ? 'disabled' : null" (click)="onApplySubmit(vacancy)">
+    Send CV
+  </button>
 </div>
