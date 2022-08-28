@@ -8,6 +8,9 @@ import {
   APPLICANT_EMAIL,
   ADMIN_EMAIL,
   EMPLOYER_EMAIL,
+  ADMIN_LOGIN_ENABLED,
+  APPLICANT_LOGIN_ENABLED,
+  EMPLOYER_LOGIN_ENABLED,
 } from 'src/app/graphql/constants';
 
 @Injectable({
@@ -33,32 +36,30 @@ export class AuthService {
     return this.isEmployerLogin.asObservable();
   }
 
-  saveApplicantData(
-    token: string,
-    id: string,
-
-    email: string,
-  ) {
+  saveApplicantData(token: string, id: string, enable: boolean, email: string) {
     this.clearAllData();
     localStorage.setItem(APPLICANT_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(APPLICANT_EMAIL, email);
+    localStorage.setItem(APPLICANT_LOGIN_ENABLED, String(enable));
     this.isApplicantLogin.next(true);
   }
 
-  saveEmployerData(token: string, id: string, email: string) {
+  saveEmployerData(token: string, id: string, enable: boolean, email: string) {
     this.clearAllData();
     localStorage.setItem(EMPLOYER_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(EMPLOYER_EMAIL, email);
+    localStorage.setItem(EMPLOYER_LOGIN_ENABLED, String(enable));
     this.isEmployerLogin.next(true);
   }
 
-  saveAdminData(token: string, id: string, email: string) {
+  saveAdminData(token: string, id: string, enable: boolean, email: string) {
     this.clearAllData();
     localStorage.setItem(ADMIN_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(ADMIN_EMAIL, email);
+    localStorage.setItem(ADMIN_LOGIN_ENABLED, String(enable));
     this.isAdminLogin.next(true);
   }
 

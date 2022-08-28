@@ -1,6 +1,11 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthService} from '../login/auth-service/auth.service';
 import {Router} from '@angular/router';
+import {
+  ADMIN_LOGIN_ENABLED,
+  APPLICANT_LOGIN_ENABLED,
+  EMPLOYER_LOGIN_ENABLED,
+} from 'src/app/graphql/constants';
 @Component({
   selector: 'nav-bar',
   templateUrl: './nav.component.html',
@@ -10,7 +15,6 @@ export class NavComponent implements OnInit, OnDestroy {
   isAdminLogin = false;
   isApplicantLogin = false;
   isEmployerLogin = false;
-  isDisableLogin = false;
 
   adminLoginText = '(Logged in as Admin)';
   applicantLoginText = '(Logged in as Applicant)';
@@ -19,24 +23,37 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnDestroy(): void {
-    this.unsubcribeAllServices();
+    // this.unsubcribeAllServices();
   }
 
   ngOnInit(): void {
     this.authService.isEmployerLoggedIn.subscribe(value => {
       this.isEmployerLogin = value;
-      this.isDisableLogin = value;
     });
 
     this.authService.isApplicantLogin.subscribe(value => {
       this.isApplicantLogin = value;
-      this.isDisableLogin = value;
     });
 
     this.authService.isAdminLogin.subscribe(value => {
       this.isAdminLogin = value;
-      this.isDisableLogin = value;
     });
+
+    this.setAllLoginsEnabed();
+  }
+
+  setAllLoginsEnabed() {
+    this.isApplicantLogin = localStorage.getItem(
+      APPLICANT_LOGIN_ENABLED,
+    ) as unknown as boolean;
+
+    this.isAdminLogin = localStorage.getItem(
+      ADMIN_LOGIN_ENABLED,
+    ) as unknown as boolean;
+
+    this.isEmployerLogin = localStorage.getItem(
+      EMPLOYER_LOGIN_ENABLED,
+    ) as unknown as boolean;
   }
 
   logout(): void {
@@ -56,6 +73,5 @@ export class NavComponent implements OnInit, OnDestroy {
     this.isAdminLogin = false;
     this.isApplicantLogin = false;
     this.isEmployerLogin = false;
-    this.isDisableLogin = false;
   }
 }

@@ -40,7 +40,7 @@ export class UserFormsComponent implements OnInit {
           (token != 'Not Found' && id != '0') ||
           (token != 'Incorrect Details' && id != '0')
         ) {
-          this.saveUserData(token, id, result.value.username);
+          this.saveUserData(token, id, true, result.value.username);
           this.router.navigate(['/applicantProfile']);
         } else {
           this.loginError = true;
@@ -52,8 +52,8 @@ export class UserFormsComponent implements OnInit {
     }
   }
 
-  saveUserData(token: string, id: string, email: string) {
-    this.authService.saveApplicantData(token, id, email);
+  saveUserData(token: string, id: string, enable: boolean, email: string) {
+    this.authService.saveApplicantData(token, id, enable, email);
   }
 }
 // nul;ll123@gmail.com

@@ -40,7 +40,7 @@ export class LoginEmployerComponent implements OnInit {
           (token != 'Not Found' && id != '0') ||
           (token != 'Incorrect Details' && id != '0')
         ) {
-          this.saveUserData(token, id, result.value.username);
+          this.saveUserData(token, id, true, result.value.username);
           this.router.navigate(['/employerProfile']);
         } else {
           this.loginError = true;
@@ -52,7 +52,7 @@ export class LoginEmployerComponent implements OnInit {
     }
   }
 
-  saveUserData(token: string, id: string, email: string) {
-    this.authService.saveEmployerData(token, id, email);
+  saveUserData(token: string, id: string, enable: boolean, email: string) {
+    this.authService.saveEmployerData(token, id, enable, email);
   }
 }

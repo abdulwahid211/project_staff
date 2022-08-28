@@ -11,7 +11,7 @@ export class Admin {
 }
 
 export const CreateAdmin = async (object: Admin, req: any) => {
-  // AuthenticateToken(req);
+  AuthenticateToken(req);
   const CreateQueryString =
     'INSERT INTO Admin (LastName, FirstName, Email, Password) VALUES (?,?,?,?)';
   const SecuredPassword = await PasswordHash(object.Password);

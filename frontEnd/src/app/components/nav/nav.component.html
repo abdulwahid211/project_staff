@@ -1,29 +1,30 @@
 <nav class="navbar">
     <ul class="nav">
-        <li>
-            <a class="nav-link" routerLinkActive="active" routerLink="/">Home</a>
+        <li *ngIf="!isAdminLogin && !isEmployerLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/">Home</a> |
         </li>
-        |
-        <li *ngIf="!isDisableLogin">
+        <li *ngIf="!isApplicantLogin && !isEmployerLogin && !isAdminLogin">
             <a class="nav-link" routerLinkActive="active" routerLink="/login">Login
       </a> |
         </li>
-        <li>
+        <li *ngIf="!isAdminLogin && !isEmployerLogin">
             <a class="nav-link" routerLinkActive="active" routerLink="/register">Register</a
       >
       |
     </li>
-    <li>
+    <li *ngIf="!isAdminLogin && !isEmployerLogin">
       <a class="nav-link" routerLinkActive="active" routerLink="/about"
         >About</a
       >
+      |
     </li>
-    |
-    <li>
+
+    <li *ngIf="!isAdminLogin && !isEmployerLogin">
       <a class="nav-link" routerLinkActive="active" routerLink="/contactus"
         >Contact Us
       </a>
         </li>
+
         <li *ngIf="isAdminLogin" class="logout">
             <a class="nav-link" id="admin-logout" routerLinkActive="active" (click)="logout()">Logout {{ adminLoginText }}
       </a>

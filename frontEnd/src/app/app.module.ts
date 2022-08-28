@@ -10,7 +10,7 @@ import {ContactusComponent} from './components/contactus/contactus.component';
 import {RegisterApplicantComponent} from './components/register/register-applicant/register-applicant.component';
 import {RegisterAdminComponent} from './components/register/register-admin/register-admin.component';
 import {NavComponent} from './components/nav/nav.component';
-import {GraphQLModule} from './graphql.module';
+import {GraphQLModule} from './modules/graphql.module';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {RegisterEmployerComponent} from './components/register/register-employer/register-employer.component';
