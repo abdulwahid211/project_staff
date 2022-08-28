@@ -1,7 +1,6 @@
-export class Applicants {
-  public ApplicantID: number;
-  public LastName: string;
-  public FirstName: string;
+export class Employer {
+  public EmployerID: number;
+  public Name: string;
   public Address: string;
   public City: string;
   public Postcode: string;
@@ -10,17 +9,15 @@ export class Applicants {
 
   constructor(
     applicationID: number,
-    lastName: string,
-    firstName: string,
+    name: string,
     address: string,
     city: string,
     postcode: string,
     email: string,
     password: string,
   ) {
-    this.ApplicantID = applicationID;
-    this.LastName = lastName;
-    this.FirstName = firstName;
+    this.EmployerID = applicationID;
+    this.Name = name;
     this.Address = address;
     this.City = city;
     this.Postcode = postcode;

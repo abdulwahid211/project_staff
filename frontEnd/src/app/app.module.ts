@@ -12,8 +12,6 @@ import {RegisterAdminComponent} from './components/register/register-admin/regis
 import {NavComponent} from './components/nav/nav.component';
 import {GraphQLModule} from './graphql.module';
 import {HttpClientModule} from '@angular/common/http';
-import {ApplicantsProfileComponent} from './components/profile/applicants-profile/applicants-profile.component';
-import {ApplicantComponent} from './components/profile/applicants-profile/applicant.components';
 import {CommonModule} from '@angular/common';
 import {RegisterEmployerComponent} from './components/register/register-employer/register-employer.component';
 import {RegisterVacancyComponent} from './components/register/register-vacancy/register-vacancy.component';
@@ -22,6 +20,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgMaterialModule} from './modules/material.module';
 import {VacancyCardComponent} from './components/vacancy/vacancy-card/vacancy-card.component';
 import {VacancyProfileComponent} from './components/vacancy/vacancy-profile/vacancy-profile.component';
+import {LoginEmployerComponent} from './components/login/login-employer/login-employer.component';
+import {LoginAdminComponent} from './components/login/login-admin/login-admin.component';
+import {ApplicantsProfileComponent} from './components/profile/applicant-profile/applicants-profile.component';
+import {ApplicantComponent} from './components/profile/applicant-profile/applicant.components';
+import {EmployerProfileComponent} from './components/profile/employer-profile/employer-profile.component';
+import {EmployerComponent} from './components/profile/employer-profile/employer.components';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import {VacancyProfileComponent} from './components/vacancy/vacancy-profile/vaca
     VacancyListComponent,
     VacancyCardComponent,
     VacancyProfileComponent,
+    LoginEmployerComponent,
+    LoginAdminComponent,
+    EmployerProfileComponent,
+    EmployerComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,10 @@ import {VacancyProfileComponent} from './components/vacancy/vacancy-profile/vaca
     CommonModule,
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
-      {path: 'appProfile', component: ApplicantsProfileComponent},
+      {path: 'loginEmployer', component: LoginEmployerComponent},
+      {path: 'admin', component: LoginAdminComponent},
+      {path: 'applicantProfile', component: ApplicantsProfileComponent},
+      {path: 'employerProfile', component: EmployerProfileComponent},
       {path: 'about', component: AboutComponent},
       {path: 'contactus', component: ContactusComponent},
       {path: 'register', component: RegisterApplicantComponent},

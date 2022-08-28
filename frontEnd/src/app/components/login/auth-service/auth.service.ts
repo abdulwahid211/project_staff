@@ -1,109 +1,81 @@
 import {Injectable} from '@angular/core';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {
-  USER_ID,
+  APPLICANT_ID,
+  EMPLOYER_ID,
+  ADMIN_ID,
   AUTH_TOKEN,
-  ADMIN_LOGIN,
-  APPLICANT_LOGIN,
   APPLICANT_EMAIL,
+  ADMIN_EMAIL,
+  EMPLOYER_EMAIL,
 } from 'src/app/graphql/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userId: string | undefined;
-  private userToken: string | undefined;
-  private userLogin: boolean | undefined;
-  private userEmail: string | undefined;
-  private _isAuthenticated = new BehaviorSubject(false);
+  public isAdminLogin = new BehaviorSubject(false);
+  public isApplicantLogin = new BehaviorSubject(false);
+  public isEmployerLogin = new BehaviorSubject(false);
 
   constructor() {}
 
-  // Providing a observable to listen the authentication state
-  get isAuthenticated(): Observable<boolean> {
-    return this._isAuthenticated.asObservable();
+  // Providing a observable to listen the authentication states
+  get isAdminLoggedIn(): Observable<boolean> {
+    return this.isAdminLogin.asObservable();
   }
 
-  setUserId(id: string) {
-    this.userId = id;
-
-    // Dispatching to all listeners that the user is authenticated
-    this._isAuthenticated.next(true);
+  get isApplicantLoggedIn(): Observable<boolean> {
+    return this.isApplicantLogin.asObservable();
   }
 
-  setUserEmail(email: string) {
-    this.userEmail = email;
-
-    // Dispatching to all listeners that the user is authenticated
-    this._isAuthenticated.next(true);
-  }
-
-  setUserToken(token: string) {
-    this.userToken = token;
-
-    // Dispatching to all listeners that the user is authenticated
-    this._isAuthenticated.next(true);
-  }
-
-  setUserLogin(enabled: boolean) {
-    this.userLogin = enabled;
-
-    // Dispatching to all listeners that the user is authenticated
-    this._isAuthenticated.next(true);
+  get isEmployerLoggedIn(): Observable<boolean> {
+    return this.isEmployerLogin.asObservable();
   }
 
   saveApplicantData(
     token: string,
     id: string,
-    enabled: boolean,
+
     email: string,
   ) {
-    localStorage.setItem(USER_ID, id);
+    this.clearAllData();
+    localStorage.setItem(APPLICANT_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
-    localStorage.setItem(APPLICANT_LOGIN, String(enabled));
     localStorage.setItem(APPLICANT_EMAIL, email);
-    this.setUserToken(token);
-    this.setUserEmail(email);
-    this.setUserId(id);
+    this.isApplicantLogin.next(true);
   }
 
-  saveAdminData(token: string, id: string, enabled: boolean) {
-    localStorage.setItem(USER_ID, id);
+  saveEmployerData(token: string, id: string, email: string) {
+    this.clearAllData();
+    localStorage.setItem(EMPLOYER_ID, id);
     localStorage.setItem(AUTH_TOKEN, token);
-    localStorage.setItem(ADMIN_LOGIN, String(enabled));
-    this.setUserToken(token);
-    this.setUserId(id);
+    localStorage.setItem(EMPLOYER_EMAIL, email);
+    this.isEmployerLogin.next(true);
   }
 
-  logoutApplicant() {
+  saveAdminData(token: string, id: string, email: string) {
+    this.clearAllData();
+    localStorage.setItem(ADMIN_ID, id);
+    localStorage.setItem(AUTH_TOKEN, token);
+    localStorage.setItem(ADMIN_EMAIL, email);
+    this.isAdminLogin.next(true);
+  }
+
+  logout() {
     // Removing user data from local storage and the service
-    localStorage.removeItem(USER_ID);
-    localStorage.removeItem(AUTH_TOKEN);
-    localStorage.removeItem(APPLICANT_LOGIN);
-    localStorage.removeItem(APPLICANT_EMAIL);
-
+    this.clearAllData();
     // Dispatching to all listeners that the user is not authenticated
-    this._isAuthenticated.next(false);
+    this.clearAllLoggedIn;
   }
 
-  logoutAdmin() {
-    // Removing user data from local storage and the service
-    localStorage.removeItem(USER_ID);
-    localStorage.removeItem(AUTH_TOKEN);
-    localStorage.removeItem(ADMIN_LOGIN);
-
-    // Dispatching to all listeners that the user is not authenticated
-    this._isAuthenticated.next(false);
+  clearAllLoggedIn() {
+    this.isAdminLogin.next(false);
+    this.isEmployerLogin.next(false);
+    this.isApplicantLogin.next(false);
   }
 
-  autoLoginApplicant() {
-    const id = localStorage.getItem(USER_ID);
-    const userToken = localStorage.getItem(AUTH_TOKEN);
-    const applicantLogin = localStorage.getItem(APPLICANT_LOGIN);
-
-    if (id && userToken && applicantLogin) {
-      this.setUserId(id);
-    }
+  clearAllData() {
+    localStorage.clear();
   }
 }

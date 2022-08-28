@@ -1,25 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginApplicantService} from './login-applicant.service';
+import {LoginAdminService} from './login-admin.service';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth-service/auth.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'login-applicant',
-  templateUrl: './login-applicant.component.html',
-  styleUrls: ['./login-applicant.component.css'],
+  selector: 'login-Admin',
+  templateUrl: './login-Admin.component.html',
+  styleUrls: ['./login-Admin.component.css'],
 })
-export class UserFormsComponent implements OnInit {
+export class LoginAdminComponent implements OnInit {
   protected validation: boolean = false;
 
-  private applicantToken: any | undefined;
+  private AdminToken: any | undefined;
 
   protected loginError: boolean = false;
 
   protected loginErrorLabelText: string = '';
 
   constructor(
-    private loginApplicantService: LoginApplicantService,
+    private loginAdminService: LoginAdminService,
     private authService: AuthService,
     private router: Router,
   ) {}
@@ -28,20 +28,19 @@ export class UserFormsComponent implements OnInit {
 
   async onClickSubmit(result: NgForm) {
     if (result.value.username && result.value.password) {
-      this.applicantToken = await this.loginApplicantService.loginApplicant(
-        result,
-      );
+      this.AdminToken = await this.loginAdminService.loginAdmin(result);
 
-      this.applicantToken.subscribe(data => {
-        const token = data.data.applicantLogin.token;
-        const id = data.data.applicantLogin.id;
+      this.AdminToken.subscribe(data => {
+        console.log(data);
+        const token = data.data.adminLogin.token;
+        const id = data.data.adminLogin.id;
 
         if (
           (token != 'Not Found' && id != '0') ||
           (token != 'Incorrect Details' && id != '0')
         ) {
           this.saveUserData(token, id, result.value.username);
-          this.router.navigate(['/applicantProfile']);
+          this.router.navigate(['/adminProfile']);
         } else {
           this.loginError = true;
           this.loginErrorLabelText = token;
@@ -53,7 +52,6 @@ export class UserFormsComponent implements OnInit {
   }
 
   saveUserData(token: string, id: string, email: string) {
-    this.authService.saveApplicantData(token, id, email);
+    this.authService.saveAdminData(token, id, email);
   }
 }
-// nul;ll123@gmail.com

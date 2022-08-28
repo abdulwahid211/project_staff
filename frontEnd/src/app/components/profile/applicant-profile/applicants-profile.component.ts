@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  USER_ID,
+  APPLICANT_ID,
   AUTH_TOKEN,
-  APPLICANT_LOGIN,
   APPLICANT_EMAIL,
 } from 'src/app/graphql/constants';
 import {Apollo} from 'apollo-angular';

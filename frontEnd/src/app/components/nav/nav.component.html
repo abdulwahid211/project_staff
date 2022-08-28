@@ -1,9 +1,40 @@
-<nav class='navbar'>
-    <ul class='nav nav-pills'>
-        <li><a class='nav-link' routerLinkActive='active' routerLink='/'>Home |</a></li>
-        <li><a class='nav-link' routerLinkActive='active' routerLink='/login'>Login |</a></li>
-        <li><a class='nav-link' routerLinkActive='active' routerLink='/register'>register |</a></li>
-        <li><a class='nav-link' routerLinkActive='active' routerLink='/about'>About |</a></li>
-        <li><a class='nav-link' routerLinkActive='active' routerLink='/contactus'>Contact Us </a></li>
+<nav class="navbar">
+    <ul class="nav">
+        <li>
+            <a class="nav-link" routerLinkActive="active" routerLink="/">Home</a>
+        </li>
+        |
+        <li *ngIf="!isDisableLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/login">Login
+      </a> |
+        </li>
+        <li>
+            <a class="nav-link" routerLinkActive="active" routerLink="/register">Register</a
+      >
+      |
+    </li>
+    <li>
+      <a class="nav-link" routerLinkActive="active" routerLink="/about"
+        >About</a
+      >
+    </li>
+    |
+    <li>
+      <a class="nav-link" routerLinkActive="active" routerLink="/contactus"
+        >Contact Us
+      </a>
+        </li>
+        <li *ngIf="isAdminLogin" class="logout">
+            <a class="nav-link" id="admin-logout" routerLinkActive="active" (click)="logout()">Logout {{ adminLoginText }}
+      </a>
+        </li>
+        <li *ngIf="isApplicantLogin" class="logout">
+            <a class="nav-link" id="admin-logout" routerLinkActive="active" (click)="logout()">Logout {{ applicantLoginText }}
+      </a>
+        </li>
+        <li *ngIf="isEmployerLogin" class="logout">
+            <a class="nav-link" id="admin-logout" routerLinkActive="active" (click)="logout()">Logout {{ employerLoginText }}
+      </a>
+        </li>
     </ul>
 </nav>

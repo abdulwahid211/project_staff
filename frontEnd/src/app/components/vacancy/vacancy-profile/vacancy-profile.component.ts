@@ -7,7 +7,7 @@ import {
   CHECK_APPLIED_JOBS,
 } from 'src/app/graphql/graphql.queries';
 import {Apollo} from 'apollo-angular';
-import {USER_ID} from 'src/app/graphql/constants';
+import {APPLICANT_ID} from 'src/app/graphql/constants';
 
 @Component({
   selector: 'app-vacancy-profile',

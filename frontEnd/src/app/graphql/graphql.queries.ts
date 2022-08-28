@@ -142,3 +142,26 @@ export const CHECK_APPLIED_JOBS = gql`
     verifyAlreadyAppliedJob(ApplicantID: $applicantId, VacancyID: $vacancyId)
   }
 `;
+
+export const EMPLOYER_LOGIN = gql`
+  mutation EmployerLogin($email: String!, $password: String!) {
+    employerLogin(Email: $email, Password: $password) {
+      token
+      id
+    }
+  }
+`;
+
+export const GET_EMPLOYER_PROFILE = gql`
+  query Employer($email: String!) {
+    Employer(Email: $email) {
+      EmployerID
+      Name
+      Address
+      City
+      Postcode
+      Email
+      Password
+    }
+  }
+`;
