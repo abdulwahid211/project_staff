@@ -5,7 +5,6 @@ import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache, ApolloLink} from '@apollo/client/core';
 import {setContext} from '@apollo/client/link/context';
 import {AUTH_TOKEN} from 'src/app/graphql/constants';
-import {AuthService} from '../components/login/auth-service/auth.service';
 
 const uri = 'http://localhost:3001/';
 
