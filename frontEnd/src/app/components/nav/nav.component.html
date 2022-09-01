@@ -25,6 +25,21 @@
       </a>
         </li>
 
+        <li *ngIf="isAdminLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/allApplicants">All Applicants
+      </a>
+        </li>
+
+        <li *ngIf="isAdminLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/allEmployers">All Employers
+      </a>
+        </li>
+
+        <li *ngIf="isAdminLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/allAdmins">All Admins
+      </a>
+        </li>
+
         <li *ngIf="isAdminLogin" class="logout">
             <a class="nav-link" id="admin-logout" routerLinkActive="active" (click)="logout()">Logout {{ adminLoginText }}
       </a>

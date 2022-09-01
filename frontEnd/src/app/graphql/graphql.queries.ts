@@ -165,3 +165,44 @@ export const GET_EMPLOYER_PROFILE = gql`
     }
   }
 `;
+
+export const GET_ALL_APPLICANTS = gql`
+  query Applicants {
+    applicants {
+      ApplicantID
+      LastName
+      FirstName
+      Address
+      City
+      Postcode
+      Email
+      Password
+    }
+  }
+`;
+
+export const GET_ALL_EMPLOYERS = gql`
+  query Employers {
+    Employers {
+      EmployerID
+      Name
+      Address
+      City
+      Postcode
+      Email
+      Password
+    }
+  }
+`;
+
+export const GET_ALL_ADMINS = gql`
+  query Admins {
+    admins {
+      AdminID
+      LastName
+      FirstName
+      Email
+      Password
+    }
+  }
+`;

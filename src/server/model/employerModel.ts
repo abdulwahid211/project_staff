@@ -1,5 +1,6 @@
 import {Db} from '../db/sql/dbConfig';
 import {PasswordHash, ComparePassword} from '../util/passwordUtil';
+import {AuthenticateToken} from '../util/tokenMethods';
 export class Employer {
   public EmployerID!: number;
   public Name!: string;
@@ -10,7 +11,8 @@ export class Employer {
   public Password!: string;
 }
 
-export const CreateEmployer = async (object: Employer) => {
+export const CreateEmployer = async (object: Employer, req: any) => {
+  AuthenticateToken(req);
   const CreateQueryString =
     'INSERT INTO employer (Name, Email, Password, Address, City, Postcode) VALUES (?,?,?,?,?,?)';
   const SecuredPassword = await PasswordHash(object.Password);
@@ -38,7 +40,8 @@ export const CreateEmployer = async (object: Employer) => {
   return row[0].Email === object.Email;
 };
 
-export const UpdateEmployer = async (object: Employer) => {
+export const UpdateEmployer = async (object: Employer, req: any) => {
+  AuthenticateToken(req);
   const UpdateQueryString =
     'Update Employer set Name=?,Password=?,Email=?,Address=?, City=?, Postcode=? where Email=?;';
   const SecuredPassword = await PasswordHash(object.Password);
@@ -66,7 +69,8 @@ export const UpdateEmployer = async (object: Employer) => {
   return row[0];
 };
 
-export const DeleteEmployer = async (email: string) => {
+export const DeleteEmployer = async (email: string, req: any) => {
+  AuthenticateToken(req);
   console.log('Output: ' + email);
   const CreateQueryString = 'Delete from Employer where Email=?;';
   Db.query(CreateQueryString, [email], (err, results) => {
@@ -83,7 +87,8 @@ export const DeleteEmployer = async (email: string) => {
   }
 };
 
-export const GetAllEmployers = async () => {
+export const GetAllEmployers = async (req: any) => {
+  AuthenticateToken(req);
   const queryString = `
       SELECT * from Employer;`;
   const promisePool = Db.promise();
@@ -92,7 +97,8 @@ export const GetAllEmployers = async () => {
   return rows;
 };
 
-export const GetEmployer = async (email: string) => {
+export const GetEmployer = async (email: string, req: any) => {
+  AuthenticateToken(req);
   const queryString = `
       SELECT * from Employer where Email=?;`;
   const promisePool = Db.promise();

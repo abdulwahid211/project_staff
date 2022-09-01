@@ -40,7 +40,7 @@ export class LoginAdminComponent implements OnInit {
           (token != 'Incorrect Details' && id != '0')
         ) {
           this.saveUserData(token, id, true, result.value.username);
-          this.router.navigate(['/adminProfile']);
+          this.router.navigate(['/']);
         } else {
           this.loginError = true;
           this.loginErrorLabelText = token;

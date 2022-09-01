@@ -72,7 +72,8 @@ export const UpdateApplicant = async (object: Applicants, req: any) => {
   return row[0];
 };
 
-export const DeleteApplicant = async (email: string) => {
+export const DeleteApplicant = async (email: string, req: any) => {
+  AuthenticateToken(req);
   const CreateQueryString = 'Delete from Applicants where Email=?;';
   Db.query(CreateQueryString, [email], (err, results) => {
     if (err) console.log(err);
@@ -88,7 +89,8 @@ export const DeleteApplicant = async (email: string) => {
   }
 };
 
-export const GetAllApplicants = async () => {
+export const GetAllApplicants = async (req: any) => {
+  AuthenticateToken(req);
   const queryString = `
       SELECT * from Applicants;`;
   const promisePool = Db.promise();
@@ -97,7 +99,8 @@ export const GetAllApplicants = async () => {
   return rows;
 };
 
-export const GetApplicant = async (email: string) => {
+export const GetApplicant = async (email: string, req: any) => {
+  AuthenticateToken(req);
   const queryString = `
       SELECT * from Applicants where Email=?;`;
   const promisePool = Db.promise();

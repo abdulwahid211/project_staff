@@ -1,0 +1,47 @@
+<p style="">All Employers</p>
+<!-- app.component.html -->
+<div class="container text-center">
+    <button mat-button (click)="openDialog('Add', {})" mat-flat-button color="primary">
+    Add Row
+  </button>
+
+    <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <div class="rows">
+            <ng-container matColumnDef="EmployerID">
+                <th mat-header-cell *matHeaderCellDef>EmployerID</th>
+                <td mat-cell *matCellDef="let element">{{ element.EmployerID }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.Name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Address">
+                <th mat-header-cell *matHeaderCellDef>Address</th>
+                <td mat-cell *matCellDef="let element">{{ element.Address }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="City">
+                <th mat-header-cell *matHeaderCellDef>City</th>
+                <td mat-cell *matCellDef="let element">{{ element.City }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Postcode">
+                <th mat-header-cell *matHeaderCellDef>Postcode</th>
+                <td mat-cell *matCellDef="let element">{{ element.Postcode }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{ element.Email }}</td>
+            </ng-container>
+        </div>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+</div>

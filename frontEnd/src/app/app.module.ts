@@ -26,6 +26,10 @@ import {ApplicantsProfileComponent} from './components/profile/applicant-profile
 import {ApplicantComponent} from './components/profile/applicant-profile/applicant.components';
 import {EmployerProfileComponent} from './components/profile/employer-profile/employer-profile.component';
 import {EmployerComponent} from './components/profile/employer-profile/employer.components';
+import {TableAllApplicantsComponent} from './components/tables/table-applicants/table-all-applicants.component';
+import {TableAllEmployersComponent} from './components/tables/table-employers/table-all-employers.component';
+import {TableAllAdminsComponent} from './components/tables/table-admins/table-all-admins.component';
+import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,10 @@ import {EmployerComponent} from './components/profile/employer-profile/employer.
     LoginAdminComponent,
     EmployerProfileComponent,
     EmployerComponent,
+    TableAllApplicantsComponent,
+    TableAllEmployersComponent,
+    TableAllAdminsComponent,
+    DialogBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +75,9 @@ import {EmployerComponent} from './components/profile/employer-profile/employer.
       {path: 'registerVacancy', component: RegisterVacancyComponent},
       {path: 'vacancyList', component: VacancyListComponent},
       {path: 'vacancyProfile/:id', component: VacancyProfileComponent},
+      {path: 'allApplicants', component: TableAllApplicantsComponent},
+      {path: 'allEmployers', component: TableAllEmployersComponent},
+      {path: 'allAdmins', component: TableAllAdminsComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: '**', redirectTo: 'home', pathMatch: 'full'},
     ]),

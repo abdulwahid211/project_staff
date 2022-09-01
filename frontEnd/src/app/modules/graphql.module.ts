@@ -5,22 +5,24 @@ import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache, ApolloLink} from '@apollo/client/core';
 import {setContext} from '@apollo/client/link/context';
 import {AUTH_TOKEN} from 'src/app/graphql/constants';
+import {AuthService} from '../components/login/auth-service/auth.service';
 
 const uri = 'http://localhost:3001/';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   const token = localStorage.getItem(AUTH_TOKEN);
 
-  const auth = setContext((operation, context) => {
-    if (token === null) {
-      return {};
-    } else {
-      return {
-        headers: {
-          Authorization: `${token}`,
-        },
-      };
+  const auth = setContext(async (_, {headers}) => {
+    let token = localStorage.getItem(AUTH_TOKEN);
+
+    if (!token) {
+      token = localStorage.getItem(AUTH_TOKEN);
     }
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
   });
 
   const link = ApolloLink.from([auth, httpLink.create({uri})]);
