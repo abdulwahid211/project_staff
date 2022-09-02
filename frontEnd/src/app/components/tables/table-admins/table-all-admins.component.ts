@@ -1,5 +1,8 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
-import {GET_ALL_ADMINS} from 'src/app/graphql/graphql.queries';
+import {
+  GET_ALL_ADMINS,
+  DELETE_ALL_ADMIN,
+} from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
@@ -18,7 +21,7 @@ export class TableAllAdminsComponent implements OnInit {
     'LastName',
     'FirstName',
     'Email',
-    'Password',
+    'Delete',
   ];
   isAdminLogin = false;
   dataSource = new MatTableDataSource<Admin>([]);
@@ -47,44 +50,24 @@ export class TableAllAdminsComponent implements OnInit {
       });
   }
 
-  openDialog(action, obj) {
-    obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '250px',
-      data: obj,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.event == 'Add') {
-        this.addRowData(result.dataSource);
-      } else if (result.event == 'Update') {
-        this.updateRowData(result.dataSource);
-      } else if (result.event == 'Delete') {
-        this.deleteRowData(result.dataSource);
-      }
-    });
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  addRowData(row_obj) {
-    // var d = new Date();
-    // this.dataSource.push({
-    //   id: d.getTime(),
-    //   name: row_obj.name,
-    // });
-    // this.table?.renderRows();
-  }
-  updateRowData(row_obj) {
-    // this.dataSource = this.dataSource.filter((value, key) => {
-    //   if (value.id == row_obj.id) {
-    //     value.name = row_obj.name;
-    //   }
-    //   return true;
-    // });
-  }
-  deleteRowData(row_obj) {
-    //   this.dataSource = this.dataSource.filter((value, key) => {
-    //     return value.id != row_obj.id;
-    //   });
-    // }
+  delete(email) {
+    console.log(email);
+    this.apollo
+      .mutate({
+        mutation: DELETE_ALL_ADMIN,
+        variables: {
+          email: email,
+        },
+      })
+      .subscribe(value => {
+        if (value) {
+          window.location.reload();
+        }
+      });
   }
 }

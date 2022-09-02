@@ -206,3 +206,21 @@ export const GET_ALL_ADMINS = gql`
     }
   }
 `;
+
+export const DELETE_ALL_ADMIN = gql`
+  mutation DeleteAdmin($email: String!) {
+    deleteAdmin(Email: $email)
+  }
+`;
+
+export const DELETE_ALL_APPLICANT = gql`
+  mutation DeleteApplicant($email: String!) {
+    deleteApplicant(Email: $email)
+  }
+`;
+
+export const DELETE_ALL_EMPLOYER = gql`
+  mutation DeleteEmployer($email: String!) {
+    deleteEmployer(Email: $email)
+  }
+`;

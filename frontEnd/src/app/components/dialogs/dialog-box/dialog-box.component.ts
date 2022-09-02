@@ -13,6 +13,7 @@ export interface UsersData {
 })
 export class DialogBoxComponent implements OnInit {
   action: string;
+  messageAction: string;
   local_data: any;
 
   constructor(
@@ -23,6 +24,7 @@ export class DialogBoxComponent implements OnInit {
     console.log(data);
     this.local_data = {...data};
     this.action = this.local_data.action;
+    this.messageAction = this.local_data.messageAction;
   }
 
   ngOnInit(): void {}
