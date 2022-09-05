@@ -32,7 +32,7 @@ export class EmployerProfileComponent implements OnInit {
         console.log(data);
         this.data = data.Employer;
         this.error = error;
-        console.log(this.data.EmployerID);
+        console.log(localStorage.getItem(AUTH_TOKEN));
       });
   }
 }

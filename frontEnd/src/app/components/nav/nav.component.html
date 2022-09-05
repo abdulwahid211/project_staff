@@ -40,6 +40,21 @@
       </a>
         </li>
 
+        <li *ngIf="isAdminLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/postVacancy">Post a Job
+      </a>
+        </li>
+
+        <li *ngIf="isAdminLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/registerEmployer">Register an Employer
+      </a>
+        </li>
+
+        <li *ngIf="isAdminLogin">
+            <a class="nav-link" routerLinkActive="active" routerLink="/registerAdmin">Register an Admin
+      </a>
+        </li>
+
         <li *ngIf="isAdminLogin" class="logout">
             <a class="nav-link" id="admin-logout" routerLinkActive="active" (click)="logout()">Logout {{ adminLoginText }}
       </a>

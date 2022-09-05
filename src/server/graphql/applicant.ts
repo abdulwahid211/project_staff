@@ -5,12 +5,14 @@ import {
   CreateApplicant,
   UpdateApplicant,
   DeleteApplicant,
+  GetApplicantAppliedJobs,
 } from '../model/applicantModel';
 
 export const typeApplicants = gql`
   extend type Query {
     applicants: [Applicant]
     applicant(Email: String!): Applicant
+    applicantAppliedJobs(employerId: ID): [ApplicantApplied]
   }
   type Applicant {
     ApplicantID: ID!
@@ -21,6 +23,18 @@ export const typeApplicants = gql`
     Postcode: String!
     Email: String!
     Password: String!
+  }
+
+  type ApplicantApplied {
+    VacancyID: ID!
+    JobTitle: String!
+    ApplicantID: ID!
+    LastName: String!
+    FirstName: String!
+    Address: String!
+    City: String!
+    Postcode: String!
+    Email: String!
   }
 
   extend type Mutation {
@@ -53,6 +67,9 @@ export const resolversApplicants = {
 
     applicant: async (obj, args, context, info) =>
       GetApplicant(args.Email, context.req),
+
+    applicantAppliedJobs: async (obj, args, context, info) =>
+      GetApplicantAppliedJobs(args.employerId, context.req),
   },
 
   Mutation: {

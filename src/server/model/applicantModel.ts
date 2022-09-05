@@ -108,3 +108,14 @@ export const GetApplicant = async (email: string, req: any) => {
   console.log('Output: ' + JSON.stringify(row));
   return row[0];
 };
+
+export const GetApplicantAppliedJobs = async (employerId: Number, req: any) => {
+  // AuthenticateToken(req);
+  const queryString = `
+  Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Address, A.Postcode, A.City, A.Email from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
+  V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   AJ.VacancyID = V.VacancyID  where EM.EmployerID = ? order by A.ApplicantID ASC;`;
+  const promisePool = Db.promise();
+  const [row] = await promisePool.execute(queryString, [employerId]);
+  console.log('Output: ' + JSON.stringify(row));
+  return row;
+};

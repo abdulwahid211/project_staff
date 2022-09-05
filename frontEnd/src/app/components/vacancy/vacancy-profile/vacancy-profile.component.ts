@@ -32,7 +32,8 @@ export class VacancyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const vacancyId = Number(this.route.snapshot.paramMap.get('id'));
-    // this.applicantId = localStorage.getItem(USER_ID) as string;
+    this.applicantId = localStorage.getItem(APPLICANT_ID) as string;
+    console.log(vacancyId);
 
     this.apollo
       .watchQuery({
@@ -42,7 +43,6 @@ export class VacancyProfileComponent implements OnInit {
         },
       })
       .valueChanges.subscribe(({data}: any) => {
-        console.log(data);
         this.vacancy = data.Vacancy;
         this.disableButton = false;
       });
@@ -52,7 +52,7 @@ export class VacancyProfileComponent implements OnInit {
         query: CHECK_APPLIED_JOBS,
         variables: {
           vacancyId: vacancyId,
-          applicantId: 45,
+          applicantId: this.applicantId,
         },
       })
       .valueChanges.subscribe(({data}: any) => {
@@ -73,7 +73,7 @@ export class VacancyProfileComponent implements OnInit {
       .mutate({
         mutation: CREATE_APPLIED_JOBS,
         variables: {
-          applicantId: 45,
+          applicantId: this.applicantId,
           vacancyId: vacancyId,
         },
       })

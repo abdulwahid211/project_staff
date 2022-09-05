@@ -1,25 +1,21 @@
-<h2>Register an Employer</h2>
+<h2>Post a Vacancy</h2>
 <form #newVacancy="ngForm" (ngSubmit)="onClickSubmit(newVacancy)" required>
-    <div *ngIf="validation">
-        All detals must be filled required!
-    </div>
+    <div *ngIf="validation">All detals must be filled required!</div>
     <div *ngIf="registerError">
-        {{registerErrorLabelText}}
+        {{ registerErrorLabelText }}
     </div>
     <div *ngIf="formSuccessful">
         <p>Form has been successfully submitted!</p>
     </div>
-    <input type="text" id="employerId" name="employerId" placeholder="employerId" ngModel required>
-    <br/>
-    <br/>
-    <input type="text" name="title" placeholder="title" ngModel required>
-    <br/>
-    <br/>
-    <input type="text" id="description" name="description" placeholder="Description" ngModel required>
-    <br/>
-    <br/>
-    <input type="text" id="created" name="created" placeholder="Created" ngModel required>
-    <br/>
-    <br/>
-    <input type="submit" value="submit">
+    <input type="text" id="employerId" name="employerId" placeholder="Employer ID" ngModel required />
+    <br />
+    <br />
+    <input type="text" name="title" placeholder="Title of the job" ngModel required />
+    <br />
+    <br />
+    <input type="text" id="description" name="description" placeholder="Description" ngModel required />
+    <br />
+    <br />
+    <br />
+    <input type="submit" value="submit" />
 </form>

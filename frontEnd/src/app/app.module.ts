@@ -29,6 +29,7 @@ import {EmployerComponent} from './components/profile/employer-profile/employer.
 import {TableAllApplicantsComponent} from './components/tables/table-applicants/table-all-applicants.component';
 import {TableAllEmployersComponent} from './components/tables/table-employers/table-all-employers.component';
 import {TableAllAdminsComponent} from './components/tables/table-admins/table-all-admins.component';
+import {TableAllApplicantsAppliedComponent} from './components/tables/table-applicants-applied/table-all-applicants-applied.component';
 import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.component';
 
 @NgModule({
@@ -55,6 +56,7 @@ import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.com
     TableAllApplicantsComponent,
     TableAllEmployersComponent,
     TableAllAdminsComponent,
+    TableAllApplicantsAppliedComponent,
     DialogBoxComponent,
   ],
   imports: [
@@ -72,12 +74,17 @@ import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.com
       {path: 'register', component: RegisterApplicantComponent},
       {path: 'registerAdmin', component: RegisterAdminComponent},
       {path: 'registerEmployer', component: RegisterEmployerComponent},
-      {path: 'registerVacancy', component: RegisterVacancyComponent},
+      {path: 'postVacancy', component: RegisterVacancyComponent},
       {path: 'vacancyList', component: VacancyListComponent},
       {path: 'vacancyProfile/:id', component: VacancyProfileComponent},
       {path: 'allApplicants', component: TableAllApplicantsComponent},
       {path: 'allEmployers', component: TableAllEmployersComponent},
       {path: 'allAdmins', component: TableAllAdminsComponent},
+      {path: 'allAppliedApplicants', component: TableAllAdminsComponent},
+      {
+        path: 'allAppiedApplicants',
+        component: TableAllApplicantsAppliedComponent,
+      },
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: '**', redirectTo: 'home', pathMatch: 'full'},
     ]),

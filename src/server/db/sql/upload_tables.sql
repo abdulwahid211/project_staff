@@ -66,3 +66,9 @@ VALUES ( 'Apple', 2, '2020-09-14', 'bla bla sacndnvosdv doainvdivd indcodv');
 
 INSERT INTO AppliedJobs ( ApplicantID, VacancyID)
 VALUES ( 1,1);
+
+
+SELECT * from Vacancies inner join Employer where Vacancies.VacancyID=145 and Vacancies.EmployerID = Employer.EmployerID;
+
+Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Address, A.Postcode, A.City, A.Email from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
+V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   AJ.VacancyID = V.VacancyID  where EM.EmployerID = 5 order by AJ.VacancyID ASC;

@@ -1,6 +1,6 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
 import {
-  GET_ALL_APPLICANTS,
+  GET_ALL_APPLIED_APPLICANTS,
   DELETE_ALL_APPLICANT,
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
@@ -8,14 +8,17 @@ import {MatDialog} from '@angular/material/dialog';
 import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
 import {Apollo} from 'apollo-angular';
 import {Applicants} from 'src/app/types/applicants';
+import {EMPLOYER_ID} from 'src/app/graphql/constants';
 
 @Component({
-  selector: 'table-all-applicants',
-  templateUrl: './table-all-applicants.component.html',
-  styleUrls: ['./table-all-applicants.component.css'],
+  selector: 'table-all-applicants-applied',
+  templateUrl: './table-all-applicants-applied.component.html',
+  styleUrls: ['./table-all-applicants-applied.component.css'],
 })
-export class TableAllApplicantsComponent implements OnInit {
+export class TableAllApplicantsAppliedComponent implements OnInit {
   displayedColumns: string[] = [
+    'VacancyID',
+    'JobTitle',
     'ApplicantID',
     'FirstName',
     'LastName',
@@ -23,21 +26,23 @@ export class TableAllApplicantsComponent implements OnInit {
     'City',
     'Postcode',
     'Email',
-    'Delete',
+    'Download_CV',
   ];
-  dataSource = new MatTableDataSource<Applicants>([]);
+  dataSource = new MatTableDataSource<any>([]);
 
-  @ViewChild(MatTable, {static: true}) table: MatTable<Applicants> | undefined;
+  @ViewChild(MatTable, {static: true}) table: MatTable<any> | undefined;
 
   constructor(public dialog: MatDialog, private apollo: Apollo) {}
   ngOnInit(): void {
     this.apollo
       .watchQuery({
-        query: GET_ALL_APPLICANTS,
+        query: GET_ALL_APPLIED_APPLICANTS,
+        variables: {
+          employerId: localStorage.getItem(EMPLOYER_ID),
+        },
       })
       .valueChanges.subscribe(({data, error}: any) => {
-        this.dataSource.data = data.applicants;
-        console.log(data.applicants);
+        this.dataSource.data = data.applicantAppliedJobs;
         console.log(error);
       });
   }
@@ -56,19 +61,19 @@ export class TableAllApplicantsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  delete(email) {
+  downloadCV(email) {
     console.log(email);
-    this.apollo
-      .mutate({
-        mutation: DELETE_ALL_APPLICANT,
-        variables: {
-          email: email,
-        },
-      })
-      .subscribe(value => {
-        if (value) {
-          window.location.reload();
-        }
-      });
+    // this.apollo
+    //   .mutate({
+    //     mutation: DELETE_ALL_APPLICANT,
+    //     variables: {
+    //       email: email,
+    //     },
+    //   })
+    //   .subscribe(value => {
+    //     if (value) {
+    //       window.location.reload();
+    //     }
+    //   });
   }
 }

@@ -224,3 +224,19 @@ export const DELETE_ALL_EMPLOYER = gql`
     deleteEmployer(Email: $email)
   }
 `;
+
+export const GET_ALL_APPLIED_APPLICANTS = gql`
+  query ApplicantAppliedJobs($employerId: ID) {
+    applicantAppliedJobs(employerId: $employerId) {
+      VacancyID
+      JobTitle
+      ApplicantID
+      LastName
+      FirstName
+      Address
+      City
+      Postcode
+      Email
+    }
+  }
+`;
