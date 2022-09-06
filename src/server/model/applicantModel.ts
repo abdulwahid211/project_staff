@@ -119,3 +119,22 @@ export const GetApplicantAppliedJobs = async (employerId: Number, req: any) => {
   console.log('Output: ' + JSON.stringify(row));
   return row;
 };
+
+export const UploadCV = async fileObject => {
+  const InsertFileTable =
+    'INSERT INTO CV (Email, Filename, Uploaded, File) VALUES (?,?,?,?)';
+
+  if (fileObject) {
+    const promisePool = Db.promise();
+    const [row] = await promisePool.execute(InsertFileTable, [
+      fileObject.Email,
+      fileObject.Filename,
+      fileObject.Created,
+      fileObject.File,
+    ]);
+    console.log('Output: ' + JSON.stringify(row));
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -5,8 +5,11 @@ import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache, ApolloLink} from '@apollo/client/core';
 import {setContext} from '@apollo/client/link/context';
 import {AUTH_TOKEN} from 'src/app/graphql/constants';
+import extractFiles from 'extract-files/extractFiles.mjs';
+// @ts-ignore
+import isExtractableFile from 'extract-files/isExtractableFile.mjs';
 
-const uri = 'http://localhost:3001/';
+const uri = 'http://localhost:3001/graphql';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   const token = localStorage.getItem(AUTH_TOKEN);
@@ -24,7 +27,13 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     };
   });
 
-  const link = ApolloLink.from([auth, httpLink.create({uri})]);
+  const link = ApolloLink.from([
+    auth,
+    httpLink.create({
+      uri: uri,
+      extractFiles: body => extractFiles(body, isExtractableFile),
+    }),
+  ]);
 
   return {
     link: link,

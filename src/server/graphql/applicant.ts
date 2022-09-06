@@ -1,4 +1,5 @@
 import {gql} from 'apollo-server-express';
+import {GraphQLUpload} from 'graphql-upload';
 import {
   GetAllApplicants,
   GetApplicant,
@@ -6,9 +7,12 @@ import {
   UpdateApplicant,
   DeleteApplicant,
   GetApplicantAppliedJobs,
+  UploadCV,
 } from '../model/applicantModel';
 
 export const typeApplicants = gql`
+  scalar Upload
+
   extend type Query {
     applicants: [Applicant]
     applicant(Email: String!): Applicant
@@ -38,6 +42,12 @@ export const typeApplicants = gql`
   }
 
   extend type Mutation {
+    uploadCV(
+      File: Upload!
+      Email: String!
+      Filename: String!
+      Created: Date!
+    ): Boolean!
     createApplicant(
       LastName: String!
       FirstName: String!
@@ -74,6 +84,7 @@ export const resolversApplicants = {
 
   Mutation: {
     createApplicant: async (obj, args, context, info) => CreateApplicant(args),
+    uploadCV: async (obj, args, context, info) => UploadCV(args),
 
     deleteApplicant: async (obj, args, context, info) =>
       DeleteApplicant(args.Email, context.req),

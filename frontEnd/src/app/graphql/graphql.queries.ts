@@ -240,3 +240,14 @@ export const GET_ALL_APPLIED_APPLICANTS = gql`
     }
   }
 `;
+
+export const UPLOAD_CV = gql`
+  mutation Mutation(
+    $file: Upload!
+    $email: String!
+    $filename: String!
+    $created: Date!
+  ) {
+    uploadCV(File: $file, Email: $email, Filename: $filename, Created: $created)
+  }
+`;
