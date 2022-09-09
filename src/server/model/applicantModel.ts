@@ -122,7 +122,7 @@ export const GetApplicantAppliedJobs = async (employerId: Number, req: any) => {
 
 export const UploadCV = async fileObject => {
   const InsertFileTable =
-    'INSERT INTO CV (Email, Filename, Uploaded, File) VALUES (?,?,?,?)';
+    'INSERT INTO CV (Email, Filename, Uploaded, File, Type, Size) VALUES (?,?,?,?,?,?)';
 
   if (fileObject) {
     const promisePool = Db.promise();
@@ -131,10 +131,40 @@ export const UploadCV = async fileObject => {
       fileObject.Filename,
       fileObject.Created,
       fileObject.File,
+      fileObject.Type,
+      fileObject.Size,
     ]);
     console.log('Output: ' + JSON.stringify(row));
     return true;
   } else {
     return false;
   }
+};
+
+export const DeleteCV = async (email: string, req: any) => {
+  AuthenticateToken(req);
+  const CreateQueryString = 'Delete from CV where Email=?;';
+  Db.query(CreateQueryString, [email], (err, results) => {
+    if (err) console.log(err);
+  });
+  const FindCVQueryString = `
+    SELECT * from CV where Email=?;`;
+  const promisePool = Db.promise();
+  const [row] = await promisePool.execute(FindCVQueryString, [email]);
+  if (row[0] == undefined) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const DownloadCV = async (email: string, req: any) => {
+  AuthenticateToken(req);
+  console.log('Help ' + email);
+  const queryString = `
+      SELECT * from CV where Email=?;`;
+  const promisePool = Db.promise();
+  const [row] = await promisePool.execute(queryString, [email]);
+  console.log('Output: 1 ' + JSON.stringify(row));
+  return row[0];
 };

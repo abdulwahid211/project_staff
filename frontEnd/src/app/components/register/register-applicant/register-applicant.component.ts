@@ -26,6 +26,8 @@ export class RegisterApplicantComponent {
 
   private _createdDate: any | undefined;
 
+  protected cvFile: Event | undefined;
+
   constructor(
     private registerApplicantService: RegisterApplicantService,
     private router: Router,
@@ -33,9 +35,13 @@ export class RegisterApplicantComponent {
     private datePipe: DatePipe,
   ) {}
 
-  async onClickSubmit(result: NgForm) {
+  async onClickSubmit(result: any) {
+    this._createdDate = Date.now();
+
     this.registerApplicant =
       await this.registerApplicantService.registerApplicant(result);
+
+    this.fileUpload(this.cvFile, result.value.email);
 
     this.registerApplicant.subscribe(
       data => {
@@ -48,8 +54,7 @@ export class RegisterApplicantComponent {
     );
   }
 
-  async fileUpload(event: any) {
-    this._createdDate = Date.now();
+  async fileUpload(event: any, email: string) {
     const file: File = event.target.files[0];
     console.log(file);
 
@@ -57,19 +62,19 @@ export class RegisterApplicantComponent {
     reader.readAsBinaryString(file);
     reader.onload;
 
-    console.log(reader);
-
     this.convertFile(file).subscribe(base64 => {
-      console.log(base64);
+      console.log(file.type);
 
       this.apollo
         .mutate({
           mutation: UPLOAD_CV,
           variables: {
             file: base64,
-            email: file.name,
+            email: email,
             filename: file.name,
             created: this.datePipe.transform(this._createdDate, 'yyyy-MM-dd'),
+            type: file.type,
+            size: file.size,
           },
         })
         .subscribe(data => {

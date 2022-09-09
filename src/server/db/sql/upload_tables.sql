@@ -11,6 +11,18 @@ CREATE TABLE Applicants (
     PRIMARY KEY (ApplicantID)
 );
 
+
+CREATE TABLE CV (
+  Id int NOT NULL AUTO_INCREMENT,
+  Email varchar(255) NOT NULL,
+  Filename varchar(255) NOT NULL,
+  Uploaded datetime NOT NULL,
+  File LONGTEXT NOT NULL,
+  Type varchar(255) NOT NULL,
+  Size int NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
 CREATE TABLE Admin (
     AdminID int NOT NULL AUTO_INCREMENT,
     LastName varchar(255) NOT NULL,
@@ -71,4 +83,4 @@ VALUES ( 1,1);
 SELECT * from Vacancies inner join Employer where Vacancies.VacancyID=145 and Vacancies.EmployerID = Employer.EmployerID;
 
 Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Address, A.Postcode, A.City, A.Email from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
-V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   AJ.VacancyID = V.VacancyID  where EM.EmployerID = 5 order by AJ.VacancyID ASC;
+V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   AJ.VacancyID = V.VacancyID  where EM.EmployerID = 5 order by A.ApplicantID ASC;

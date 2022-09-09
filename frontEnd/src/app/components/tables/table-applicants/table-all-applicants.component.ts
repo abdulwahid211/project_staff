@@ -24,6 +24,7 @@ export class TableAllApplicantsComponent implements OnInit {
     'Postcode',
     'Email',
     'Delete',
+    'Download_CV',
   ];
   dataSource = new MatTableDataSource<Applicants>([]);
 
@@ -57,6 +58,22 @@ export class TableAllApplicantsComponent implements OnInit {
   }
 
   delete(email) {
+    console.log(email);
+    this.apollo
+      .mutate({
+        mutation: DELETE_ALL_APPLICANT,
+        variables: {
+          email: email,
+        },
+      })
+      .subscribe(value => {
+        if (value) {
+          window.location.reload();
+        }
+      });
+  }
+
+  downloadCV(email) {
     console.log(email);
     this.apollo
       .mutate({

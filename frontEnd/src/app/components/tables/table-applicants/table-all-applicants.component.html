@@ -54,6 +54,15 @@
           </button>
                 </mat-cell>
             </ng-container>
+
+            <ng-container matColumnDef="Download_CV">
+                <th mat-header-cell *matHeaderCellDef>Download CV</th>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button matTooltip="Download_CV" class="iconbutton" (click)="downloadCV(element.Email)" color="warn">
+            <mat-icon>get_app</mat-icon>
+          </button>
+                </mat-cell>
+            </ng-container>
         </div>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

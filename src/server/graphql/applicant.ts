@@ -8,6 +8,8 @@ import {
   DeleteApplicant,
   GetApplicantAppliedJobs,
   UploadCV,
+  DeleteCV,
+  DownloadCV,
 } from '../model/applicantModel';
 
 export const typeApplicants = gql`
@@ -41,13 +43,29 @@ export const typeApplicants = gql`
     Email: String!
   }
 
+  type CV {
+    Id: ID!
+    File: Upload!
+    Email: String!
+    Filename: String!
+    Uploaded: Date!
+    Type: String!
+    Size: Int!
+  }
+
   extend type Mutation {
     uploadCV(
       File: Upload!
       Email: String!
       Filename: String!
       Created: Date!
+      Type: String!
+      Size: Int!
     ): Boolean!
+
+    deleteCV(Email: String!): Boolean!
+    downloadCV(Email: String): CV!
+
     createApplicant(
       LastName: String!
       FirstName: String!
@@ -85,6 +103,10 @@ export const resolversApplicants = {
   Mutation: {
     createApplicant: async (obj, args, context, info) => CreateApplicant(args),
     uploadCV: async (obj, args, context, info) => UploadCV(args),
+    downloadCV: async (obj, args, context, info) =>
+      DownloadCV(args.Email, context.req),
+    deleteCV: async (obj, args, context, info) =>
+      DeleteCV(args.Email, context.req),
 
     deleteApplicant: async (obj, args, context, info) =>
       DeleteApplicant(args.Email, context.req),

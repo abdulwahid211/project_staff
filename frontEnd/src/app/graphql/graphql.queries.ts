@@ -242,12 +242,33 @@ export const GET_ALL_APPLIED_APPLICANTS = gql`
 `;
 
 export const UPLOAD_CV = gql`
-  mutation Mutation(
+  mutation UploadCV(
     $file: Upload!
     $email: String!
     $filename: String!
     $created: Date!
+    $type: String!
+    $size: Int!
   ) {
-    uploadCV(File: $file, Email: $email, Filename: $filename, Created: $created)
+    uploadCV(
+      File: $file
+      Email: $email
+      Filename: $filename
+      Created: $created
+      Type: $type
+      Size: $size
+    )
+  }
+`;
+
+export const DOWNLOAD_CV = gql`
+  mutation DownloadCV($email: String) {
+    downloadCV(Email: $email) {
+      ID
+      File
+      Email
+      Filename
+      Uploaded
+    }
   }
 `;
