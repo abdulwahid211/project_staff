@@ -262,13 +262,15 @@ export const UPLOAD_CV = gql`
 `;
 
 export const DOWNLOAD_CV = gql`
-  mutation DownloadCV($email: String) {
+  mutation Mutation($email: String) {
     downloadCV(Email: $email) {
-      ID
+      Id
       File
       Email
       Filename
       Uploaded
+      Type
+      Size
     }
   }
 `;

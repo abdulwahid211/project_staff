@@ -2,12 +2,13 @@ import {Component, ViewChild, OnInit} from '@angular/core';
 import {
   GET_ALL_APPLIED_APPLICANTS,
   DELETE_ALL_APPLICANT,
+  DOWNLOAD_CV,
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
 import {Apollo} from 'apollo-angular';
-import {Applicants} from 'src/app/types/applicants';
+import {DownloadCVFile} from 'src/app/utils/cvFileTools';
 import {EMPLOYER_ID} from 'src/app/graphql/constants';
 
 @Component({
@@ -63,17 +64,17 @@ export class TableAllApplicantsAppliedComponent implements OnInit {
 
   downloadCV(email) {
     console.log(email);
-    // this.apollo
-    //   .mutate({
-    //     mutation: DELETE_ALL_APPLICANT,
-    //     variables: {
-    //       email: email,
-    //     },
-    //   })
-    //   .subscribe(value => {
-    //     if (value) {
-    //       window.location.reload();
-    //     }
-    //   });
+    this.apollo
+      .mutate({
+        mutation: DOWNLOAD_CV,
+        variables: {
+          email: email,
+        },
+      })
+      .subscribe((value: any) => {
+        if (value) {
+          DownloadCVFile(value.data.downloadCV);
+        }
+      });
   }
 }

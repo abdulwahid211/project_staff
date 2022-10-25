@@ -1,9 +1,37 @@
+.navbar {
+    display: flex;
+    padding-top: 1px;
+    justify-content: space-between;
+    width: 100%;
+    align-items: stretch;
+}
+
 .nav {
     display: flex;
     justify-content: center;
+    align-items: center;
     list-style-type: none;
+    text-align: center;
+    margin-right: 8%;
+}
+
+.navbar #logo {
+    padding: 10px;
 }
 
 .nav-link {
-    margin: 5px;
+    text-decoration: none;
+    color: #004d90;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 20px;
+    font-size: 160%;
+}
+
+.nav-link:hover {
+    color: hotpink;
+}
+
+.nav-link:active {
+    color: blue;
 }

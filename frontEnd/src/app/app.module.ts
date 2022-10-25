@@ -31,6 +31,7 @@ import {TableAllEmployersComponent} from './components/tables/table-employers/ta
 import {TableAllAdminsComponent} from './components/tables/table-admins/table-all-admins.component';
 import {TableAllApplicantsAppliedComponent} from './components/tables/table-applicants-applied/table-all-applicants-applied.component';
 import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.component';
+import {MainComponent} from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.com
     TableAllAdminsComponent,
     TableAllApplicantsAppliedComponent,
     DialogBoxComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +89,7 @@ import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.com
       },
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: '**', redirectTo: 'home', pathMatch: 'full'},
+      {path: 'home', component: MainComponent},
     ]),
     GraphQLModule,
     HttpClientModule,

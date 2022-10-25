@@ -2,12 +2,14 @@ import {Component, ViewChild, OnInit} from '@angular/core';
 import {
   GET_ALL_APPLICANTS,
   DELETE_ALL_APPLICANT,
+  DOWNLOAD_CV,
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
 import {Apollo} from 'apollo-angular';
 import {Applicants} from 'src/app/types/applicants';
+import {DownloadCVFile} from 'src/app/utils/cvFileTools';
 
 @Component({
   selector: 'table-all-applicants',
@@ -77,14 +79,14 @@ export class TableAllApplicantsComponent implements OnInit {
     console.log(email);
     this.apollo
       .mutate({
-        mutation: DELETE_ALL_APPLICANT,
+        mutation: DOWNLOAD_CV,
         variables: {
           email: email,
         },
       })
-      .subscribe(value => {
+      .subscribe((value: any) => {
         if (value) {
-          window.location.reload();
+          DownloadCVFile(value.data.downloadCV);
         }
       });
   }
