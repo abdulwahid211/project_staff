@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HomeComponent} from './components/home/home.component';
+import {MainComponent} from './components/main/main.component';
 import {RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {UserFormsComponent} from './components/login/login-applicant/login-applicant.component';
@@ -31,7 +31,8 @@ import {TableAllEmployersComponent} from './components/tables/table-employers/ta
 import {TableAllAdminsComponent} from './components/tables/table-admins/table-all-admins.component';
 import {TableAllApplicantsAppliedComponent} from './components/tables/table-applicants-applied/table-all-applicants-applied.component';
 import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.component';
-import {MainComponent} from './components/main/main.component';
+import {HomeComponent} from './components/home/home.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {MainComponent} from './components/main/main.component';
     TableAllApplicantsAppliedComponent,
     DialogBoxComponent,
     MainComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,7 @@ import {MainComponent} from './components/main/main.component';
       },
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: '**', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'home', component: MainComponent},
+      {path: 'home', component: HomeComponent},
     ]),
     GraphQLModule,
     HttpClientModule,
@@ -97,6 +99,6 @@ import {MainComponent} from './components/main/main.component';
     NgMaterialModule,
   ],
   providers: [],
-  bootstrap: [HomeComponent],
+  bootstrap: [MainComponent],
 })
 export class AppModule {}

@@ -1,0 +1,44 @@
+.titlePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.subheading {
+    position: absolute;
+    color: white;
+    width: 85%;
+}
+
+.subheading h2 {
+    font-size: 5em;
+    text-align: center;
+}
+
+.aboutPage {
+    background-color: #fff9f1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 60px;
+}
+
+.aboutPage h2 {
+    color: #004d90;
+    font-weight: bold;
+    font-size: 350%;
+}
+
+.aboutPage p {
+    padding-top: 30px;
+    line-height: 2;
+    font-size: 100%;
+}
