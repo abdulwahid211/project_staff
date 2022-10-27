@@ -6,7 +6,6 @@ import {
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
 import {Apollo} from 'apollo-angular';
 import {DownloadCVFile} from 'src/app/utils/cvFileTools';
 import {EMPLOYER_ID} from 'src/app/graphql/constants';
@@ -46,15 +45,6 @@ export class TableAllApplicantsAppliedComponent implements OnInit {
         this.dataSource.data = data.applicantAppliedJobs;
         console.log(error);
       });
-  }
-
-  openDialog(action, messageAction, obj) {
-    obj.action = action;
-    obj.messageAction = messageAction;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '350px',
-      data: obj,
-    });
   }
 
   applyFilter(event: Event) {

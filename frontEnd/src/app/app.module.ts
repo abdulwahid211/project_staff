@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {MainComponent} from './components/main/main.component';
 import {RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
-import {UserFormsComponent} from './components/login/login-applicant/login-applicant.component';
+import {LoginFormsComponent} from './components/login/login-applicant/login-applicant.component';
 import {FormsModule} from '@angular/forms';
 import {AboutComponent} from './components/about/about.component';
 import {ContactusComponent} from './components/contactus/contactus.component';
@@ -20,7 +20,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgMaterialModule} from './modules/material.module';
 import {VacancyCardComponent} from './components/vacancy/vacancy-card/vacancy-card.component';
 import {VacancyProfileComponent} from './components/vacancy/vacancy-profile/vacancy-profile.component';
-import {LoginEmployerComponent} from './components/login/login-employer/login-employer.component';
 import {LoginAdminComponent} from './components/login/login-admin/login-admin.component';
 import {ApplicantsProfileComponent} from './components/profile/applicant-profile/applicants-profile.component';
 import {ApplicantComponent} from './components/profile/applicant-profile/applicant.components';
@@ -30,15 +29,15 @@ import {TableAllApplicantsComponent} from './components/tables/table-applicants/
 import {TableAllEmployersComponent} from './components/tables/table-employers/table-all-employers.component';
 import {TableAllAdminsComponent} from './components/tables/table-admins/table-all-admins.component';
 import {TableAllApplicantsAppliedComponent} from './components/tables/table-applicants-applied/table-all-applicants-applied.component';
-import {DialogBoxComponent} from './components/dialogs/dialog-box/dialog-box.component';
 import {HomeComponent} from './components/home/home.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     HomeComponent,
     LoginComponent,
-    UserFormsComponent,
+    LoginFormsComponent,
     AboutComponent,
     ContactusComponent,
     RegisterApplicantComponent,
@@ -51,7 +50,6 @@ import {FooterComponent} from './components/footer/footer.component';
     VacancyListComponent,
     VacancyCardComponent,
     VacancyProfileComponent,
-    LoginEmployerComponent,
     LoginAdminComponent,
     EmployerProfileComponent,
     EmployerComponent,
@@ -59,7 +57,6 @@ import {FooterComponent} from './components/footer/footer.component';
     TableAllEmployersComponent,
     TableAllAdminsComponent,
     TableAllApplicantsAppliedComponent,
-    DialogBoxComponent,
     MainComponent,
     FooterComponent,
   ],
@@ -67,9 +64,9 @@ import {FooterComponent} from './components/footer/footer.component';
     BrowserModule,
     FormsModule,
     CommonModule,
+    NgbModule,
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
-      {path: 'loginEmployer', component: LoginEmployerComponent},
       {path: 'admin', component: LoginAdminComponent},
       {path: 'applicantProfile', component: ApplicantsProfileComponent},
       {path: 'employerProfile', component: EmployerProfileComponent},

@@ -1,0 +1,13 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-form-field {
+    width: 150%;
+    padding-left: 20px;
+}
+
+#username {
+    width: 500%;
+}

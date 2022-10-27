@@ -6,7 +6,6 @@ import {
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
 import {Apollo} from 'apollo-angular';
 import {Applicants} from 'src/app/types/applicants';
 import {DownloadCVFile} from 'src/app/utils/cvFileTools';
@@ -43,15 +42,6 @@ export class TableAllApplicantsComponent implements OnInit {
         console.log(data.applicants);
         console.log(error);
       });
-  }
-
-  openDialog(action, messageAction, obj) {
-    obj.action = action;
-    obj.messageAction = messageAction;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '350px',
-      data: obj,
-    });
   }
 
   applyFilter(event: Event) {

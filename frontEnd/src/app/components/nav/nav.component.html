@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div id="logo">
-        <img src="assets/logo.png" height="105" />
+        <a href="/home"> <img src="assets/logo.png" height="105" /></a>
     </div>
 
     <ul class="nav">
@@ -8,16 +8,11 @@
             <a class="nav-link" routerLinkActive="active" routerLink="/">Home</a>
         </li>
         <li *ngIf="!isApplicantLogin && !isEmployerLogin && !isAdminLogin">
-            <a class="nav-link" routerLinkActive="active" routerLink="/login">Login
+            <a class="nav-link" routerLinkActive="active" (click)="openDialog()">Login/ Register
       </a>
         </li>
         <li *ngIf="!isAdminLogin && !isEmployerLogin">
-            <a class="nav-link" routerLinkActive="active" routerLink="/register">Register</a
-      >
-    </li>
-    <li *ngIf="!isAdminLogin && !isEmployerLogin">
-      <a class="nav-link" routerLinkActive="active" routerLink="/about"
-        >About</a
+            <a class="nav-link" routerLinkActive="active" routerLink="/about">Vacancies</a
       >
     </li>
 
@@ -43,7 +38,7 @@
         </li>
 
         <li *ngIf="isAdminLogin">
-            <a class="nav-link" routerLinkActive="active" routerLink="/postVacancy">Post a Job
+            <a class="nav-link" routerLinkActive="active" routerLink="/postVacancy">Post Job
       </a>
         </li>
 

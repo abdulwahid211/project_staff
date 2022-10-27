@@ -36,3 +36,8 @@
 .nav-link:active {
     color: blue;
 }
+
+.mat-dialog-container {
+    background-color: #004d90;
+    border-radius: 90%;
+}

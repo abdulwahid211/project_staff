@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './login-applicant.component.html',
   styleUrls: ['./login-applicant.component.css'],
 })
-export class UserFormsComponent implements OnInit {
+export class LoginFormsComponent implements OnInit {
   protected validation: boolean = false;
 
   private applicantToken: any | undefined;

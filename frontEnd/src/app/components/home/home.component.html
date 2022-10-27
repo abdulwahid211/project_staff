@@ -1,11 +1,11 @@
-<div class="titlePage">
-    <video autoplay muted loop id="background-video">
-    <source src="assets/construction.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
-  </video>
-    <div class="subheading">
-        <h2>Come and apply for your dream job now!</h2>
-    </div>
+<div class="titlePage" [ngStyle]="{
+    'background-image':
+      'linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url(' +
+      actualImage +
+      ')'
+  }">
+    <img src="assets/logobannerwhite.png" />
+    <h2 class="subTitle">&#8226; Inspire &#8226; Grow &#8226; Lead</h2>
 </div>
 <div class="aboutPage">
     <h2>About Us</h2>
@@ -14,5 +14,6 @@
         confident in our ability to supply only the highest caliber of medical professionals in the industry, and with access to our continuously growing database of fully vetted candidates. As a preferred supplier to both NHS and private care organisations,
         our team of experienced consultants can assist in all areas. When you use our services, you can be fully assured that you will be receiving a highly cost-effective solution to your staffing requirements.
     </p>
+    <a href="/register"><button>Join Us</button></a>
 </div>
 <footer></footer>

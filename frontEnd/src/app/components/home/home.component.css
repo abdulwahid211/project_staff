@@ -2,24 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#background-video {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
+    height: 80%;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
+    padding-top: -20px;
 }
 
-.subheading {
-    position: absolute;
-    color: white;
-    width: 85%;
-}
-
-.subheading h2 {
-    font-size: 5em;
-    text-align: center;
+.titlePage img {
+    width: 30%;
+    height: auto;
+    padding-bottom: 70px;
 }
 
 .aboutPage {
@@ -40,5 +36,33 @@
 .aboutPage p {
     padding-top: 30px;
     line-height: 2;
-    font-size: 100%;
+    color: #004d90;
+    font-weight: 600;
+    font-size: 140%;
+    padding-bottom: 30px;
+}
+
+.aboutPage button {
+    background-color: #ffbb6d;
+    color: #004d90;
+    border: 0;
+    padding: 20px 55px;
+    font-weight: 800;
+    border-radius: 10%;
+    font-size: 26px;
+}
+
+.aboutPage button:hover {
+    background-color: #a86f2e;
+    /* Green */
+    color: white;
+    border: #004d90;
+}
+
+.subTitle {
+    color: rgb(255, 255, 255);
+    font-size: 450%;
+    margin: 20px;
+    text-align: center;
+    line-height: 1;
 }

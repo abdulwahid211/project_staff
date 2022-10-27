@@ -1,11 +1,14 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthService} from '../login/auth-service/auth.service';
 import {Router} from '@angular/router';
+import {LoginComponent} from '../login/login.component';
 import {
   ADMIN_LOGIN_ENABLED,
   APPLICANT_LOGIN_ENABLED,
   EMPLOYER_LOGIN_ENABLED,
 } from 'src/app/graphql/constants';
+
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'nav-bar',
   templateUrl: './nav.component.html',
@@ -20,10 +23,27 @@ export class NavComponent implements OnInit, OnDestroy {
   applicantLoginText = '(Logged in as Applicant)';
   employerLoginText = '(Logged in as Employer)';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnDestroy(): void {
     // this.unsubcribeAllServices();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      height: '600px',
+      width: '800px',
+      backdropClass: 'backdrop',
+      panelClass: 'dialogTheme',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   ngOnInit(): void {

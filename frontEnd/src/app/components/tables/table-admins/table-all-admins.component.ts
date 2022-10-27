@@ -5,7 +5,6 @@ import {
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogBoxComponent} from '../../dialogs/dialog-box/dialog-box.component';
 import {Apollo} from 'apollo-angular';
 import {Admin} from 'src/app/types/admin';
 import {AuthService} from '../../login/auth-service/auth.service';
