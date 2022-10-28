@@ -3,18 +3,22 @@
     <div *ngIf="loginError">
         {{ loginErrorLabelText }}
     </div>
-    <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input id="username" matInput placeholder="Email" name="username" ngModel required />
-        <mat-icon matPrefix>person</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input type="text" matInput name="password" placeholder="Password" ngModel required />
-        <mat-icon matPrefix>lock</mat-icon>
-    </mat-form-field>
-
-    <br />
-    <p>Forgotten your password?</p>
-    <input type="submit" value="SIGN IN" />
+    <div class="authLogin">
+        <mat-form-field id="emailInput">
+            <mat-label>Email</mat-label>
+            <input id="username" type="text" matInput placeholder="Email" name="email" ngModel required />
+            <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field id="passwordInput">
+            <mat-label>Password</mat-label>
+            <input id="password" type="password" matInput name="password" placeholder="Password" autocomplete="off" ngModel required />
+            <mat-icon matPrefix>lock</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="submitInput">
+        <input type="submit" value="SIGN IN" />
+        <a href="/forgotten">
+            <p>Forgotten your password?</p>
+        </a>
+    </div>
 </form>

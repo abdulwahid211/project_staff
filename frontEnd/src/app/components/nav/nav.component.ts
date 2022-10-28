@@ -36,7 +36,7 @@ export class NavComponent implements OnInit, OnDestroy {
   openDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {
       height: '600px',
-      width: '800px',
+      width: '600px',
       backdropClass: 'backdrop',
       panelClass: 'dialogTheme',
     });
