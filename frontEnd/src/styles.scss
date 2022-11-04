@@ -3,9 +3,6 @@
 html,
 body {
     height: 100%;
-}
-
-body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
@@ -18,4 +15,8 @@ a:link {
 .mat-dialog-container {
     background-color: #fff9f1;
     color: #004d90;
+}
+
+.mat-typography {
+    background-color: #fff9f1;
 }

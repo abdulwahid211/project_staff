@@ -1,0 +1,88 @@
+.registerContiner {
+    display: flex;
+    padding-left: 200px;
+    padding-right: 100px;
+}
+
+.uploadCV {
+    margin-bottom: 30px;
+}
+
+#contactPreference {
+    padding-left: 200px;
+    padding-right: 100px;
+    padding-bottom: 30px;
+}
+
+#contactPreference h2 {
+    font-size: 140%;
+}
+
+.titleRegister h2 {
+    display: flex;
+    justify-content: center;
+    background-color: #6299de;
+    color: white;
+    font-size: 230%;
+    padding: 20px;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+.register-form input[type='text'],
+.register-form input[type='tel'] {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border-style: line;
+    border-radius: 9%;
+    height: 20px;
+    font-size: larger;
+    margin-bottom: 10px;
+    height: 35px;
+    padding: 20px;
+    width: 80%;
+}
+
+.register-form input,
+select {
+    border: 1px solid #ccc;
+}
+
+#registerNames {
+    display: flex;
+    flex-direction: row;
+}
+
+#uploadCV {
+    margin-bottom: 30px;
+}
+
+.registerContiner input[type='submit'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbb6d;
+    color: #004d90;
+    border: 0;
+    padding: 10px 35px;
+    font-weight: 600;
+    border-radius: 12%;
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+}
+
+.registerForm input[type='submit']:hover {
+    background-color: #a86f2e;
+    color: white;
+    border: #004d90;
+}
+
+.registerLabel {
+    color: #004d90;
+    font-size: 110%;
+    font-weight: 450;
+}
