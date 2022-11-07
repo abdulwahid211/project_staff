@@ -24,7 +24,7 @@ export const GET_APPLICANT_PROFILE = gql`
       ApplicantID
       FirstName
       LastName
-      Address
+      telephone
       City
       Postcode
       Email
@@ -39,18 +39,16 @@ export const CREATE_APPLICANT_PROFILE = gql`
     $firstName: String!
     $email: String!
     $password: String!
-    $address: String!
+    $telephone: String!
     $city: String!
-    $postcode: String!
   ) {
     createApplicant(
       LastName: $lastName
       FirstName: $firstName
       Email: $email
       Password: $password
-      Address: $address
+      Telephone: $telephone
       City: $city
-      Postcode: $postcode
     )
   }
 `;
@@ -76,6 +74,7 @@ export const CREATE_EMPLOYER_PROFILE = gql`
     $name: String!
     $email: String!
     $password: String!
+    $telephone: String!
     $address: String!
     $city: String!
     $postcode: String!
@@ -127,6 +126,10 @@ export const GET_VACANCIES = gql`
       Title
       Description
       Created
+      Sector
+      Salary
+      Location
+      Contract
     }
   }
 `;
@@ -157,7 +160,7 @@ export const GET_EMPLOYER_PROFILE = gql`
     Employer(Email: $email) {
       EmployerID
       Name
-      Address
+      telephone
       City
       Postcode
       Email
@@ -172,11 +175,10 @@ export const GET_ALL_APPLICANTS = gql`
       ApplicantID
       LastName
       FirstName
-      Address
+      Telephone
       City
       Postcode
       Email
-      Password
     }
   }
 `;
@@ -186,6 +188,7 @@ export const GET_ALL_EMPLOYERS = gql`
     Employers {
       EmployerID
       Name
+      Telephone
       Address
       City
       Postcode
@@ -233,9 +236,8 @@ export const GET_ALL_APPLIED_APPLICANTS = gql`
       ApplicantID
       LastName
       FirstName
-      Address
       City
-      Postcode
+      Telephone
       Email
     }
   }

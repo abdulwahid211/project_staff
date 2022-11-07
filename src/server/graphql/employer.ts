@@ -19,14 +19,14 @@ export const typeEmployer = gql`
     City: String!
     Postcode: String!
     Email: String!
-    Password: String!
+    Telephone: String!
   }
 
   type Mutation {
     createEmployer(
       Name: String!
       Email: String!
-      Password: String!
+      Telephone: String!
       Address: String!
       City: String!
       Postcode: String!
@@ -35,7 +35,7 @@ export const typeEmployer = gql`
     updateEmployer(
       Name: String!
       Email: String!
-      Password: String!
+      Telephone: String!
       Address: String!
       City: String!
       Postcode: String!

@@ -38,33 +38,43 @@ export class RegisterApplicantComponent {
   async onClickSubmit(result: any) {
     this._createdDate = Date.now();
 
-    this.registerApplicant =
-      await this.registerApplicantService.registerApplicant(result);
+    if (
+      result.value.email &&
+      result.value.firstname &&
+      result.value.lastname &&
+      result.value.password &&
+      result.value.telephone &&
+      result.value.city &&
+      this.cvFile
+    ) {
+      this.registerApplicant =
+        await this.registerApplicantService.registerApplicant(result);
+      this.fileUpload(this.cvFile, result.value.email);
 
-    this.fileUpload(this.cvFile, result.value.email);
-
-    this.registerApplicant.subscribe(
-      data => {
-        console.log(data);
-        this.formSuccessful = data.data.createApplicant;
-      },
-      error => {
-        console.log('Error ' + error);
-      },
-    );
+      this.registerApplicant.subscribe(
+        data => {
+          console.log('Success');
+          this.formSuccessful = data.data.createApplicant;
+          this.validation = false;
+          result.resetForm();
+        },
+        error => {
+          console.log('Error ' + error);
+        },
+      );
+    } else {
+      this.validation = true;
+    }
   }
 
   async fileUpload(event: any, email: string) {
     const file: File = event.target.files[0];
-    console.log(file);
 
     const reader = new FileReader();
     reader.readAsBinaryString(file);
     reader.onload;
 
     this.convertFile(file).subscribe(base64 => {
-      console.log(file.type);
-
       this.apollo
         .mutate({
           mutation: UPLOAD_CV,

@@ -3,8 +3,7 @@ CREATE TABLE Applicants (
     ApplicantID int NOT NULL AUTO_INCREMENT,
     LastName varchar(255) NOT NULL,
     FirstName varchar(255) NOT NULL,
-    Address varchar(255) NOT NULL,
-    Postcode varchar(255) NOT NULL,
+    Telephone varchar(255) NOT NULL,
     City varchar(255) NOT NULL,
     Email varchar(255) NOT NULL,
     Password varchar(255) NOT NULL,
@@ -35,9 +34,13 @@ CREATE TABLE Admin (
 CREATE TABLE Vacancies (
     VacancyID int NOT NULL AUTO_INCREMENT,
     Title varchar(255),
+    Sector varchar(255),
     EmployerID int,
     Created datetime,
-    Description varchar(255),
+    Salary varchar(255),
+    Location varchar(255),
+    Contract  varchar(255),
+    Description LONGTEXT NOT NULL,
     PRIMARY KEY (VacancyID),
     FOREIGN KEY (EmployerID) REFERENCES Employer(EmployerID)
 );
@@ -49,7 +52,7 @@ CREATE TABLE Employer (
     City varchar(255) NOT NULL,
     Postcode varchar(255) NOT NULL,
     Email varchar(255) NOT NULL,
-    Password varchar(255) NOT NULL,
+    Telephone varchar(255) NOT NULL,
     PRIMARY KEY (EmployerID)
 );
 
@@ -67,14 +70,44 @@ VALUES ( 'James', 'Robertson', 'Causeway', 'Manchester', 'EC1 ASD', 'ABDULK@GMAI
 INSERT INTO Applicants ( LastName, FirstName, Address, City, Postcode, Email, Password)
 VALUES ( 'Abdul', 'Wahid', 'Barking Causeway', 'London','EC9 ASD', 'absuhsuh@GMAIL.COM', 'PASSWORD123');
 
-INSERT INTO Employer ( Name, Address, City, Postcode, Email, Password)
-VALUES ( 'Apple', 'Peterbrough', 'London', 'E2 KIO', 'scadcsdfvf@gmail.com', 'PASSWORD');
+INSERT INTO Employer ( Name, Address, City, Postcode, Email, Telephone)
+VALUES ( 'Next LTD', 'Peterbrough', 'London', 'E2 KIO', 'next@gmail.com', '0976654346676');
+
+INSERT INTO Employer ( Name, Address, City, Postcode, Email, Telephone)
+VALUES ( 'JD Sports', 'Peterbrough TYUS', 'London', 'E2 KIO', 'jd@gmail.com', '0976654346676');
 
 INSERT INTO Admin ( LastName, FirstName, Email, Password)
-VALUES ( 'James', 'Robertson','ABDULK@GMAIL.COM', 'PASSWORD');
+VALUES ( 'Haider', 'Ali','ali', 'pokemon');
 
-INSERT INTO Vacancies ( Title, EmployerID, Created, Description)
-VALUES ( 'Apple', 2, '2020-09-14', 'bla bla sacndnvosdv doainvdivd indcodv');
+INSERT INTO Admin ( LastName, FirstName, Email, Password)
+VALUES ( 'Roots', 'Ali','root', 'password');
+
+INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
+VALUES ( 'Doctor', 2, '2020-09-14', 'Responsibilities of Doctor:
+
+Working across the service charge and rents team providing property accounting
+Setting rent and service charge for general needs housing to supported housing
+Calculating and inputting all rent charges in the system whilst supporting team to ensure all rents are set correctly and monitored.
+Reconciling all property expenditure ensuring it is coded against correct properties so service charges are reflecting the expenditures for compliance
+Carry out monthly variance reporting and supporting the service charge manager
+Ideal candidate:
+
+Experience working in service charge administration
+Experience using housing management and financial systems
+Knowledge of rent and service charge processes
+Understanding of Landlord and Tenant legislation
+Understanding of fixed and variable service charges','£14 an hour','London','Permanent','Government');
+
+
+INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
+VALUES ( 'Qaulity Engineer', 2, '2022-09-14', 'Responsibilities of Qaulity Engineer:
+Working across the service charge and rents team providing property accounting
+Understanding of fixed and variable service charges','£10000 an hour','London','Permanent','Information Technology');
+
+INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
+VALUES ( 'Football Manager', 2, '2026-09-14', 'Responsibilities of Manager:
+Working across the service charge and rents team providing property accounting
+Understanding of fixed and variable service charges','£90,000-£99,0000','London','Permanent','Sports');
 
 INSERT INTO AppliedJobs ( ApplicantID, VacancyID)
 VALUES ( 1,1);

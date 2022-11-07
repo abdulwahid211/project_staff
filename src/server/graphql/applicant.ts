@@ -24,9 +24,8 @@ export const typeApplicants = gql`
     ApplicantID: ID!
     LastName: String!
     FirstName: String!
-    Address: String!
+    Telephone: String!
     City: String!
-    Postcode: String!
     Email: String!
     Password: String!
   }
@@ -37,9 +36,8 @@ export const typeApplicants = gql`
     ApplicantID: ID!
     LastName: String!
     FirstName: String!
-    Address: String!
+    Telephone: String!
     City: String!
-    Postcode: String!
     Email: String!
   }
 
@@ -71,9 +69,8 @@ export const typeApplicants = gql`
       FirstName: String!
       Email: String!
       Password: String!
-      Address: String!
+      Telephone: String!
       City: String!
-      Postcode: String!
     ): Boolean!
     deleteApplicant(Email: String!): Boolean!
     updateApplicant(
@@ -81,9 +78,8 @@ export const typeApplicants = gql`
       FirstName: String!
       Email: String!
       Password: String!
-      Address: String!
+      Telephone: String!
       City: String!
-      Postcode: String!
     ): Boolean!
   }
 `;

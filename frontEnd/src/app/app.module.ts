@@ -5,7 +5,6 @@ import {RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {LoginFormsComponent} from './components/login/login-applicant/login-applicant.component';
 import {FormsModule} from '@angular/forms';
-import {AboutComponent} from './components/about/about.component';
 import {ContactusComponent} from './components/contactus/contactus.component';
 import {RegisterApplicantComponent} from './components/register/register-applicant/register-applicant.component';
 import {RegisterAdminComponent} from './components/register/register-admin/register-admin.component';
@@ -32,13 +31,14 @@ import {TableAllApplicantsAppliedComponent} from './components/tables/table-appl
 import {HomeComponent} from './components/home/home.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
     HomeComponent,
     LoginComponent,
     LoginFormsComponent,
-    AboutComponent,
     ContactusComponent,
     RegisterApplicantComponent,
     RegisterEmployerComponent,
@@ -62,7 +62,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
+    MatSelectModule,
     FormsModule,
+    Ng2SearchPipeModule,
     CommonModule,
     NgbModule,
     RouterModule.forRoot([
@@ -70,7 +72,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
       {path: 'admin', component: LoginAdminComponent},
       {path: 'applicantProfile', component: ApplicantsProfileComponent},
       {path: 'employerProfile', component: EmployerProfileComponent},
-      {path: 'about', component: AboutComponent},
       {path: 'contactus', component: ContactusComponent},
       {path: 'register', component: RegisterApplicantComponent},
       {path: 'registerAdmin', component: RegisterAdminComponent},

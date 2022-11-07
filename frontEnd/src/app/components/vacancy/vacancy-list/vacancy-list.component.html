@@ -1,2 +1,15 @@
-<p>Vacancy Lists</p>
-<vacancy-card *ngFor="let j of vacancies" [vacancy]="j"></vacancy-card>
+<div class="titleRegister">
+    <input class="search-vacancy" type="text" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442; Search for a job" />
+    <mat-form-field class="optionDropdown" placeholder="All" floatLabel="never">
+        <mat-label style="padding-left: 5px">Select Job Sector</mat-label>
+        <mat-select [(ngModel)]="selectedSector" (selectionChange)="valueSelected()">
+            <mat-option *ngFor="let item of sectors" [value]="item">
+                {{ item }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<ul class="VacancyListsContainer">
+    <vacancy-card *ngFor="let j of selectedSectorJobs | filter: searchText" [vacancy]="j">
+    </vacancy-card>
+</ul>

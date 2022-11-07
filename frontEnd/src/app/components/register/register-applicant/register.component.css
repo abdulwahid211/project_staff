@@ -37,7 +37,7 @@
     flex-direction: column;
     background-color: rgb(255, 255, 255);
     border-style: line;
-    border-radius: 9%;
+    border-radius: 0.375rem;
     height: 20px;
     font-size: larger;
     margin-bottom: 10px;

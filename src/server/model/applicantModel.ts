@@ -6,16 +6,15 @@ export class Applicants {
   public ApplicantID!: number;
   public LastName!: string;
   public FirstName!: string;
-  public Address!: string;
+  public Telephone!: string;
   public City!: string;
-  public Postcode!: string;
   public Email!: string;
   public Password!: string;
 }
 
 export const CreateApplicant = async (object: Applicants) => {
   const CreateQueryString =
-    'INSERT INTO Applicants (LastName, FirstName, Email, Password, Address, City, Postcode) VALUES (?,?,?,?,?,?,?)';
+    'INSERT INTO Applicants (LastName, FirstName, Email, Password, Telephone, City) VALUES (?,?,?,?,?,?)';
   const SecuredPassword = await PasswordHash(object.Password);
   Db.query(
     CreateQueryString,
@@ -24,9 +23,8 @@ export const CreateApplicant = async (object: Applicants) => {
       object.LastName,
       object.Email,
       SecuredPassword,
-      object.Address,
+      object.Telephone,
       object.City,
-      object.Postcode,
     ],
     (err, results) => {
       if (err) console.log(err);
@@ -45,7 +43,7 @@ export const CreateApplicant = async (object: Applicants) => {
 export const UpdateApplicant = async (object: Applicants, req: any) => {
   AuthenticateToken(req);
   const UpdateQueryString =
-    'Update Applicants set FirstName=?,LastName=?,Password=?,Email=?,Address=?, City=?, Postcode=? where Email=?;';
+    'Update Applicants set FirstName=?,LastName=?,Password=?,Email=?,Telephone=?, City=? where Email=?;';
   const SecuredPassword = await PasswordHash(object.Password);
   Db.query(
     UpdateQueryString,
@@ -54,9 +52,8 @@ export const UpdateApplicant = async (object: Applicants, req: any) => {
       object.LastName,
       SecuredPassword,
       object.Email,
-      object.Address,
+      object.Telephone,
       object.City,
-      object.Postcode,
       object.Email,
     ],
     (err, results) => {
@@ -112,7 +109,7 @@ export const GetApplicant = async (email: string, req: any) => {
 export const GetApplicantAppliedJobs = async (employerId: Number, req: any) => {
   // AuthenticateToken(req);
   const queryString = `
-  Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Address, A.Postcode, A.City, A.Email from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
+  Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Telephone, A.City, A.Email from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
   V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   AJ.VacancyID = V.VacancyID  where EM.EmployerID = ? order by A.ApplicantID ASC;`;
   const promisePool = Db.promise();
   const [row] = await promisePool.execute(queryString, [employerId]);

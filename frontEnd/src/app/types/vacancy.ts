@@ -4,4 +4,8 @@ export interface Vacancy {
   Description: string;
   Created: String;
   EmployerID: number;
+  Sector: string;
+  Salary: string;
+  Location: string;
+  Contract: string;
 }

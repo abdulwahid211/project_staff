@@ -44,6 +44,7 @@
         "karma-webpack": "^5.0.0",
         "mysql": "^2.18.1",
         "mysql2": "^2.3.3",
+        "ng2-search-filter": "^0.5.1",
         "null-loader": "^4.0.1",
         "raw-loader": "^4.0.2",
         "rxjs": "^7.5.6",

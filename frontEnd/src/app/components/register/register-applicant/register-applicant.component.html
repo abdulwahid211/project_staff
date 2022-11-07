@@ -14,11 +14,13 @@
 <div class="registerContiner">
     <form #registerApplicant="ngForm" (ngSubmit)="onClickSubmit(registerApplicant)" required>
         <div class="registerForm">
-            <div *ngIf="validation">All detals must be filled required!</div>
+            <div *ngIf="validation" style="color: red">
+                All detals must be filled required!
+            </div>
             <div *ngIf="registerError">
                 {{ registerErrorLabelText }}
             </div>
-            <div *ngIf="formSuccessful">
+            <div *ngIf="formSuccessful" style="color: green">
                 <p>Form has been successfully submitted!</p>
             </div>
 
@@ -30,7 +32,7 @@
                 </div>
 
                 <p class="registerLabel">Email:</p>
-                <input matInput type="text" id="email" placeholder="Email" ngModel required />
+                <input matInput type="text" name="email" placeholder="Email" ngModel required />
 
                 <p class="registerLabel">Password:</p>
                 <input matInput type="text" name="password" placeholder="Password" ngModel required />
@@ -39,7 +41,7 @@
                 <input matInput type="text" name="city" placeholder="City" ngModel required />
 
                 <p class="registerLabel">Telephone:</p>
-                <input matInput type="tel" name="phone" placeholder="Telephone" ngModel required />
+                <input matInput type="tel" name="telephone" placeholder="Telephone" ngModel required />
 
                 <div id="uploadCV">
                     <p class="registerLabel">Please upload your CV</p>
