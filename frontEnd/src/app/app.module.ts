@@ -77,7 +77,7 @@ import {MatSelectModule} from '@angular/material/select';
       {path: 'registerAdmin', component: RegisterAdminComponent},
       {path: 'registerEmployer', component: RegisterEmployerComponent},
       {path: 'postVacancy', component: RegisterVacancyComponent},
-      {path: 'vacancyList', component: VacancyListComponent},
+      {path: 'vacancies', component: VacancyListComponent},
       {path: 'vacancyProfile/:id', component: VacancyProfileComponent},
       {path: 'allApplicants', component: TableAllApplicantsComponent},
       {path: 'allEmployers', component: TableAllEmployersComponent},
