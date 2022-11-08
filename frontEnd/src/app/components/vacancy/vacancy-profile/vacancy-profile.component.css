@@ -1,0 +1,38 @@
+.description {
+  white-space: pre-line;
+}
+
+.titleVacancyProfile {
+  background-color: #6299de;
+  color: black;
+  padding: 40px;
+}
+
+.titleVacancyProfile h1 {
+  font-size: 60px;
+  padding-bottom: 20px;
+  color: rgb(24, 24, 98);
+}
+
+mat-icon {
+  margin-top: 4px;
+}
+
+.vacancyPoints {
+  display: flex;
+  justify-items: center;
+  flex-direction: row;
+}
+
+span {
+  padding-left: 20px;
+}
+
+.info {
+  padding: 40px;
+}
+
+.info h1 {
+  font-size: 40px;
+  padding-bottom: 20px;
+}

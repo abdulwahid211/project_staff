@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Vacancy} from 'src/app/types/vacancy';
 import {Router} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'vacancy-card',
@@ -10,12 +11,16 @@ import {Router} from '@angular/router';
 export class VacancyCardComponent {
   @Input('vacancy') vacancy!: Vacancy;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private datePipe: DatePipe) {}
 
   onSelect(vacancy: Vacancy): void {
     const id = vacancy.VacancyID;
     console.log(vacancy.Title);
 
     this.router.navigate(['/vacancyProfile/' + id]);
+  }
+
+  public SetCorrectDate(date: any) {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 }

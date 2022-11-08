@@ -83,7 +83,7 @@ INSERT INTO Admin ( LastName, FirstName, Email, Password)
 VALUES ( 'Roots', 'Ali','root', 'password');
 
 INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
-VALUES ( 'Doctor', 2, '2020-09-14', 'Responsibilities of Doctor:
+VALUES ( 'Surgeon', 2, '2022-11-14', 'Responsibilities of Surgeon:
 
 Working across the service charge and rents team providing property accounting
 Setting rent and service charge for general needs housing to supported housing
@@ -96,7 +96,7 @@ Experience working in service charge administration
 Experience using housing management and financial systems
 Knowledge of rent and service charge processes
 Understanding of Landlord and Tenant legislation
-Understanding of fixed and variable service charges','£14 an hour','London','Permanent','Government');
+Understanding of fixed and variable service charges','£105k to £129k','Peterborough','Permanent','Government');
 
 
 INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )

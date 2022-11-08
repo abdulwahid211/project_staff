@@ -1,16 +1,45 @@
-<p>Vacancy Profile</p>
-
 <div class="vacancy-profile" *ngIf="vacancy">
-    <h1>{{ vacancy.Title }}</h1>
-    <h1>{{ vacancy.Description }}</h1>
-    <h1>{{ vacancy.Created }}</h1>
+  <div class="titleVacancyProfile">
+    <h1 class="profileTitle">{{ vacancy.Title }}</h1>
+    <h2 class="vacancyPoints">
+      <mat-icon> monetization_on</mat-icon>
+      <span>{{ vacancy.Salary }}</span>
+    </h2>
+    <h2 class="vacancyPoints">
+      <mat-icon> location_city</mat-icon>
+      <span>{{ vacancy.Location }}</span>
+    </h2>
+    <h2 class="vacancyPoints">
+      <mat-icon> access_time</mat-icon>
+      <span>{{ vacancy.Contract }}</span>
+    </h2>
+    <h2 class="vacancyPoints">
+      <mat-icon> calendar_today</mat-icon>
+      <span>Posted: {{ SetCorrectDate(vacancy.Created) }}</span>
+    </h2>
+
+    <p id="goBack">
+      <a href="/vacancies"> <mat-icon>keyboard_arrow_left</mat-icon> BACK </a>
+    </p>
+  </div>
+
+  <div class="info">
+    <div class="jobDescription">
+      <h1>Job Description</h1>
+    </div>
+    <p>Roles & Responsibilities:</p>
+    <p class="description">{{ vacancy.Description }}</p>
     <div *ngIf="JobAlreadyApplied">
-        <h1>{{ TextAlreadyJobApplied }}</h1>
+      <h1>{{ TextAlreadyJobApplied }}</h1>
     </div>
     <div *ngIf="JobAppliedSucessful">
-        <h1>{{ TextJobAppliedSucess }}</h1>
+      <h1>{{ TextJobAppliedSucess }}</h1>
     </div>
-    <button [disabled]="disableButton ? 'disabled' : null" (click)="onApplySubmit(vacancy)">
-    Send CV
-  </button>
+    <button
+      [disabled]="disableButton ? 'disabled' : null"
+      (click)="onApplySubmit(vacancy)"
+    >
+      Send CV
+    </button>
+  </div>
 </div>

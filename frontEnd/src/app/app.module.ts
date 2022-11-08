@@ -33,6 +33,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {MatSelectModule} from '@angular/material/select';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,7 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     NgMaterialModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [MainComponent],
 })
 export class AppModule {}

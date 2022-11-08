@@ -3,7 +3,7 @@ import {Vacancy} from 'src/app/types/vacancy';
 import {GET_VACANCIES} from 'src/app/graphql/graphql.queries';
 
 import {Apollo} from 'apollo-angular';
-import {identifierName} from '@angular/compiler';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-vacancy-list',

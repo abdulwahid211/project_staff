@@ -8,6 +8,7 @@ import {
 } from 'src/app/graphql/graphql.queries';
 import {Apollo} from 'apollo-angular';
 import {APPLICANT_ID} from 'src/app/graphql/constants';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-vacancy-profile',
@@ -28,6 +29,7 @@ export class VacancyProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apollo: Apollo,
+    private datePipe: DatePipe,
   ) {}
 
   ngOnInit(): void {
@@ -81,5 +83,9 @@ export class VacancyProfileComponent implements OnInit {
         this.JobAppliedSucessful = data.data.createAppliedJobs;
         this.disableButton = true;
       });
+  }
+
+  public SetCorrectDate(date: any) {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 }

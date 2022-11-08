@@ -114,6 +114,10 @@ export const GET_VACANCY_PROFILE = gql`
       Title
       Description
       Created
+      Sector
+      Salary
+      Location
+      Contract
     }
   }
 `;

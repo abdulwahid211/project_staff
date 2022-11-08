@@ -1,34 +1,36 @@
 <li>
-    <mat-card class="vacancy-card">
-        <mat-card-header>
-            <img src="assets/{{ vacancy.Sector }}.png" mat-card-avatar />
-            <mat-card-title>{{ vacancy.Title }}</mat-card-title>
-            <mat-card-subtitle>
-                {{ vacancy.Sector }}
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <ul>
-                <li>
-                    <mat-icon> monetization_on</mat-icon>
-                    <span class="vacancyPoints">{{ vacancy.Salary }}</span>
-                </li>
+  <mat-card class="vacancy-card">
+    <mat-card-header>
+      <img src="assets/{{ vacancy.Sector }}.png" mat-card-avatar />
+      <mat-card-title>{{ vacancy.Title }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ vacancy.Sector }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ul>
+        <li>
+          <mat-icon> monetization_on</mat-icon>
+          <span class="vacancyPoints">{{ vacancy.Salary }}</span>
+        </li>
 
-                <li>
-                    <mat-icon> location_city</mat-icon>
-                    <span class="vacancyPoints">{{ vacancy.Location }}</span>
-                </li>
-                <li>
-                    <mat-icon> description</mat-icon>
-                    <span class="vacancyPoints">{{ vacancy.Contract }}</span>
-                </li>
-                <li>Posted: {{ vacancy.Created }}</li>
-            </ul>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="onSelect(vacancy)">
+        <li>
+          <mat-icon> location_city</mat-icon>
+          <span class="vacancyPoints">{{ vacancy.Location }}</span>
+        </li>
+        <li>
+          <mat-icon> access_time</mat-icon>
+          <span class="vacancyPoints">{{ vacancy.Contract }}</span>
+        </li>
+        <li style="font-weight: 400">
+          Posted: {{ SetCorrectDate(vacancy.Created) }}
+        </li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="onSelect(vacancy)">
         Details!
       </button>
-        </mat-card-actions>
-    </mat-card>
+    </mat-card-actions>
+  </mat-card>
 </li>

@@ -1,41 +1,60 @@
 @import '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css';
 .vacancy-card {
-    margin: 10px;
-    width: 350px;
+  margin: 10px;
+  width: 350px;
 }
 
 li span {
-    margin-top: 2px;
-    padding-left: 10px;
+  margin-top: 2px;
+  padding-left: 10px;
 }
 
-mat-icon {}
+mat-icon {
+}
 
 ul {
-    list-style: none;
-    padding: 10px;
+  list-style: none;
+  padding: 10px;
 }
 
 li {
-    display: flex;
-    justify-items: center;
-    flex-direction: row;
-    padding-bottom: 15px;
-    padding-top: 10px;
+  display: flex;
+  justify-items: center;
+  flex-direction: row;
+  padding-bottom: 15px;
+  padding-top: 10px;
 }
 
 mat-card-title {
-    color: #004d90;
-    font-size: 100px;
+  color: #004d90;
+  font-size: 100px;
 }
 
 mat-card-subtitle {
-    color: #004d90;
-    font-weight: 500;
+  color: #004d90;
+  font-weight: 500;
 }
 
 .mat-card-avatar {
-    border-radius: 0;
-    height: 50px;
-    width: 50px;
+  border-radius: 0;
+  height: 50px;
+  width: 50px;
+}
+
+mat-card-actions {
+  display: flex;
+  margin-top: -20px;
+  justify-content: center;
+}
+
+mat-card-actions button {
+  background-color: #ffbb6d;
+  width: 100%;
+  color: white;
+}
+
+mat-card-actions button:hover {
+  background-color: #a86f2e;
+  color: #ffbb6d;
+  border: #004d90;
 }
