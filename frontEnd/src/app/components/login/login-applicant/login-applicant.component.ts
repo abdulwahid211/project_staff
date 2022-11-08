@@ -3,6 +3,7 @@ import {LoginApplicantService} from './login-applicant.service';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth-service/auth.service';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'login-applicant',
@@ -21,13 +22,13 @@ export class LoginFormsComponent implements OnInit {
   constructor(
     private loginApplicantService: LoginApplicantService,
     private authService: AuthService,
-    private router: Router,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {}
 
   async onClickSubmit(result: NgForm) {
-    if (result.value.username && result.value.password) {
+    if (result.value.email && result.value.password) {
       this.applicantToken = await this.loginApplicantService.loginApplicant(
         result,
       );
@@ -35,13 +36,13 @@ export class LoginFormsComponent implements OnInit {
       this.applicantToken.subscribe(data => {
         const token = data.data.applicantLogin.token;
         const id = data.data.applicantLogin.id;
-
+        console.log(token);
         if (
           (token != 'Not Found' && id != '0') ||
           (token != 'Incorrect Details' && id != '0')
         ) {
-          this.saveUserData(token, id, true, result.value.username);
-          this.router.navigate(['/applicantProfile']);
+          this.dialog.closeAll();
+          this.saveUserData(token, id, true, result.value.email);
         } else {
           this.loginError = true;
           this.loginErrorLabelText = token;
@@ -56,4 +57,3 @@ export class LoginFormsComponent implements OnInit {
     this.authService.saveApplicantData(token, id, enable, email);
   }
 }
-// nul;ll123@gmail.com

@@ -9,6 +9,8 @@ import {
 import {Apollo} from 'apollo-angular';
 import {APPLICANT_ID} from 'src/app/graphql/constants';
 import {DatePipe} from '@angular/common';
+import {LoginComponent} from '../../login/login.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-vacancy-profile',
@@ -30,6 +32,7 @@ export class VacancyProfileComponent implements OnInit {
     private router: Router,
     private apollo: Apollo,
     private datePipe: DatePipe,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -68,21 +71,38 @@ export class VacancyProfileComponent implements OnInit {
     this.router.navigate(['/vacancyList']);
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      height: '600px',
+      width: '600px',
+      backdropClass: 'backdrop',
+      panelClass: 'dialogTheme',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   onApplySubmit(vacancy: Vacancy) {
     const vacancyId = vacancy.VacancyID;
 
-    this.apollo
-      .mutate({
-        mutation: CREATE_APPLIED_JOBS,
-        variables: {
-          applicantId: this.applicantId,
-          vacancyId: vacancyId,
-        },
-      })
-      .subscribe((data: any) => {
-        this.JobAppliedSucessful = data.data.createAppliedJobs;
-        this.disableButton = true;
-      });
+    if (this.applicantId) {
+      this.apollo
+        .mutate({
+          mutation: CREATE_APPLIED_JOBS,
+          variables: {
+            applicantId: this.applicantId,
+            vacancyId: vacancyId,
+          },
+        })
+        .subscribe((data: any) => {
+          this.JobAppliedSucessful = data.data.createAppliedJobs;
+          this.disableButton = true;
+        });
+    } else {
+      this.openDialog();
+    }
   }
 
   public SetCorrectDate(date: any) {

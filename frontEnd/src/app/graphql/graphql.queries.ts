@@ -24,9 +24,8 @@ export const GET_APPLICANT_PROFILE = gql`
       ApplicantID
       FirstName
       LastName
-      telephone
+      Telephone
       City
-      Postcode
       Email
       Password
     }

@@ -16,7 +16,7 @@ export class LoginApplicantService {
       .mutate({
         mutation: APPLICANT_LOGIN,
         variables: {
-          email: login.value.username,
+          email: login.value.email,
           password: login.value.password,
         },
       })

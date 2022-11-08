@@ -31,7 +31,7 @@ export class ApplicantsProfileComponent implements OnInit {
       .valueChanges.subscribe(({data, error}: any) => {
         this.data = data.applicant;
         this.error = error;
-        console.log(this.data.ApplicantID);
+        console.log(this.data);
       });
   }
 }
