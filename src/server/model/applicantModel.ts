@@ -1,6 +1,7 @@
 import {Db} from '../db/sql/dbConfig';
 import {PasswordHash, ComparePassword} from '../util/passwordUtil';
 import {AuthenticateToken} from '../util/tokenMethods';
+import {SendEmail} from '../email/senderEmail';
 
 export class Applicants {
   public ApplicantID!: number;
@@ -28,6 +29,19 @@ export const CreateApplicant = async (object: Applicants) => {
     ],
     (err, results) => {
       if (err) console.log(err);
+      if (results) {
+        SendEmail(
+          'abdulwahid211@gmail.com',
+          object.Email,
+          'Thank you for joining LandSea Stuffing',
+          'TYUI OPI',
+          '<p>Your credentials from LandSea Stuffing</p><p>Your username: ' +
+            object.Email +
+            ' </p><p>Your password: ' +
+            object.Password +
+            '</p>',
+        );
+      }
     },
   );
 

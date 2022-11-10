@@ -3,7 +3,7 @@ import {ApolloServer} from 'apollo-server-express';
 import {
   typeAuthUserInput,
   resolversAuthentication,
-} from './graphql/authenticationts';
+} from './graphql/authentications';
 import {createServer} from 'http';
 import {typeAdmins, resolversAdmins} from './graphql/admin';
 import {typeApplicants, resolversApplicants} from './graphql/applicant';
@@ -12,9 +12,7 @@ import {typeAppliedJobs, resolversAppliedJobs} from './graphql/appliedJobs';
 import {typeVacancies, resolversVacancies} from './graphql/vacancies';
 import {Db} from '../server/db/sql/dbConfig';
 import * as dotenv from 'dotenv';
-import {graphqlHTTP} from 'express-graphql';
-import {GraphQLUpload, graphqlUploadExpress} from 'graphql-upload';
-
+import {graphqlUploadExpress} from 'graphql-upload';
 Db.connect();
 dotenv.config();
 const port = process.env.PORT;
@@ -74,6 +72,6 @@ async function setupApp() {
       console.log(`Server listening on port: ${port}`),
     );
   } catch (error) {
-    console.log('Server Error: ${error.message}');
+    console.log('Server Error:' + error);
   }
 }

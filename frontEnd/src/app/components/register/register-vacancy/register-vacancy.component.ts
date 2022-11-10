@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {RegisterVacancyService} from './register-vacancy.service';
-import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {sectors} from 'src/app/types/sectors';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-vacancy',
@@ -10,7 +11,7 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./register-vacancy.component.css'],
   providers: [DatePipe],
 })
-export class RegisterVacancyComponent {
+export class RegisterVacancyComponent implements OnInit {
   protected validation: boolean = false;
 
   protected registerError: boolean = false;
@@ -22,20 +23,31 @@ export class RegisterVacancyComponent {
   private registerVacancy: any | undefined;
 
   private _createdDate: any | undefined;
+  public jobSectors = sectors;
+
+  private employerId: Number | undefined;
 
   constructor(
     private registerVacancyService: RegisterVacancyService,
-    private router: Router,
+    private route: ActivatedRoute,
     private datePipe: DatePipe,
   ) {}
+
+  ngOnInit(): void {
+    this.employerId = Number(this.route.snapshot.paramMap.get('id'));
+  }
+
+  public selectedSector: string | undefined;
 
   async onClickSubmit(result: NgForm) {
     this._createdDate = Date.now();
     this.registerVacancy = await this.registerVacancyService.registerVacancy(
       result,
+      this.employerId,
       this.datePipe.transform(this._createdDate, 'yyyy-MM-dd'),
+      this.selectedSector,
     );
-
+    console.log(this.selectedSector);
     this.registerVacancy.subscribe(
       data => {
         console.log(data);
@@ -45,5 +57,12 @@ export class RegisterVacancyComponent {
         console.log('Error ' + error);
       },
     );
+  }
+
+  public onOptionsSelected(event) {
+    const value = event.target.value;
+    if (value) {
+      this.selectedSector = value;
+    }
   }
 }

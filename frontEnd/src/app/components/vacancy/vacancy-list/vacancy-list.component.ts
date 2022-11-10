@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Vacancy} from 'src/app/types/vacancy';
 import {GET_VACANCIES} from 'src/app/graphql/graphql.queries';
+import {sectors} from 'src/app/types/sectors';
 
 import {Apollo} from 'apollo-angular';
 import {DatePipe} from '@angular/common';
@@ -13,9 +14,9 @@ import {DatePipe} from '@angular/common';
 export class VacancyListComponent implements OnInit {
   vacancies: Vacancy[] = [];
 
-  sectors = ['All', 'Government', 'Retail', 'Sports', 'Information Technology'];
-
   public selectedSector;
+
+  public jobSectors = sectors;
 
   public selectedDefaultSector: string | undefined;
 

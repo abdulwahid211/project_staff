@@ -20,11 +20,9 @@ export class TableAllApplicantsComponent implements OnInit {
     'ApplicantID',
     'FirstName',
     'LastName',
-    'Address',
     'City',
-    'Postcode',
     'Email',
-    'Delete',
+    'Telephone',
     'Download_CV',
   ];
   dataSource = new MatTableDataSource<Applicants>([]);

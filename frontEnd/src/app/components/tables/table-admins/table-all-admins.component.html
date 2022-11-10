@@ -1,9 +1,9 @@
-<p style="">All Admins</p>
+<h2 style="display: flex; justify-content: center">Admin Table</h2>
 <!-- app.component.html -->
 <div class="container text-center">
-    <mat-form-field appearance="standard">
+    <mat-form-field appearance="standard" floatLabel="never">
         <mat-label>Search Admin</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. email" #input />
+        <input matInput (keyup)="applyFilter($event)" placeholder="e.g email" #input />
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
         <div class="rows">

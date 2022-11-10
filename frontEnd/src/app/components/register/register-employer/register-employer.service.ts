@@ -1,32 +1,29 @@
-import { Apollo } from 'apollo-angular';
-import { CREATE_EMPLOYER_PROFILE } from '../../../graphql/graphql.queries';
-import { Observable } from 'rxjs';
-import { Injectable } from "@angular/core";
+import {Apollo} from 'apollo-angular';
+import {CREATE_EMPLOYER_PROFILE} from '../../../graphql/graphql.queries';
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegisterEmployerService {
+  constructor(private apollo: Apollo) {}
 
-    constructor(private apollo: Apollo) { }
-
-   async registerEmployer(register:any): Promise<Observable<string>>{
-       return this.apollo.mutate({
-          mutation: CREATE_EMPLOYER_PROFILE,
-          variables: {
-            name: register.value.name,
-            email: register.value.email,
-            password: register.value.password,
-            address: register.value.address,
-            city: register.value.city,
-            postcode: register.value.postcode
-          }
-        }).pipe(((data:any)=>{
-            return data;
-        }
-        
-        ))
-        }
-
-
+  async registerEmployer(register: any): Promise<Observable<string>> {
+    return this.apollo
+      .mutate({
+        mutation: CREATE_EMPLOYER_PROFILE,
+        variables: {
+          name: register.value.name,
+          email: register.value.email,
+          telephone: register.value.telephone,
+          address: register.value.address,
+          city: register.value.city,
+          postcode: register.value.postcode,
+        },
+      })
+      .pipe((data: any) => {
+        return data;
+      });
+  }
 }

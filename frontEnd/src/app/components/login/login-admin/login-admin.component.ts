@@ -6,8 +6,8 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'login-Admin',
-  templateUrl: './login-Admin.component.html',
-  styleUrls: ['./login-Admin.component.css'],
+  templateUrl: './login-admin.component.html',
+  styleUrls: ['./login-admin.component.css'],
 })
 export class LoginAdminComponent implements OnInit {
   protected validation: boolean = false;
@@ -32,8 +32,8 @@ export class LoginAdminComponent implements OnInit {
 
       this.AdminToken.subscribe(data => {
         console.log(data);
-        const token = data.data.adminLogin.token;
-        const id = data.data.adminLogin.id;
+        const token = data.data.adminsLogin.token;
+        const id = data.data.adminsLogin.id;
 
         if (
           (token != 'Not Found' && id != '0') ||

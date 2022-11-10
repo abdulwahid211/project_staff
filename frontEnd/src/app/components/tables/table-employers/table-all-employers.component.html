@@ -1,4 +1,4 @@
-<p style="">All Employers</p>
+<h2 style="display: flex; justify-content: center">Employer Table</h2>
 <!-- app.component.html -->
 <div class="container text-center">
     <mat-form-field appearance="standard">
@@ -9,7 +9,11 @@
         <div class="rows">
             <ng-container matColumnDef="EmployerID">
                 <th mat-header-cell *matHeaderCellDef>EmployerID</th>
-                <td mat-cell *matCellDef="let element">{{ element.EmployerID }}</td>
+                <a href="www.google.com">
+                    <td mat-cell *matCellDef="let element" href="www.google.com">
+                        {{ element.EmployerID }}
+                    </td>
+                </a>
             </ng-container>
 
             <ng-container matColumnDef="Name">

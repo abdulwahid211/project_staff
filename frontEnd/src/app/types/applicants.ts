@@ -2,9 +2,8 @@ export class Applicants {
   public ApplicantID: number;
   public LastName: string;
   public FirstName: string;
-  public Address: string;
   public City: string;
-  public Postcode: string;
+  public Telephone: string;
   public Email: string;
   public Password: string;
 
@@ -12,18 +11,16 @@ export class Applicants {
     applicationID: number,
     lastName: string,
     firstName: string,
-    address: string,
     city: string,
-    postcode: string,
+    telephone: string,
     email: string,
     password: string,
   ) {
     this.ApplicantID = applicationID;
     this.LastName = lastName;
     this.FirstName = firstName;
-    this.Address = address;
     this.City = city;
-    this.Postcode = postcode;
+    this.Telephone = telephone;
     this.Email = email;
     this.Password = password;
   }

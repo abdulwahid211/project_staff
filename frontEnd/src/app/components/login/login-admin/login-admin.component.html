@@ -1,13 +1,14 @@
-<h2>Login as Admin</h2>
-<form #userName="ngForm" (ngSubmit)="onClickSubmit(userName)" required>
-    <div *ngIf="validation">Username and Password are required!</div>
-    <div *ngIf="loginError">
-        {{ loginErrorLabelText }}
-    </div>
-    <input type="text" id="username" name="username" placeholder="Username" ngModel required />
-    <br />
-    <br />
-    <input type="text" name="password" placeholder="Password" ngModel required />
-    <br />
-    <input type="submit" value="submit" />
-</form>
+<div class="adminHeading">
+    <h2 style="display: flex; justify-content: center">Login as Admin</h2>
+</div>
+<div class="adminLogin">
+    <form #userName="ngForm" (ngSubmit)="onClickSubmit(userName)" required>
+        <div *ngIf="validation">Username and Password are required!</div>
+        <div *ngIf="loginError">
+            {{ loginErrorLabelText }}
+        </div>
+        <input type="text" id="username" name="username" placeholder="Username" ngModel required />
+        <input type="password" name="password" placeholder="Password" ngModel required />
+        <input type="submit" value="submit" />
+    </form>
+</div>

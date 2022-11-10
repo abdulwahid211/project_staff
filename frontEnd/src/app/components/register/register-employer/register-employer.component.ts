@@ -40,6 +40,7 @@ export class RegisterEmployerComponent {
         data => {
           console.log(data);
           this.formSuccessful = data.data.createEmployer;
+          result.resetForm();
         },
         error => {
           console.log('Error ' + error);

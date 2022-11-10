@@ -11,7 +11,7 @@ export const APPLICANT_LOGIN = gql`
 
 export const ADMIN_LOGIN = gql`
   mutation Mutation($email: String!, $password: String!) {
-    adminLogin(Email: $email, Password: $password) {
+    adminsLogin(Email: $email, Password: $password) {
       token
       id
     }
@@ -69,22 +69,25 @@ export const CREATE_ADMIN_PROFILE = gql`
 `;
 
 export const CREATE_EMPLOYER_PROFILE = gql`
-  mutation Mutation(
-    $name: String!
-    $email: String!
-    $password: String!
-    $telephone: String!
-    $address: String!
-    $city: String!
-    $postcode: String!
+  mutation CreateVacancies(
+    $employerId: ID!
+    $title: String!
+    $description: String!
+    $created: Date!
+    $sector: String!
+    $salary: String!
+    $location: String!
+    $contract: String!
   ) {
-    createEmployer(
-      Name: $name
-      Email: $email
-      Password: $password
-      Address: $address
-      City: $city
-      Postcode: $postcode
+    createVacancies(
+      EmployerID: $employerId
+      Title: $title
+      Description: $description
+      Created: $created
+      Sector: $sector
+      Salary: $salary
+      Location: $location
+      Contract: $contract
     )
   }
 `;
@@ -95,12 +98,20 @@ export const CREATE_VACANCY_PROFILE = gql`
     $title: String!
     $description: String!
     $created: Date!
+    $sector: String!
+    $salary: String!
+    $location: String!
+    $contract: String!
   ) {
     createVacancies(
       EmployerID: $employerId
       Title: $title
       Description: $description
       Created: $created
+      Sector: $sector
+      Salary: $salary
+      Location: $location
+      Contract: $contract
     )
   }
 `;
@@ -180,7 +191,6 @@ export const GET_ALL_APPLICANTS = gql`
       FirstName
       Telephone
       City
-      Postcode
       Email
     }
   }
@@ -196,7 +206,6 @@ export const GET_ALL_EMPLOYERS = gql`
       City
       Postcode
       Email
-      Password
     }
   }
 `;
@@ -228,6 +237,12 @@ export const DELETE_ALL_APPLICANT = gql`
 export const DELETE_ALL_EMPLOYER = gql`
   mutation DeleteEmployer($email: String!) {
     deleteEmployer(Email: $email)
+  }
+`;
+
+export const DELETE_ALL_VACANCY = gql`
+  mutation Mutation($vacancyId: ID!) {
+    deleteVacancies(VacancyID: $vacancyId)
   }
 `;
 

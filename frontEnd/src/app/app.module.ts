@@ -34,6 +34,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {MatSelectModule} from '@angular/material/select';
 import {DatePipe} from '@angular/common';
+import {TableAllVacanciesComponent} from './components/tables/table-vacancies/table-all-vacancies.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {DatePipe} from '@angular/common';
     TableAllApplicantsComponent,
     TableAllEmployersComponent,
     TableAllAdminsComponent,
+    TableAllVacanciesComponent,
     TableAllApplicantsAppliedComponent,
     MainComponent,
     FooterComponent,
@@ -77,12 +79,13 @@ import {DatePipe} from '@angular/common';
       {path: 'register', component: RegisterApplicantComponent},
       {path: 'registerAdmin', component: RegisterAdminComponent},
       {path: 'registerEmployer', component: RegisterEmployerComponent},
-      {path: 'postVacancy', component: RegisterVacancyComponent},
+      {path: 'postVacancy/:id', component: RegisterVacancyComponent},
       {path: 'vacancies', component: VacancyListComponent},
       {path: 'vacancyProfile/:id', component: VacancyProfileComponent},
       {path: 'allApplicants', component: TableAllApplicantsComponent},
       {path: 'allEmployers', component: TableAllEmployersComponent},
       {path: 'allAdmins', component: TableAllAdminsComponent},
+      {path: 'allVacancies', component: TableAllVacanciesComponent},
       {path: 'allAppliedApplicants', component: TableAllAdminsComponent},
       {
         path: 'allAppiedApplicants',
