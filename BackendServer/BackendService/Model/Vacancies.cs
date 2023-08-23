@@ -9,7 +9,7 @@ namespace BackendService.Model
         [Key]
         public int? VacancyID { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int EmployerID { get; set; }
         public string Sector { get; set; }
         public string Salary { get; set; }
