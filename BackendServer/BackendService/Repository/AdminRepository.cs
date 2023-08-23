@@ -1,6 +1,6 @@
 ﻿using AdminService.Data;
-using AdminService.Repository;
 using BackendService.Model;
+using BackendService.Repository.Interfaces;
 
 namespace BackendService.Repository
 {
@@ -12,38 +12,34 @@ namespace BackendService.Repository
             _dbContext = dbContext;
         }
 
-        public Admin CreateAdmin(Admin admin)
+        public async Task<bool> CreateAdminAsync(Admin admin)
         {
             _dbContext.Admins.Add(admin);
-            Save();
-            return admin;
+            int result = await SaveAsync();
+            return result != 0;
         }
 
-        public bool DeleteAdmin(string email)
+        public async Task<bool> DeleteAdminAsync(string email)
         {
             var filteredData = _dbContext.Admins.Where(x => x.Email == email).ToList();
             var result = _dbContext.Remove(filteredData);
-            Save();
-            return result != null ? true : false;
+            await SaveAsync();
+            return result != null;
         }
 
-        public IEnumerable<Admin> GetAllAdmins()
+        public async Task<IEnumerable<Admin>> GetAllAdminsAsync()
         {
-            Console.WriteLine(_dbContext.Admins.ToList());
             return _dbContext.Admins.ToList();
-
-
-
         }
-        public Admin UpdateAdmin(Admin admin)
+        public async Task<Admin> UpdateAdminAsync(Admin admin)
         {
             var result = _dbContext.Admins.Update(admin);
-            _dbContext.SaveChanges();
+            await SaveAsync();
             return result.Entity;
         }
 
-        public void Save() => _dbContext.SaveChanges();
+        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public Admin GetAdmin(string email) => _dbContext.Admins.Where(x => x.Email == email).FirstOrDefault();
+        public async Task<Admin> GetAdminAsync(string email) => _dbContext.Admins.Where(x => x.Email == email).FirstOrDefault();
     }
 }

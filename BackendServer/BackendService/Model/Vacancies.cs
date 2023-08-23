@@ -7,7 +7,7 @@ namespace BackendService.Model
     public class Vacancies
     {
         [Key]
-        public int VacancyID { get; set; }
+        public int? VacancyID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int EmployerID { get; set; }

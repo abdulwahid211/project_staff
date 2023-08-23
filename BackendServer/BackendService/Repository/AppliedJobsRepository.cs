@@ -1,6 +1,7 @@
 ﻿using AdminService.Data;
 using AppliedJobsService.Repository;
 using BackendService.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendService.Repository
 {
@@ -12,34 +13,38 @@ namespace BackendService.Repository
             _dbContext = dbContext;
         }
 
-        public void CreateAppliedJobs(AppliedJobs admin)
+        public async Task<bool> CreateAppliedJobsAsync(AppliedJobs job)
         {
-            _dbContext.AppliedJobs.Add(admin);
-            Save();
+            _dbContext.AppliedJobs.Add(job);
+            int result = await SaveAsync();
+            return result != 0;
         }
 
-        public bool DeleteAppliedJobs(int AppliedJobs)
+        public async Task<bool> DeleteAppliedJobsAsync(int id)
         {
-            var filteredData = _dbContext.AppliedJobs.Where(x => x.AppliedJobsID == AppliedJobs).ToList();
+            var filteredData = _dbContext.AppliedJobs.Where(x => x.VacancyID == id).ToListAsync();
             var result = _dbContext.Remove(filteredData);
-            Save();
-            return result != null ? true : false;
+            await SaveAsync();
+            return result != null;
         }
 
-        public IEnumerable<AppliedJobs> GetAllAppliedJobs() => _dbContext.AppliedJobs.ToList();
-
-        public AppliedJobs UpdateAppliedJobs(AppliedJobs admin)
+        public async Task<IEnumerable<AppliedJobs>> GetAllAppliedJobsAsync()
         {
-            var result = _dbContext.AppliedJobs.Update(admin);
-            _dbContext.SaveChanges();
+            return await _dbContext.AppliedJobs.ToListAsync();
+        }
+        public async Task<AppliedJobs> UpdateAppliedJobsAsync(AppliedJobs job)
+        {
+            var result = _dbContext.AppliedJobs.Update(job);
+            await SaveAsync();
             return result.Entity;
         }
 
-        public void Save() => _dbContext.SaveChanges();
+        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public AppliedJobs GetAppliedJobs(int AppliedJobsID) => _dbContext.AppliedJobs.Where(x => x.AppliedJobsID == AppliedJobsID).FirstOrDefault();
+        public async Task<AppliedJobs> GetAppliedJobsAsync(int id) => await _dbContext.AppliedJobs.Where(x => x.VacancyID == id).FirstOrDefaultAsync();
 
-        public bool VerifyAlreadyAppliedJob(string ApplicantID, string VacancyID)
+        // TO DO..
+        public Task<bool> VerifyAlreadyAppliedJobAsync(string ApplicantID, string VacancyID)
         {
             throw new NotImplementedException();
         }

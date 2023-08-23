@@ -1,10 +1,8 @@
 using AdminService.Data;
-using AdminService.Repository;
-using ApplicantsService.Repository;
 using AppliedJobsService.Repository;
 using BackendService.Graphql;
 using BackendService.Repository;
-using EmployerService.Repository;
+using BackendService.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using VacanciesService.Repository;
 

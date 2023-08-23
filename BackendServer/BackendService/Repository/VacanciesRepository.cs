@@ -12,31 +12,34 @@ namespace BackendService.Repository
             _dbContext = dbContext;
         }
 
-        public void CreateVacancies(Vacancies admin)
+        public async Task<bool> CreateVacanciesAsync(Vacancies admin)
         {
             _dbContext.Vacancies.Add(admin);
-            Save();
+            int result = await SaveAsync();
+            return result != 0;
         }
 
-        public bool DeleteVacancies(int vacancyID)
+        public async Task<bool> DeleteVacanciesAsync(int id)
         {
-            var filteredData = _dbContext.Vacancies.Where(x => x.VacancyID == vacancyID).ToList();
+            var filteredData = _dbContext.Vacancies.Where(x => x.VacancyID == id).ToList();
             var result = _dbContext.Remove(filteredData);
-            Save();
-            return result != null ? true : false;
+            await SaveAsync();
+            return result != null;
         }
 
-        public IEnumerable<Vacancies> GetAllVacancies() => _dbContext.Vacancies.ToList();
-
-        public Vacancies UpdateVacancies(Vacancies admin)
+        public async Task<IEnumerable<Vacancies>> GetAllVacanciesAsync()
+        {
+            return _dbContext.Vacancies.ToList();
+        }
+        public async Task<Vacancies> UpdateVacanciesAsync(Vacancies admin)
         {
             var result = _dbContext.Vacancies.Update(admin);
-            _dbContext.SaveChanges();
+            await SaveAsync();
             return result.Entity;
         }
 
-        public void Save() => _dbContext.SaveChanges();
+        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public Vacancies GetVacancy(int vacancyID) => _dbContext.Vacancies.Where(x => x.VacancyID == vacancyID).FirstOrDefault();
+        public async Task<Vacancies> GetVacancyAsync(int id) => _dbContext.Vacancies.Where(x => x.VacancyID == id).FirstOrDefault();
     }
 }

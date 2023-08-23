@@ -1,6 +1,6 @@
 ﻿using AdminService.Data;
 using BackendService.Model;
-using EmployerService.Repository;
+using BackendService.Repository.Interfaces;
 
 namespace BackendService.Repository
 {
@@ -12,31 +12,34 @@ namespace BackendService.Repository
             _dbContext = dbContext;
         }
 
-        public void CreateEmployer(Employer Employer)
+        public async Task<bool> CreateEmployerAsync(Employer admin)
         {
-            _dbContext.Employers.Add(Employer);
-            Save();
+            _dbContext.Employers.Add(admin);
+            int result = await SaveAsync();
+            return result != 0;
         }
 
-        public bool DeleteEmployer(string email)
+        public async Task<bool> DeleteEmployerAsync(string email)
         {
             var filteredData = _dbContext.Employers.Where(x => x.Email == email).ToList();
             var result = _dbContext.Remove(filteredData);
-            Save();
-            return result != null ? true : false;
+            await SaveAsync();
+            return result != null;
         }
 
-        public IEnumerable<Employer> GetAllEmployers() => _dbContext.Employers.ToList();
-
-        public Employer UpdateEmployer(Employer Employer)
+        public async Task<IEnumerable<Employer>> GetAllEmployersAsync()
         {
-            var result = _dbContext.Employers.Update(Employer);
-            _dbContext.SaveChanges();
+            return _dbContext.Employers.ToList();
+        }
+        public async Task<Employer> UpdateEmployerAsync(Employer admin)
+        {
+            var result = _dbContext.Employers.Update(admin);
+            await SaveAsync();
             return result.Entity;
         }
 
-        public void Save() => _dbContext.SaveChanges();
+        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public Employer GetEmployer(string email) => _dbContext.Employers.Where(x => x.Email == email).FirstOrDefault();
+        public async Task<Employer> GetEmployerAsync(string email) => _dbContext.Employers.Where(x => x.Email == email).FirstOrDefault();
     }
 }

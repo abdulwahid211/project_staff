@@ -7,7 +7,7 @@ namespace BackendService.Model
     public class Applicants
     {
         [Key]
-        public int ApplicantID { get; set; }
+        public int? ApplicantID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Password { get; set; }

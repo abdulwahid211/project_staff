@@ -1,6 +1,7 @@
 ﻿using AdminService.Data;
-using ApplicantsService.Repository;
 using BackendService.Model;
+using BackendService.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendService.Repository
 {
@@ -12,31 +13,34 @@ namespace BackendService.Repository
             _dbContext = dbContext;
         }
 
-        public void CreateApplicant(Applicants applicants)
+        public async Task<bool> CreateApplicantAsync(Applicants admin)
         {
-            _dbContext.Applicants.Add(applicants);
-            Save();
+            _dbContext.Applicants.Add(admin);
+            int result = await SaveAsync();
+            return result != 0;
         }
 
-        public bool DeleteApplicant(string email)
+        public async Task<bool> DeleteApplicantAsync(string email)
         {
             var filteredData = _dbContext.Applicants.Where(x => x.Email == email).ToList();
             var result = _dbContext.Remove(filteredData);
-            Save();
-            return result != null ? true : false;
+            await SaveAsync();
+            return result != null;
         }
 
-        public IEnumerable<Applicants> GetAllApplicants() => _dbContext.Applicants.ToList();
-
-        public Applicants UpdateApplicant(Applicants applicants)
+        public async Task<IEnumerable<Applicants>> GetAllApplicantsAsync()
         {
-            var result = _dbContext.Applicants.Update(applicants);
-            _dbContext.SaveChanges();
+            return await _dbContext.Applicants.ToListAsync();
+        }
+        public async Task<Applicants> UpdateApplicantAsync(Applicants admin)
+        {
+            var result = _dbContext.Applicants.Update(admin);
+            await SaveAsync();
             return result.Entity;
         }
 
-        public void Save() => _dbContext.SaveChanges();
+        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public Applicants GetApplicant(string email) => _dbContext.Applicants.Where(x => x.Email == email).FirstOrDefault();
+        public async Task<Applicants> GetApplicantAsync(string email) => await _dbContext.Applicants.Where(x => x.Email == email).FirstOrDefaultAsync();
     }
 }
