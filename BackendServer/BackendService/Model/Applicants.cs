@@ -12,7 +12,6 @@ namespace BackendService.Model
         public string FirstName { get; set; }
         public string Password { get; set; }
         public string City { get; set; }
-        public string Postcode { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
     }

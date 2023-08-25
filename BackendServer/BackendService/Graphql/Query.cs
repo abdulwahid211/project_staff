@@ -8,7 +8,7 @@ namespace BackendService.Graphql
     public sealed class Query
     {
         [UseFiltering]
-        public Task<IEnumerable<Admin>> Admins([Service] IAdminRepository context) => context.GetAllAdminsAsync();
+        public Task<IEnumerable<Admin>> Admins([Service] IAdminRepository context, [Service] IHttpContextAccessor http) => context.GetAllAdminsAsync(http);
         public Task<Admin> Admin([Service] IAdminRepository context, string email) => context.GetAdminAsync(email);
         public Task<IEnumerable<Applicants>> Applicants([Service] IApplicantsRepository context) => context.GetAllApplicantsAsync();
         public Task<Applicants> Applicant([Service] IApplicantsRepository context, string email) => context.GetApplicantAsync(email);
