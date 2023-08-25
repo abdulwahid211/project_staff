@@ -14,7 +14,7 @@ namespace BackendService.Model
         public string Sector { get; set; }
         public string Salary { get; set; }
         public string Location { get; set; }
-        public string Created { get; set; }
+        public DateTime Created { get; set; }
         public string Contract { get; set; }
     }
 }
