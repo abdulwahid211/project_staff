@@ -1,6 +1,6 @@
 
 CREATE TABLE Applicants (
-    ApplicantID int SERIAL PRIMARY KEY,
+    ApplicantID int NOT NULL AUTO_INCREMENT,
     LastName varchar(255) NOT NULL,
     FirstName varchar(255) NOT NULL,
     Telephone varchar(255) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE Applicants (
 
 
 CREATE TABLE CV (
-  Id int SERIAL PRIMARY KEY,
+  Id int NOT NULL AUTO_INCREMENT,
   Email varchar(255) NOT NULL,
   Filename varchar(255) NOT NULL,
   Uploaded datetime NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE CV (
 );
 
 CREATE TABLE Admin (
-    AdminID int SERIAL PRIMARY KEY,
+    AdminID int NOT NULL AUTO_INCREMENT,
     LastName varchar(255) NOT NULL,
     FirstName varchar(255) NOT NULL,
     Email varchar(255) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE Admin (
 );
 
 CREATE TABLE Vacancies (
-    VacancyID int SERIAL PRIMARY KEY,
+    VacancyID int NOT NULL AUTO_INCREMENT,
     Title varchar(255),
     Sector varchar(255),
     EmployerID int,
@@ -46,7 +46,7 @@ CREATE TABLE Vacancies (
 );
 
 CREATE TABLE Employer (
-    EmployerID int SERIAL PRIMARY KEY,
+    EmployerID int NOT NULL AUTO_INCREMENT,
     Name varchar(255),
     Address varchar(255) NOT NULL,
     City varchar(255) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Employer (
 );
 
 CREATE TABLE AppliedJobs (
-    AppliedJobsID int SERIAL PRIMARY KEY,
+    AppliedJobsID int NOT NULL AUTO_INCREMENT,
     ApplicantID int,
     VacancyID int,
     PRIMARY KEY (AppliedJobsID),
