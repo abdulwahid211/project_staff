@@ -14,7 +14,7 @@ namespace BackendService.Authentication
             _config = config;
         }
 
-        public string ValidateUser(IHttpContextAccessor http)
+        public string AuthenticateToken(IHttpContextAccessor http)
         {
             var keyValue = _config.GetValue<string>("Jwt:SecretKey");
             var token = http.HttpContext.Request.Headers.Authorization;
@@ -47,9 +47,9 @@ namespace BackendService.Authentication
             }
         }
 
-        public void CheckValidateUser(IHttpContextAccessor http)
+        public void ValidateUserToken(IHttpContextAccessor http)
         {
-            if (ValidateUser(http).IsNullOrEmpty())
+            if (AuthenticateToken(http).IsNullOrEmpty())
             {
                 throw new ArgumentException("Valid Token is required to access resource");
             }

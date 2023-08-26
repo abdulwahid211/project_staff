@@ -22,10 +22,14 @@ namespace BackendService.Repository
 
         public async Task<bool> DeleteAppliedJobsAsync(int id)
         {
-            var filteredData = _dbContext.AppliedJobs.Where(x => x.VacancyID == id).ToListAsync();
-            var result = _dbContext.Remove(filteredData);
+            var job = await _dbContext.AppliedJobs.FirstOrDefaultAsync(x => x.AppliedJobsID == id);
+            if (job == null)
+            {
+                return false;
+            }
+            _dbContext.AppliedJobs.Remove(job);
             await SaveAsync();
-            return result != null;
+            return true;
         }
 
         public async Task<IEnumerable<AppliedJobs>> GetAllAppliedJobsAsync()

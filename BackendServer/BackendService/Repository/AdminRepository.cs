@@ -18,7 +18,9 @@ namespace BackendService.Repository
 
         public async Task<bool> CreateAdminAsync(Admin admin, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
+            var hashPassword = PasswordUtil.HashPassword(admin.Password);
+            admin.Password = hashPassword;
             _dbContext.Admins.Add(admin);
             int result = await SaveAsync();
             return result != 0;
@@ -26,21 +28,27 @@ namespace BackendService.Repository
 
         public async Task<bool> DeleteAdminAsync(string email, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
-            var filteredData = await _dbContext.Admins.Where(x => x.Email == email).ToListAsync();
-            var result = _dbContext.Remove(filteredData);
+            _tokenMethods.ValidateUserToken(http);
+            var admin = await _dbContext.Admins.FirstOrDefaultAsync(x => x.Email == email);
+            if (admin == null)
+            {
+                return false;
+            }
+            _dbContext.Admins.Remove(admin);
             await SaveAsync();
-            return result != null;
+            return true;
         }
 
         public async Task<IEnumerable<Admin>> GetAllAdminsAsync(IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
             return await _dbContext.Admins.ToListAsync();
         }
         public async Task<Admin> UpdateAdminAsync(Admin admin, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
+            var hashPassword = PasswordUtil.HashPassword(admin.Password);
+            admin.Password = hashPassword;
             var result = _dbContext.Admins.Update(admin);
             await SaveAsync();
             return result.Entity;
@@ -50,7 +58,7 @@ namespace BackendService.Repository
 
         public async Task<Admin> GetAdminAsync(string email, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
             return await _dbContext.Admins.Where(x => x.Email == email).FirstOrDefaultAsync();
         }
     }

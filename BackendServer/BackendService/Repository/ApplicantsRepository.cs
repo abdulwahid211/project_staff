@@ -16,31 +16,39 @@ namespace BackendService.Repository
             _tokenMethods = tokenMethods;
         }
 
-        public async Task<bool> CreateApplicantAsync(Applicants admin)
+        public async Task<bool> CreateApplicantAsync(Applicants applicant)
         {
-            _dbContext.Applicants.Add(admin);
+            var hashPassword = PasswordUtil.HashPassword(applicant.Password);
+            applicant.Password = hashPassword;
+            _dbContext.Applicants.Add(applicant);
             int result = await SaveAsync();
             return result != 0;
         }
 
         public async Task<bool> DeleteApplicantAsync(string email, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
-            var filteredData = _dbContext.Applicants.Where(x => x.Email == email).ToList();
-            var result = _dbContext.Remove(filteredData);
+            _tokenMethods.ValidateUserToken(http);
+            var applicant = await _dbContext.Applicants.FirstOrDefaultAsync(x => x.Email == email);
+            if (applicant == null)
+            {
+                return false;
+            }
+            _dbContext.Applicants.Remove(applicant);
             await SaveAsync();
-            return result != null;
+            return true;
         }
 
         public async Task<IEnumerable<Applicants>> GetAllApplicantsAsync(IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
             return await _dbContext.Applicants.ToListAsync();
         }
-        public async Task<Applicants> UpdateApplicantAsync(Applicants admin, IHttpContextAccessor http)
+        public async Task<Applicants> UpdateApplicantAsync(Applicants applicant, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
-            var result = _dbContext.Applicants.Update(admin);
+            _tokenMethods.ValidateUserToken(http);
+            var hashPassword = PasswordUtil.HashPassword(applicant.Password);
+            applicant.Password = hashPassword;
+            var result = _dbContext.Applicants.Update(applicant);
             await SaveAsync();
             return result.Entity;
         }
@@ -49,7 +57,7 @@ namespace BackendService.Repository
 
         public async Task<Applicants> GetApplicantAsync(string email, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
             return await _dbContext.Applicants.Where(x => x.Email == email).FirstOrDefaultAsync();
         }
     }

@@ -8,7 +8,7 @@ namespace BackendService.Graphql
     {
         //Admin
         public Task<bool> CreateAdmin([Service] IAdminRepository context, [Service] IHttpContextAccessor http, Admin admin) => context.CreateAdminAsync(admin, http);
-        public Task<bool> DeleteAdmin([Service] IAdminRepository context, [Service] IHttpContextAccessor http, string Email) => context.DeleteAdminAsync(Email, http);
+        public Task<bool> DeleteAdmin([Service] IAdminRepository context, [Service] IHttpContextAccessor http, string email) => context.DeleteAdminAsync(email, http);
         public Task<Admin> UpdateAdmin([Service] IAdminRepository context, [Service] IHttpContextAccessor http, Admin admin) => context.UpdateAdminAsync(admin, http);
 
         //Applicant

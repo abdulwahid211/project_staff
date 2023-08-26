@@ -17,7 +17,9 @@ namespace BackendService.Repository
 
         public async Task<string> AdminLoginAsync(string email, string password)
         {
-            var result = await _dbContext.Admins.Where(x => x.Email.Equals(email) && x.Password.Equals(password)).ToListAsync();
+            var hashedPassword = PasswordUtil.HashPassword(password);
+            var validPassword = PasswordUtil.VerifyHashPassword(password, hashedPassword);
+            var result = await _dbContext.Admins.Where(x => x.Email.Equals(email) && validPassword).ToListAsync();
             if (result.Count > 0)
             {
                 return _tokenMethods.GenerateAccessToken(email);
@@ -30,7 +32,9 @@ namespace BackendService.Repository
 
         public async Task<string> ApplicantLoginAsync(string email, string password)
         {
-            var result = await _dbContext.Applicants.Where(x => x.Email.Equals(email) && x.Password.Equals(password)).ToListAsync();
+            var hashedPassword = PasswordUtil.HashPassword(password);
+            var validPassword = PasswordUtil.VerifyHashPassword(password, hashedPassword);
+            var result = await _dbContext.Applicants.Where(x => x.Email.Equals(email) && validPassword).ToListAsync();
             if (result.Count > 0)
             {
                 return _tokenMethods.GenerateAccessToken(email);

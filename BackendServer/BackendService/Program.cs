@@ -56,6 +56,7 @@ builder.Services
     .AddMutationType<Mutation>()
     .AddFiltering();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

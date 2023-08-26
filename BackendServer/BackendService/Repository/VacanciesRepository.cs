@@ -18,7 +18,7 @@ namespace BackendService.Repository
 
         public async Task<bool> CreateVacanciesAsync(Vacancies admin, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
             _dbContext.Vacancies.Add(admin);
             int result = await SaveAsync();
             return result != 0;
@@ -26,17 +26,21 @@ namespace BackendService.Repository
 
         public async Task<bool> DeleteVacanciesAsync(int id, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
-            var filteredData = await _dbContext.Vacancies.Where(x => x.VacancyID == id).ToListAsync();
-            var result = _dbContext.Remove(filteredData);
+            _tokenMethods.ValidateUserToken(http);
+            var vacancy = await _dbContext.Vacancies.FirstOrDefaultAsync(x => x.VacancyID == id);
+            if (vacancy == null)
+            {
+                return false;
+            }
+            _dbContext.Vacancies.Remove(vacancy);
             await SaveAsync();
-            return result != null;
+            return true;
         }
 
         public async Task<IEnumerable<Vacancies>> GetAllVacanciesAsync() => await _dbContext.Vacancies.ToListAsync();
         public async Task<Vacancies> UpdateVacanciesAsync(Vacancies vacancy, IHttpContextAccessor http)
         {
-            _tokenMethods.CheckValidateUser(http);
+            _tokenMethods.ValidateUserToken(http);
             var result = _dbContext.Vacancies.Update(vacancy);
             await SaveAsync();
             return result.Entity;
