@@ -48,6 +48,7 @@ builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 builder.Services.AddScoped<IAppliedJobsRepository, AppliedJobsRepository>();
 builder.Services.AddScoped<IVacanciesRepository, VacanciesRepository>();
 builder.Services.AddScoped<IUserAuthLogins, UserAuthLogins>();
+builder.Services.AddScoped<ICVRepository, CVRepository>();
 
 builder.Services
     .AddHttpContextAccessor()

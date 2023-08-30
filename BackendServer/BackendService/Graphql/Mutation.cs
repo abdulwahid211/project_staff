@@ -29,5 +29,10 @@ namespace BackendService.Graphql
         //userlogins
         public Task<string> AdminsLogin([Service] IUserAuthLogins context, string email, string password) => context.AdminLoginAsync(email, password);
         public Task<string> ApplicantLogin([Service] IUserAuthLogins context, string email, string password) => context.ApplicantLoginAsync(email, password);
+
+        //CV
+        public Task<bool> UploadCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, CV cv) => context.UploadCVAsync(cv, http);
+        public Task<CV> DownloadCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, string email) => context.DownloadCVAsync(email, http);
+        public Task<bool> DeleteCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, string email) => context.DeleteCVAsync(email, http);
     }
 }

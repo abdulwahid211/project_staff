@@ -10,6 +10,7 @@ namespace AdminService.Data
         public DbSet<AppliedJobs> AppliedJobs { get; set; }
         public DbSet<Employer> Employers { get; set; }
         public DbSet<Vacancies> Vacancies { get; set; }
+        public DbSet<CV> CVFiles { get; set; }
         public LandSeaDbContext(DbContextOptions<LandSeaDbContext> options) : base(options) { }
     }
 
