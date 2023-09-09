@@ -14,12 +14,12 @@ namespace BackendService.Graphql
 
         //Applicant
         public Task<bool> CreateApplicant([Service] IApplicantsRepository context, Applicants applicant) => context.CreateApplicantAsync(applicant);
-        public Task<bool> DeleteApplicant([Service] IApplicantsRepository context, [Service] IHttpContextAccessor http, string Email) => context.DeleteApplicantAsync(Email, http);
+        public Task<bool> DeleteApplicant([Service] IApplicantsRepository context, [Service] IHttpContextAccessor http, string email) => context.DeleteApplicantAsync(email, http);
         public Task<Applicants> UpdateApplicant([Service] IApplicantsRepository context, [Service] IHttpContextAccessor http, Applicants applicant) => context.UpdateApplicantAsync(applicant, http);
 
         //Employer
         public Task<bool> CreateEmployer([Service] IEmployerRepository context, [Service] IHttpContextAccessor http, Employer employer) => context.CreateEmployerAsync(employer, http);
-        public Task<bool> DeleteEmployer([Service] IEmployerRepository context, [Service] IHttpContextAccessor http, string Email) => context.DeleteEmployerAsync(Email, http);
+        public Task<bool> DeleteEmployer([Service] IEmployerRepository context, [Service] IHttpContextAccessor http, string email) => context.DeleteEmployerAsync(email, http);
         public Task<Employer> UpdateEmployer([Service] IEmployerRepository context, [Service] IHttpContextAccessor http, Employer employer) => context.UpdateEmployerAsync(employer, http);
 
         //Vacancies
@@ -28,10 +28,7 @@ namespace BackendService.Graphql
         public Task<Vacancies> UpdateVacancies([Service] IVacanciesRepository context, [Service] IHttpContextAccessor http, Vacancies vacancy) => context.UpdateVacanciesAsync(vacancy, http);
 
         //CV
-        public Task<bool> UploadCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, CV cv) => context.UploadCVAsync(cv, http);
-        public Task<CV> DownloadCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, string email) => context.DownloadCVAsync(email, http);
-        public Task<bool> DeleteCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, string email) => context.DeleteCVAsync(email, http);
-
+        public Task<bool> UploadCV([Service] ICVRepository context, CV cv) => context.UploadCVAsync(cv);
         public Task<bool> CreateAppliedJobs([Service] IAppliedJobsRepository context, AppliedJobs jobs) => context.CreateAppliedJobsAsync(jobs);
 
     }

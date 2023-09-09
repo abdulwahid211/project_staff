@@ -40,7 +40,6 @@ export class TableAllVacanciesComponent implements OnInit {
       })
       .valueChanges.subscribe(({data, error}: any) => {
         this.dataSource.data = data.vacancies;
-        console.log('Shitt');
       });
   }
 

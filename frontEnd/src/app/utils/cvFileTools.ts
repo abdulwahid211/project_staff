@@ -1,9 +1,9 @@
 import {CV} from '../types/cv';
 
 export function DownloadCVFile(downloadCV: CV) {
-  const fileBlob = DataURItoBlob(downloadCV.File, downloadCV.Type);
-  const newFile = new File([fileBlob], downloadCV.Filename, {
-    type: downloadCV.Type,
+  const fileBlob = DataURItoBlob(downloadCV.file, downloadCV.type);
+  const newFile = new File([fileBlob], downloadCV.filename, {
+    type: downloadCV.type,
   });
 
   const url = window.URL.createObjectURL(newFile);

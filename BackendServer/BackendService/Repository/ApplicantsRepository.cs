@@ -10,6 +10,7 @@ namespace BackendService.Repository
     {
         private readonly LandSeaDbContext _dbContext;
         private readonly ITokenUtil _tokenMethods;
+        private readonly ICVRepository _iCVRepository;
         public ApplicantsRepository(LandSeaDbContext dbContext, ITokenUtil tokenMethods)
         {
             _dbContext = dbContext;
@@ -35,6 +36,15 @@ namespace BackendService.Repository
             }
             _dbContext.Applicants.Remove(applicant);
             await SaveAsync();
+
+            var cv = await _dbContext.CVFiles.FirstOrDefaultAsync(x => x.Email == email);
+            if (cv == null)
+            {
+                return false;
+            }
+            _dbContext.CVFiles.Remove(cv);
+            await SaveAsync();
+
             return true;
         }
 

@@ -1,7 +1,7 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
 import {
   GET_ALL_APPLIED_APPLICANTS,
-  DELETE_ALL_APPLICANT,
+  DELETE_APPLICANT,
   DOWNLOAD_CV,
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';

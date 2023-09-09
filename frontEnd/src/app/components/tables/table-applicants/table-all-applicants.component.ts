@@ -1,7 +1,7 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
 import {
   GET_ALL_APPLICANTS,
-  DELETE_ALL_APPLICANT,
+  DELETE_APPLICANT,
   DOWNLOAD_CV,
 } from 'src/app/graphql/graphql.queries';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
@@ -50,7 +50,7 @@ export class TableAllApplicantsComponent implements OnInit {
     console.log(email);
     this.apollo
       .mutate({
-        mutation: DELETE_ALL_APPLICANT,
+        mutation: DELETE_APPLICANT,
         variables: {
           email: email,
         },

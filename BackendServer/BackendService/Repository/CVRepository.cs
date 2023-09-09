@@ -16,9 +16,8 @@ namespace BackendService.Repository
             _tokenMethods = tokenMethods;
         }
 
-        public async Task<bool> UploadCVAsync(CV newCvFile, IHttpContextAccessor http)
+        public async Task<bool> UploadCVAsync(CV newCvFile)
         {
-            _tokenMethods.ValidateUserToken(http);
             _dbContext.CVFiles.Add(newCvFile);
             int result = await SaveAsync();
             return result != 0;
@@ -35,10 +34,16 @@ namespace BackendService.Repository
             return cv;
 
         }
+        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public async Task<bool> DeleteCVAsync(string email, IHttpContextAccessor http)
+        public async Task<IEnumerable<CV>> GetAllCVFiles(IHttpContextAccessor http)
         {
             _tokenMethods.ValidateUserToken(http);
+            return await _dbContext.CVFiles.ToListAsync();
+        }
+
+        public async Task<bool> DeleteCVAsync(string email)
+        {
             var cv = await _dbContext.CVFiles.FirstOrDefaultAsync(x => x.Email == email);
             if (cv == null)
             {
@@ -48,7 +53,5 @@ namespace BackendService.Repository
             await SaveAsync();
             return true;
         }
-        public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
-
     }
 }

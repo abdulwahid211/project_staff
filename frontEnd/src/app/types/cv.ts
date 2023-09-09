@@ -1,10 +1,10 @@
 export class CV {
-  public Email: string;
-  public Filename: string;
-  public Uploaded: string;
-  public File: string;
-  public Type: string;
-  public Size: number;
+  public email: string;
+  public filename: string;
+  public uploaded: string;
+  public file: string;
+  public type: string;
+  public size: number;
 
   constructor(
     email: string,
@@ -14,11 +14,11 @@ export class CV {
     type: string,
     size: number,
   ) {
-    this.Email = email;
-    this.Filename = filename;
-    this.Uploaded = uploaded;
-    this.File = file;
-    this.Type = type;
-    this.Size = size;
+    this.email = email;
+    this.filename = filename;
+    this.uploaded = uploaded;
+    this.file = file;
+    this.type = type;
+    this.size = size;
   }
 }

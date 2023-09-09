@@ -223,13 +223,13 @@ export const DELETE_ALL_ADMIN = gql`
   }
 `;
 
-export const DELETE_ALL_APPLICANT = gql`
+export const DELETE_APPLICANT = gql`
   mutation DeleteApplicant($email: String!) {
     deleteApplicant(email: $email)
   }
 `;
 
-export const DELETE_ALL_EMPLOYER = gql`
+export const DELETE_EMPLOYER = gql`
   mutation DeleteEmployer($email: String!) {
     deleteEmployer(email: $email)
   }
@@ -279,14 +279,14 @@ export const UPLOAD_CV = gql`
 `;
 
 export const DOWNLOAD_CV = gql`
-  mutation Mutation($email: String!) {
+  query DownloadCV($email: String!) {
     downloadCV(email: $email) {
       id
-      file
       email
       filename
-      uploaded
+      file
       type
+      uploaded
       size
     }
   }
