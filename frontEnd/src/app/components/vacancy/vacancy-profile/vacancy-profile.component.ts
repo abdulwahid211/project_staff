@@ -25,7 +25,7 @@ export class VacancyProfileComponent implements OnInit {
   TextJobAppliedSucess =
     'Thank you for submitting your CV, we will contact you if you have been successful!';
   TextAlreadyJobApplied = 'You have applied this job before!';
-  applicantId!: string;
+  applicantID!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,10 +37,13 @@ export class VacancyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const vacancyId = Number(this.route.snapshot.paramMap.get('id'));
-    this.applicantId =
+    this.applicantID =
       localStorage.getItem(APPLICANT_ID) != null
         ? (localStorage.getItem(APPLICANT_ID) as string)
         : '0';
+    this.disableButton =
+      localStorage.getItem(APPLICANT_ID) == null ? true : false;
+
     console.log(vacancyId);
 
     this.apollo
@@ -61,7 +64,7 @@ export class VacancyProfileComponent implements OnInit {
         query: CHECK_APPLIED_JOBS,
         variables: {
           vacancyId: vacancyId,
-          applicantId: Number(this.applicantId),
+          applicantID: Number(this.applicantID),
         },
       })
       .valueChanges.subscribe(({data}: any) => {
@@ -91,12 +94,12 @@ export class VacancyProfileComponent implements OnInit {
   onApplySubmit(vacancy: Vacancy) {
     const vacancyId = vacancy.vacancyID;
 
-    if (this.applicantId) {
+    if (this.applicantID) {
       this.apollo
         .mutate({
           mutation: CREATE_APPLIED_JOBS,
           variables: {
-            applicantId: this.applicantId,
+            applicantID: Number(this.applicantID),
             vacancyId: vacancyId,
           },
         })
