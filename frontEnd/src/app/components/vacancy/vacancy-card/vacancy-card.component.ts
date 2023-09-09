@@ -14,8 +14,8 @@ export class VacancyCardComponent {
   constructor(private router: Router, private datePipe: DatePipe) {}
 
   onSelect(vacancy: Vacancy): void {
-    const id = vacancy.VacancyID;
-    console.log(vacancy.Title);
+    const id = vacancy.vacancyID;
+    console.log(vacancy.title);
 
     this.router.navigate(['/vacancyProfile/' + id]);
   }

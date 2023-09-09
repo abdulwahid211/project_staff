@@ -1,29 +1,29 @@
 <li>
   <mat-card class="vacancy-card">
     <mat-card-header>
-      <img src="assets/{{ vacancy.Sector }}.png" mat-card-avatar />
-      <mat-card-title>{{ vacancy.Title }}</mat-card-title>
+      <img src="assets/{{ vacancy.sector }}.png" mat-card-avatar />
+      <mat-card-title>{{ vacancy.title }}</mat-card-title>
       <mat-card-subtitle>
-        {{ vacancy.Sector }}
+        {{ vacancy.sector }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <ul>
         <li>
           <mat-icon> monetization_on</mat-icon>
-          <span class="vacancyPoints">{{ vacancy.Salary }}</span>
+          <span class="vacancyPoints">{{ vacancy.salary }}</span>
         </li>
 
         <li>
           <mat-icon> location_city</mat-icon>
-          <span class="vacancyPoints">{{ vacancy.Location }}</span>
+          <span class="vacancyPoints">{{ vacancy.location }}</span>
         </li>
         <li>
           <mat-icon> access_time</mat-icon>
-          <span class="vacancyPoints">{{ vacancy.Contract }}</span>
+          <span class="vacancyPoints">{{ vacancy.contract }}</span>
         </li>
         <li style="font-weight: 400">
-          Posted: {{ SetCorrectDate(vacancy.Created) }}
+          Posted: {{ SetCorrectDate(vacancy.created) }}
         </li>
       </ul>
     </mat-card-content>

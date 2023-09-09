@@ -1,11 +1,11 @@
 export interface Vacancy {
-  VacancyID: number;
-  Title: string;
-  Description: string;
-  Created: String;
-  EmployerID: number;
-  Sector: string;
-  Salary: string;
-  Location: string;
-  Contract: string;
+  vacancyID: number;
+  title: string;
+  description: string;
+  created: String;
+  employerID: number;
+  sector: string;
+  salary: string;
+  location: string;
+  contract: string;
 }

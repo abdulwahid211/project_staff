@@ -37,7 +37,6 @@ export class TableAllApplicantsComponent implements OnInit {
       })
       .valueChanges.subscribe(({data, error}: any) => {
         this.dataSource.data = data.applicants;
-        console.log(data.applicants);
         console.log(error);
       });
   }

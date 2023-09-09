@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -72,20 +71,8 @@ namespace BackendService.Authentication
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var generatedToken = tokenHandler.WriteToken(token);
 
-            return JsonTokenMessageFormat(generatedToken);
+            return generatedToken.ToString();
         }
-
-        public string JsonTokenMessageFormat(string message)
-        {
-            var tokenFormat = new
-            {
-                token = message
-            };
-
-            return JsonConvert.SerializeObject(tokenFormat).ToString();
-        }
-
-
 
     }
 }

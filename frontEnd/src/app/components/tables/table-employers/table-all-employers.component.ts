@@ -34,7 +34,7 @@ export class TableAllEmployersComponent implements OnInit {
         query: GET_ALL_EMPLOYERS,
       })
       .valueChanges.subscribe(({data, error}: any) => {
-        this.dataSource.data = data.Employers;
+        this.dataSource.data = data.employers;
         console.log(data);
       });
   }

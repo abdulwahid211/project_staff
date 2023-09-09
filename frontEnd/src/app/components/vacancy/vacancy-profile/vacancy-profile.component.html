@@ -1,21 +1,21 @@
 <div class="vacancy-profile" *ngIf="vacancy">
   <div class="titleVacancyProfile">
-    <h1 class="profileTitle">{{ vacancy.Title }}</h1>
+    <h1 class="profileTitle">{{ vacancy.title }}</h1>
     <h2 class="vacancyPoints">
       <mat-icon> monetization_on</mat-icon>
-      <span>{{ vacancy.Salary }}</span>
+      <span>{{ vacancy.salary }}</span>
     </h2>
     <h2 class="vacancyPoints">
       <mat-icon> location_city</mat-icon>
-      <span>{{ vacancy.Location }}</span>
+      <span>{{ vacancy.location }}</span>
     </h2>
     <h2 class="vacancyPoints">
       <mat-icon> access_time</mat-icon>
-      <span>{{ vacancy.Contract }}</span>
+      <span>{{ vacancy.contract }}</span>
     </h2>
     <h2 class="vacancyPoints">
       <mat-icon> calendar_today</mat-icon>
-      <span>Posted: {{ SetCorrectDate(vacancy.Created) }}</span>
+      <span>Posted: {{ SetCorrectDate(vacancy.created) }}</span>
     </h2>
 
     <p id="goBack">
@@ -28,7 +28,7 @@
       <h1>Job Description</h1>
     </div>
     <p>Roles & Responsibilities:</p>
-    <p class="description">{{ vacancy.Description }}</p>
+    <p class="description">{{ vacancy.description }}</p>
     <div *ngIf="JobAlreadyApplied">
       <h1>{{ TextAlreadyJobApplied }}</h1>
     </div>

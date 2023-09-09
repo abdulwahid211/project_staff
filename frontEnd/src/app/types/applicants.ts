@@ -1,11 +1,11 @@
 export class Applicants {
-  public ApplicantID: number;
-  public LastName: string;
-  public FirstName: string;
-  public City: string;
-  public Telephone: string;
-  public Email: string;
-  public Password: string;
+  public applicantID: number;
+  public lastName: string;
+  public firstName: string;
+  public city: string;
+  public telephone: string;
+  public email: string;
+  public password: string;
 
   constructor(
     applicationID: number,
@@ -16,12 +16,12 @@ export class Applicants {
     email: string,
     password: string,
   ) {
-    this.ApplicantID = applicationID;
-    this.LastName = lastName;
-    this.FirstName = firstName;
-    this.City = city;
-    this.Telephone = telephone;
-    this.Email = email;
-    this.Password = password;
+    this.applicantID = applicationID;
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.city = city;
+    this.telephone = telephone;
+    this.email = email;
+    this.password = password;
   }
 }

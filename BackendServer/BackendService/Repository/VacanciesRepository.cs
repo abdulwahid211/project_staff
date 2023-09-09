@@ -48,6 +48,6 @@ namespace BackendService.Repository
 
         public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
 
-        public async Task<Vacancies> GetVacancyAsync(int id) => await _dbContext.Vacancies.Where(x => x.VacancyID == id).FirstOrDefaultAsync();
+        public async Task<Vacancies> GetVacancyAsync(int id) => await _dbContext.Vacancies.FirstOrDefaultAsync(x => x.VacancyID == id);
     }
 }

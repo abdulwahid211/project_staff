@@ -1,7 +1,7 @@
 export class Admin {
-    public AdminID!: number;
-    public LastName!: string;
-    public FirstName!: string;
-    public Email!: string;
-    public Password!: string;
+  public adminID!: number;
+  public lastName!: string;
+  public firstName!: string;
+  public email!: string;
+  public password!: string;
 }

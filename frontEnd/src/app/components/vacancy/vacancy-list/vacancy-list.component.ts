@@ -33,7 +33,7 @@ export class VacancyListComponent implements OnInit {
       })
       .valueChanges.subscribe(({data, error}: any) => {
         console.log(data);
-        this.vacancies = data.Vacancies;
+        this.vacancies = data.vacancies;
         this.selectedSectorJobs = this.vacancies;
       });
   }
@@ -42,7 +42,7 @@ export class VacancyListComponent implements OnInit {
     this.selectedSector == 'All'
       ? (this.selectedSectorJobs = this.vacancies)
       : (this.selectedSectorJobs = this.vacancies.filter(
-          item => item.Sector === this.selectedSector,
+          item => item.sector === this.selectedSector,
         ));
 
     console.log(this.selectedSectorJobs);

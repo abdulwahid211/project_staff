@@ -4,7 +4,6 @@
     {
         public string AuthenticateToken(IHttpContextAccessor http);
         public string GenerateAccessToken(string username);
-        public string JsonTokenMessageFormat(string message);
         public void ValidateUserToken(IHttpContextAccessor http);
     }
 }

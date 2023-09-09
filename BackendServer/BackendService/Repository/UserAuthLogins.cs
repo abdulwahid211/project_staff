@@ -1,5 +1,6 @@
 ﻿using AdminService.Data;
 using BackendService.Authentication;
+using BackendService.Model;
 using BackendService.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,33 +16,49 @@ namespace BackendService.Repository
             _tokenMethods = tokenMethods;
         }
 
-        public async Task<string> AdminLoginAsync(string email, string password)
+        public async Task<AuthPayLoad> AdminLoginAsync(string email, string password)
         {
             var hashedPassword = PasswordUtil.HashPassword(password);
             var validPassword = PasswordUtil.VerifyHashPassword(password, hashedPassword);
-            var result = await _dbContext.Admins.Where(x => x.Email.Equals(email) && validPassword).ToListAsync();
-            if (result.Count > 0)
+            var admin = await _dbContext.Admins.SingleOrDefaultAsync(x => x.Email.Equals(email) && validPassword);
+            var payload = new AuthPayLoad
             {
-                return _tokenMethods.GenerateAccessToken(email);
+                Token = "",
+                Id = 0
+            };
+            if (admin is not null)
+            {
+                payload.Id = (int)admin.AdminID;
+                payload.Token = _tokenMethods.GenerateAccessToken(email);
+                return payload;
             }
             else
             {
-                return _tokenMethods.JsonTokenMessageFormat("Not Found");
+                payload.Token = "Not Found";
+                return payload;
             }
         }
 
-        public async Task<string> ApplicantLoginAsync(string email, string password)
+        public async Task<AuthPayLoad> ApplicantLoginAsync(string email, string password)
         {
             var hashedPassword = PasswordUtil.HashPassword(password);
             var validPassword = PasswordUtil.VerifyHashPassword(password, hashedPassword);
-            var result = await _dbContext.Applicants.Where(x => x.Email.Equals(email) && validPassword).ToListAsync();
-            if (result.Count > 0)
+            var applicant = await _dbContext.Applicants.SingleOrDefaultAsync(x => x.Email.Equals(email) && validPassword);
+            var payload = new AuthPayLoad
             {
-                return _tokenMethods.GenerateAccessToken(email);
+                Token = "",
+                Id = 0
+            };
+            if (applicant is not null)
+            {
+                payload.Token = _tokenMethods.GenerateAccessToken(email);
+                payload.Id = (int)applicant.ApplicantID;
+                return payload;
             }
             else
             {
-                return _tokenMethods.JsonTokenMessageFormat("Not Found");
+                payload.Token = "Not Found";
+                return payload;
             }
         }
 

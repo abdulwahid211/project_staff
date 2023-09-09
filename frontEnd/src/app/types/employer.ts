@@ -1,11 +1,11 @@
 export class Employer {
-  public EmployerID: number;
-  public Name: string;
-  public Address: string;
-  public City: string;
-  public Postcode: string;
-  public Email: string;
-  public Password: string;
+  public employerID: number;
+  public name: string;
+  public address: string;
+  public city: string;
+  public postcode: string;
+  public email: string;
+  public password: string;
 
   constructor(
     applicationID: number,
@@ -16,12 +16,12 @@ export class Employer {
     email: string,
     password: string,
   ) {
-    this.EmployerID = applicationID;
-    this.Name = name;
-    this.Address = address;
-    this.City = city;
-    this.Postcode = postcode;
-    this.Email = email;
-    this.Password = password;
+    this.employerID = applicationID;
+    this.name = name;
+    this.address = address;
+    this.city = city;
+    this.postcode = postcode;
+    this.email = email;
+    this.password = password;
   }
 }

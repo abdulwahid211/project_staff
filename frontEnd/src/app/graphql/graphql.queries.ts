@@ -1,8 +1,8 @@
 import {gql} from 'apollo-angular';
 
 export const APPLICANT_LOGIN = gql`
-  mutation Mutation($email: String!, $password: String!) {
-    applicantLogin(Email: $email, Password: $password) {
+  query Mutation($email: String!, $password: String!) {
+    applicantLogin(email: $email, password: $password) {
       token
       id
     }
@@ -10,8 +10,8 @@ export const APPLICANT_LOGIN = gql`
 `;
 
 export const ADMIN_LOGIN = gql`
-  mutation Mutation($email: String!, $password: String!) {
-    adminsLogin(Email: $email, Password: $password) {
+  query Mutation($email: String!, $password: String!) {
+    adminsLogin(email: $email, password: $password) {
       token
       id
     }
@@ -20,14 +20,14 @@ export const ADMIN_LOGIN = gql`
 
 export const GET_APPLICANT_PROFILE = gql`
   query Query($email: String!) {
-    applicant(Email: $email) {
-      ApplicantID
-      FirstName
-      LastName
-      Telephone
-      City
-      Email
-      Password
+    applicant(email: $email) {
+      applicantID
+      firstName
+      lastName
+      telephone
+      city
+      email
+      password
     }
   }
 `;
@@ -42,12 +42,14 @@ export const CREATE_APPLICANT_PROFILE = gql`
     $city: String!
   ) {
     createApplicant(
-      LastName: $lastName
-      FirstName: $firstName
-      Email: $email
-      Password: $password
-      Telephone: $telephone
-      City: $city
+      applicant: {
+        lastName: $lastName
+        firstName: $firstName
+        email: $email
+        password: $password
+        telephone: $telephone
+        city: $city
+      }
     )
   }
 `;
@@ -60,125 +62,117 @@ export const CREATE_ADMIN_PROFILE = gql`
     $password: String!
   ) {
     createAdmin(
-      LastName: $lastName
-      FirstName: $firstName
-      Email: $email
-      Password: $password
+      admin: {
+        lastName: $lastName
+        firstName: $firstName
+        email: $email
+        password: $password
+      }
     )
   }
 `;
 
 export const CREATE_EMPLOYER_PROFILE = gql`
-  mutation CreateVacancies(
-    $employerId: ID!
-    $title: String!
-    $description: String!
-    $created: Date!
-    $sector: String!
-    $salary: String!
-    $location: String!
-    $contract: String!
+  mutation CreateEmployer(
+    $name: String!
+    $address: String!
+    $city: String!
+    $postcode: String!
+    $email: String!
+    $telephone: String!
   ) {
-    createVacancies(
-      EmployerID: $employerId
-      Title: $title
-      Description: $description
-      Created: $created
-      Sector: $sector
-      Salary: $salary
-      Location: $location
-      Contract: $contract
+    createEmployer(
+      employer: {
+        name: $name
+        address: $address
+        city: $city
+        postcode: $postcode
+        email: $email
+        telephone: $telephone
+      }
     )
   }
 `;
 
 export const CREATE_VACANCY_PROFILE = gql`
-  mutation Mutation(
-    $employerId: ID!
+  mutation CreateVacancies(
+    $employerId: Int!
     $title: String!
     $description: String!
-    $created: Date!
+    $created: DateTime!
     $sector: String!
     $salary: String!
     $location: String!
     $contract: String!
   ) {
     createVacancies(
-      EmployerID: $employerId
-      Title: $title
-      Description: $description
-      Created: $created
-      Sector: $sector
-      Salary: $salary
-      Location: $location
-      Contract: $contract
+      vacancy: {
+        employerID: $employerId
+        title: $title
+        salary: $salary
+        location: $location
+        created: $created
+        contract: $contract
+        description: $description
+        sector: $sector
+      }
     )
   }
 `;
 
 export const GET_VACANCY_PROFILE = gql`
-  query Vacancy($vacancyId: ID!) {
-    Vacancy(VacancyID: $vacancyId) {
-      VacancyID
-      EmployerID
-      Title
-      Description
-      Created
-      Sector
-      Salary
-      Location
-      Contract
+  query vacancy($vacancyId: Int!) {
+    vacancy(vacancyId: $vacancyId) {
+      vacancyID
+      employerID
+      title
+      description
+      created
+      sector
+      salary
+      location
+      contract
     }
   }
 `;
 
 export const GET_VACANCIES = gql`
-  query Vacancies {
-    Vacancies {
-      VacancyID
-      EmployerID
-      Title
-      Description
-      Created
-      Sector
-      Salary
-      Location
-      Contract
+  query vacancies {
+    vacancies {
+      vacancyID
+      employerID
+      title
+      description
+      created
+      sector
+      salary
+      location
+      contract
     }
   }
 `;
 
 export const CREATE_APPLIED_JOBS = gql`
-  mutation Mutation($applicantId: ID!, $vacancyId: ID!) {
-    createAppliedJobs(ApplicantID: $applicantId, VacancyID: $vacancyId)
+  mutation Mutation($applicantID: Int!, $vacancyId: Int!) {
+    createAppliedJobs(jobs: {applicantID: $applicantID, vacancyID: $vacancyId})
   }
 `;
 
 export const CHECK_APPLIED_JOBS = gql`
-  query Query($applicantId: ID!, $vacancyId: ID!) {
-    verifyAlreadyAppliedJob(ApplicantID: $applicantId, VacancyID: $vacancyId)
-  }
-`;
-
-export const EMPLOYER_LOGIN = gql`
-  mutation EmployerLogin($email: String!, $password: String!) {
-    employerLogin(Email: $email, Password: $password) {
-      token
-      id
-    }
+  query Query($applicantId: Int!, $vacancyId: Int!) {
+    verifyAlreadyAppliedJob(applicantId: $applicantId, vacancyId: $vacancyId)
   }
 `;
 
 export const GET_EMPLOYER_PROFILE = gql`
   query Employer($email: String!) {
-    Employer(Email: $email) {
-      EmployerID
-      Name
+    employer(email: $email) {
+      employerID
+      name
       telephone
-      City
-      Postcode
-      Email
-      Password
+      city
+      postcode
+      email
     }
   }
 `;
@@ -186,26 +180,27 @@ export const GET_EMPLOYER_PROFILE = gql`
 export const GET_ALL_APPLICANTS = gql`
   query Applicants {
     applicants {
-      ApplicantID
-      LastName
-      FirstName
-      Telephone
-      City
-      Email
+      applicantID
+      lastName
+      firstName
+      telephone
+      city
+      email
+      password
     }
   }
 `;
 
 export const GET_ALL_EMPLOYERS = gql`
   query Employers {
-    Employers {
-      EmployerID
-      Name
-      Telephone
-      Address
-      City
-      Postcode
-      Email
+    employers {
+      employerID
+      name
+      telephone
+      address
+      city
+      postcode
+      email
     }
   }
 `;
@@ -213,84 +208,86 @@ export const GET_ALL_EMPLOYERS = gql`
 export const GET_ALL_ADMINS = gql`
   query Admins {
     admins {
-      AdminID
-      LastName
-      FirstName
-      Email
-      Password
+      adminID
+      lastName
+      firstName
+      email
+      password
     }
   }
 `;
 
 export const DELETE_ALL_ADMIN = gql`
   mutation DeleteAdmin($email: String!) {
-    deleteAdmin(Email: $email)
+    deleteAdmin(email: $email)
   }
 `;
 
 export const DELETE_ALL_APPLICANT = gql`
   mutation DeleteApplicant($email: String!) {
-    deleteApplicant(Email: $email)
+    deleteApplicant(email: $email)
   }
 `;
 
 export const DELETE_ALL_EMPLOYER = gql`
   mutation DeleteEmployer($email: String!) {
-    deleteEmployer(Email: $email)
+    deleteEmployer(email: $email)
   }
 `;
 
 export const DELETE_ALL_VACANCY = gql`
-  mutation Mutation($vacancyId: ID!) {
-    deleteVacancies(VacancyID: $vacancyId)
+  mutation Mutation($vacancyId: Int!) {
+    deleteVacancies(vacancyID: $vacancyId)
   }
 `;
 
 export const GET_ALL_APPLIED_APPLICANTS = gql`
-  query ApplicantAppliedJobs($employerId: ID) {
+  query ApplicantAppliedJobs($employerId: Int!) {
     applicantAppliedJobs(employerId: $employerId) {
-      VacancyID
-      JobTitle
-      ApplicantID
-      LastName
-      FirstName
-      City
-      Telephone
-      Email
+      vacancyID
+      jobTitle
+      applicantID
+      lastName
+      firstName
+      city
+      telephone
+      email
     }
   }
 `;
 
 export const UPLOAD_CV = gql`
   mutation UploadCV(
-    $file: Upload!
+    $file: String!
     $email: String!
     $filename: String!
-    $created: Date!
+    $uploaded: DateTime!
     $type: String!
     $size: Int!
   ) {
     uploadCV(
-      File: $file
-      Email: $email
-      Filename: $filename
-      Created: $created
-      Type: $type
-      Size: $size
+      cv: {
+        file: $file
+        email: $email
+        filename: $filename
+        uploaded: $uploaded
+        type: $type
+        size: $size
+      }
     )
   }
 `;
 
 export const DOWNLOAD_CV = gql`
-  mutation Mutation($email: String) {
-    downloadCV(Email: $email) {
-      Id
-      File
-      Email
-      Filename
-      Uploaded
-      Type
-      Size
+  mutation Mutation($email: String!) {
+    downloadCV(email: $email) {
+      id
+      file
+      email
+      filename
+      uploaded
+      type
+      size
     }
   }
 `;

@@ -39,7 +39,8 @@ export class TableAllVacanciesComponent implements OnInit {
         query: GET_VACANCIES,
       })
       .valueChanges.subscribe(({data, error}: any) => {
-        this.dataSource.data = data.Vacancies;
+        this.dataSource.data = data.vacancies;
+        console.log('Shitt');
       });
   }
 

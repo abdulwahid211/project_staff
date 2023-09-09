@@ -82,7 +82,7 @@ export class RegisterApplicantComponent {
             file: base64,
             email: email,
             filename: file.name,
-            created: this.datePipe.transform(this._createdDate, 'yyyy-MM-dd'),
+            uploaded: this.datePipe.transform(this._createdDate, 'yyyy-MM-dd'),
             type: file.type,
             size: file.size,
           },

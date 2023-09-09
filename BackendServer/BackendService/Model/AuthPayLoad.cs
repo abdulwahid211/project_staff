@@ -2,7 +2,7 @@
 {
     public class AuthPayLoad
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Token { get; set; }
     }
 }

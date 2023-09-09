@@ -36,8 +36,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       };
   });
 
-// Add services to the container.
-builder.Services.AddControllers();
+var useCors = builder.Configuration.GetValue("Cors:Enabled", defaultValue: false);
+var corsOrigins = builder.Configuration.GetValue<string>("Cors:Origins", string.Empty).Split(",").Select(x => x.Trim()).ToArray();
+if (useCors)
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: "CorsPolicy", policyBuilder =>
+        {
+            policyBuilder
+                .WithOrigins(corsOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithExposedHeaders("Content-Disposition");
+        });
+    });
+}
+
+builder.Services.AddAuthorization();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -49,14 +66,12 @@ builder.Services.AddScoped<IAppliedJobsRepository, AppliedJobsRepository>();
 builder.Services.AddScoped<IVacanciesRepository, VacanciesRepository>();
 builder.Services.AddScoped<IUserAuthLogins, UserAuthLogins>();
 builder.Services.AddScoped<ICVRepository, CVRepository>();
-
 builder.Services
     .AddHttpContextAccessor()
     .AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
     .AddFiltering();
-
 
 var app = builder.Build();
 
@@ -66,12 +81,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseAuthentication();
+
+if (useCors)
+{
+    app.UseCors("CorsPolicy");
+}
+
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
-app.MapControllers();
 app.MapGraphQL(path: "/graphql");
 
 app.Run();
