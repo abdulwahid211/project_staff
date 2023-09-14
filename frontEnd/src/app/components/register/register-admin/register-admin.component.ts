@@ -30,7 +30,7 @@ export class RegisterAdminComponent {
     this.registerAdmin.subscribe(
       data => {
         console.log(data);
-        this.formSuccessful = data.createAdmin;
+        this.formSuccessful = data.data.createAdmin;
         if( this.formSuccessful){
           result.resetForm();
         }
