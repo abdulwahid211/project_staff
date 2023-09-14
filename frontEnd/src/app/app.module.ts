@@ -35,7 +35,6 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {MatSelectModule} from '@angular/material/select';
 import {DatePipe} from '@angular/common';
 import {TableAllVacanciesComponent} from './components/tables/table-vacancies/table-all-vacancies.component';
-import {NgToastModule} from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -66,7 +65,6 @@ import {NgToastModule} from 'ng-angular-popup';
   ],
   imports: [
     BrowserModule,
-    NgToastModule,
     MatSelectModule,
     FormsModule,
     Ng2SearchPipeModule,

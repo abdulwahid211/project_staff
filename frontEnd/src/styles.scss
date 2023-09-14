@@ -11,7 +11,7 @@ a:link {
     text-decoration: none;
 }
 
-@import '~bootstrap/scss/bootstrap';
+@import '../node_modules/bootstrap/scss/bootstrap';
 .mat-dialog-container {
     background-color: #fff9f1;
     color: #004d90;
