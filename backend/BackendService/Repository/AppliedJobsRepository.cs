@@ -30,9 +30,13 @@ namespace BackendService.Repository
         }
         public async Task<bool> CreateAppliedJobsAsync(AppliedJobs job)
         {
-            _dbContext.AppliedJobs.Add(job);
-            int result = await SaveAsync();
-            return result != 0;
+            if (await VerifyAlreadyAppliedJobAsync(job.ApplicantID, job.VacancyID))
+            {
+                await _dbContext.AppliedJobs.AddAsync(job);
+                int result = await SaveAsync();
+                return result != 0;
+            }
+            return false;
         }
 
         public async Task<bool> DeleteAppliedJobsAsync(int id)

@@ -19,11 +19,23 @@ namespace BackendService.Repository
         public async Task<bool> CreateAdminAsync(Admin admin, IHttpContextAccessor http)
         {
             _tokenMethods.ValidateUserToken(http);
-            var hashPassword = PasswordUtil.HashPassword(admin.Password);
-            admin.Password = hashPassword;
-            _dbContext.Admins.Add(admin);
-            int result = await SaveAsync();
-            return result != 0;
+            if (await VerifyAdminExistsAsync(admin))
+            {
+                var hashPassword = PasswordUtil.HashPassword(admin.Password);
+                admin.Password = hashPassword;
+                await _dbContext.Admins.AddAsync(admin);
+                var result = await SaveAsync();
+                return result != 0;
+            }
+            return false;
+
+        }
+
+        public async Task<bool> VerifyAdminExistsAsync(Admin admin)
+        {
+            var result = await _dbContext.Admins.FirstOrDefaultAsync(x => x.Email == admin.Email);
+
+            return result is null;
         }
 
         public async Task<bool> DeleteAdminAsync(string email, IHttpContextAccessor http)

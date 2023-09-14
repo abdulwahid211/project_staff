@@ -18,10 +18,21 @@ namespace BackendService.Repository
 
         public async Task<bool> CreateEmployerAsync(Employer employer, IHttpContextAccessor http)
         {
-            _tokenMethods.ValidateUserToken(http);
-            _dbContext.Employers.Add(employer);
-            int result = await SaveAsync();
-            return result != 0;
+            if (await VerifyEmployerExistsAsync(employer))
+            {
+                _tokenMethods.ValidateUserToken(http);
+                await _dbContext.Employers.AddAsync(employer);
+                int result = await SaveAsync();
+                return result != 0;
+            }
+            return false;
+        }
+
+        public async Task<bool> VerifyEmployerExistsAsync(Employer employer)
+        {
+            var result = await _dbContext.Employers.FirstOrDefaultAsync(x => x.Email == employer.Email);
+
+            return result is null;
         }
 
         public async Task<bool> DeleteEmployerAsync(string email, IHttpContextAccessor http)

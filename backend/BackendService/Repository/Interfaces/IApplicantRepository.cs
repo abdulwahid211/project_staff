@@ -9,5 +9,6 @@ namespace BackendService.Repository.Interfaces
         public Task<bool> CreateApplicantAsync(Applicants applicant);
         public Task<Applicants> UpdateApplicantAsync(Applicants applicant, IHttpContextAccessor http);
         public Task<bool> DeleteApplicantAsync(string email, IHttpContextAccessor http);
+        public Task<bool> VerifyApplicantExistsAsync(Applicants applicant);
     }
 }

@@ -24,6 +24,7 @@ namespace BackendService.Graphql
 
         //appliedJobs
         public Task<bool> VerifyAlreadyAppliedJob([Service] IAppliedJobsRepository context, int applicantId, int vacancyId) => context.VerifyAlreadyAppliedJobAsync(applicantId, vacancyId);
+
         [UseFiltering]
         public Task<ApplicantApplied> ApplicantAppliedJobs([Service] IAppliedJobsRepository context, [Service] IHttpContextAccessor http, int employerId) => context.GetAllAppliedJobsAsync(http, employerId);
         public Task<CV?> DownloadCV([Service] ICVRepository context, [Service] IHttpContextAccessor http, string email) => context.DownloadCVAsync(email, http);

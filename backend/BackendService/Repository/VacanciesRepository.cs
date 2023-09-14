@@ -19,7 +19,7 @@ namespace BackendService.Repository
         public async Task<bool> CreateVacanciesAsync(Vacancies admin, IHttpContextAccessor http)
         {
             _tokenMethods.ValidateUserToken(http);
-            _dbContext.Vacancies.Add(admin);
+            await _dbContext.Vacancies.AddAsync(admin);
             int result = await SaveAsync();
             return result != 0;
         }

@@ -10,7 +10,6 @@ namespace BackendService.Repository
     {
         private readonly LandSeaDbContext _dbContext;
         private readonly ITokenUtil _tokenMethods;
-        private readonly ICVRepository _iCVRepository;
         public ApplicantsRepository(LandSeaDbContext dbContext, ITokenUtil tokenMethods)
         {
             _dbContext = dbContext;
@@ -19,11 +18,23 @@ namespace BackendService.Repository
 
         public async Task<bool> CreateApplicantAsync(Applicants applicant)
         {
-            var hashPassword = PasswordUtil.HashPassword(applicant.Password);
-            applicant.Password = hashPassword;
-            _dbContext.Applicants.Add(applicant);
-            int result = await SaveAsync();
-            return result != 0;
+            if (await VerifyApplicantExistsAsync(applicant))
+            {
+                var hashPassword = PasswordUtil.HashPassword(applicant.Password);
+                applicant.Password = hashPassword;
+                await _dbContext.Applicants.AddAsync(applicant);
+                int result = await SaveAsync();
+                return result != 0;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> VerifyApplicantExistsAsync(Applicants applicant)
+        {
+            var result = await _dbContext.Applicants.FirstOrDefaultAsync(x => x.Email == applicant.Email);
+
+            return result is null;
         }
 
         public async Task<bool> DeleteApplicantAsync(string email, IHttpContextAccessor http)
