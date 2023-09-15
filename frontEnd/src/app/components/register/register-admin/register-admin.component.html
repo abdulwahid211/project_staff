@@ -3,12 +3,14 @@
 </div>
 <div class="registerAdmin">
     <form #registerAdmin="ngForm" (ngSubmit)="onClickSubmit(registerAdmin)" required>
-        <div *ngIf="validation">All detals must be filled required!</div>
+        <div *ngIf="validation">          
+            <p style="color: red;">All details must be filled</p>
+        </div>
         <div *ngIf="registerError">
-            {{ registerErrorLabelText }}
+          <p style="color: red;">Unsuccessful Submission, please try again!</p>
         </div>
         <div *ngIf="formSuccessful">
-            <p>Form has been successfully submitted!</p>
+            <p style="color: green;">New Admin has been successfully added!</p>
         </div>
         <input type="text" id="email" name="email" placeholder="Email/Username" ngModel required />
 

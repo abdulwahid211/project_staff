@@ -36,6 +36,7 @@ export class RegisterApplicantComponent {
   ) {}
 
   async onClickSubmit(result: any) {
+    this.registerError,this.formSuccessful, this.validation = false;
     this._createdDate = Date.now();
 
     if (
@@ -53,14 +54,14 @@ export class RegisterApplicantComponent {
 
       this.registerApplicant.subscribe(
         data => {
-          console.log('Success');
           this.formSuccessful = data.data.createApplicant;
-          this.validation = false;
-          result.resetForm();
-        },
-        error => {
-          console.log('Error ' + error);
-        },
+          if( this.formSuccessful){
+            result.resetForm();
+          }
+         else{
+          this.registerError = true;
+         }
+        }
       );
     } else {
       this.validation = true;

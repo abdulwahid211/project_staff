@@ -18,7 +18,7 @@
                 All detals must be filled required!
             </div>
             <div *ngIf="registerError">
-                {{ registerErrorLabelText }}
+                <p style="color: red">Unsuccessful submission, email address already used!</p>
             </div>
             <div *ngIf="formSuccessful" style="color: green">
                 <p>Form has been successfully submitted!</p>

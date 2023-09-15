@@ -25,19 +25,32 @@ export class RegisterAdminComponent {
   ) {}
 
   async onClickSubmit(result: NgForm) {
+    this.validation = false;
+    if(result.value.firstname && result.value.lastname && result.value.email && result.value.password){
+      console.log(result.value)
     this.registerAdmin = await this.registerAdminService.registerAdmin(result);
 
     this.registerAdmin.subscribe(
       data => {
         console.log(data);
         this.formSuccessful = data.data.createAdmin;
+        this.registerError = false;
         if( this.formSuccessful){
           result.resetForm();
         }
+       else{
+        this.registerError = true;
+       }
       },
       error => {
         console.log('Error ' + error);
       },
     );
+
+
+  }else{
+     this.validation = true;
+  }
+
   }
 }
