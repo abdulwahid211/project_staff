@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-vacancy',
-  templateUrl: './register-Vacancy.component.html',
+  templateUrl: './register-vacancy.component.html',
   styleUrls: ['./register-vacancy.component.css'],
   providers: [DatePipe],
 })
