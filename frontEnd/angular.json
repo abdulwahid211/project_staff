@@ -69,11 +69,13 @@
           "configurations": {
             "production": {
               "browserTarget": "frontEnd:build:production",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "proxy.conf.json",
+              "disableHostCheck": true
             },
             "development": {
               "browserTarget": "frontEnd:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "proxy.conf.json",
+              "disableHostCheck": true
             }
           },
           "options": {
