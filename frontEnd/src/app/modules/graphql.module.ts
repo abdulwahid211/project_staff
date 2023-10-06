@@ -9,7 +9,7 @@ import extractFiles from 'extract-files/extractFiles.mjs';
 // @ts-ignore
 import isExtractableFile from 'extract-files/isExtractableFile.mjs';
 
-const uri = 'https://localhost:44379/graphql';
+const uri = 'https://localhost:5000/graphql';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   const token = localStorage.getItem(AUTH_TOKEN);
