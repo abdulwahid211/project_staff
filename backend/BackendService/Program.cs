@@ -19,6 +19,8 @@ var secretKey = builder.Configuration.GetValue<string>("Jwt:SecretKey");
 var signingKey = new SymmetricSecurityKey(
           Encoding.UTF8.GetBytes(secretKey));
 
+var IsDevelopment = builder.Environment.IsDevelopment();
+
 builder.Services.AddDbContextPool<LandSeaDbContext>(options => options.UseMySql(dbConnectionString, ServerVersion.AutoDetect(dbConnectionString)));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -67,8 +69,8 @@ builder.Services.AddScoped<IVacanciesRepository, VacanciesRepository>();
 builder.Services.AddScoped<IUserAuthLogins, UserAuthLogins>();
 builder.Services.AddScoped<ICVRepository, CVRepository>();
 builder.Services
-    .AddHttpContextAccessor()
-    .AddGraphQLServer()
+.AddHttpContextAccessor()
+    .AddGraphQLServer().AllowIntrospection(IsDevelopment)
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
     .AddFiltering();
@@ -76,10 +78,9 @@ builder.Services
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (IsDevelopment)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
 }
 
 if (useCors)
