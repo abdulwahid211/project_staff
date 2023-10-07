@@ -70,7 +70,7 @@ builder.Services.AddScoped<IUserAuthLogins, UserAuthLogins>();
 builder.Services.AddScoped<ICVRepository, CVRepository>();
 builder.Services
 .AddHttpContextAccessor()
-    .AddGraphQLServer().AllowIntrospection(IsDevelopment)
+    .AddGraphQLServer().AllowIntrospection(false)
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
     .AddFiltering();
