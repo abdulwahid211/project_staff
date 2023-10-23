@@ -4,6 +4,7 @@ using BackendService.Authentication;
 using BackendService.Graphql;
 using BackendService.Repository;
 using BackendService.Repository.Interfaces;
+using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -93,6 +94,10 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapGraphQL(path: "/graphql");
+app.MapGraphQL(path: "/graphql").WithOptions(new GraphQLServerOptions()
+{
+    //Disable GraphQL IDE outside dev
+    Tool = { Enable = false }
+});
 
 app.Run();
