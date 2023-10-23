@@ -29,3 +29,14 @@
 .socialMediaIcons a {
     padding: 5px;
 }
+
+/*    Mobile */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .footerBar p {
+        color: #004d90;
+        font-size: 10%;
+    }
+
+  }

@@ -41,3 +41,33 @@
     background-color: #004d90;
     border-radius: 90%;
 }
+
+/*    Mobile */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        margin-right: 0%;
+        justify-content: none;
+        align-items: none;
+   
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: #004d90;
+        font-weight: bold;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        padding: 12px;
+        margin: 0px;
+        font-size: 110%;
+        text-align: center;
+    }
+
+    .navbar #logo {
+        padding-left: 50px;
+    }
+  }

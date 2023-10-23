@@ -97,7 +97,7 @@ app.UseAuthorization();
 app.MapGraphQL(path: "/graphql").WithOptions(new GraphQLServerOptions()
 {
     //Disable GraphQL IDE outside dev
-    Tool = { Enable = false }
+    Tool = { Enable = true }
 });
 
 app.Run();

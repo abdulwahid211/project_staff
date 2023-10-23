@@ -10,7 +10,6 @@ export class HomeComponent implements OnInit {
   changeBackgroundCounter = 0;
 
   images = [
-    'https://www.morganhunt.com/uploads/thumb/1645718622Morgan-Hunt-UK-Recruitment-Agency-Public-Sector-Recruiters.jpg',
     'assets/slides/nurse.jpg',
     'assets/slides/office.jpg',
     'assets/slides/teacher.jpg',

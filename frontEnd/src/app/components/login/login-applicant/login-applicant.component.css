@@ -86,3 +86,15 @@ mat-form-field {
     padding: 10px;
     font-size: 150%;
 }
+
+/*    Mobile */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    #emailInput input {
+        height: 10px;
+        padding: 10px;
+        font-size: 150%;
+    }
+
+  }
