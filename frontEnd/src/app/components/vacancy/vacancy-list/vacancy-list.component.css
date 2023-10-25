@@ -1,5 +1,5 @@
 @import '//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css';
-.VacancyListsContainer {
+.vacancyListsContainer {
     display: flex;
     flex-wrap: wrap;
     margin-left: 100px;
@@ -81,4 +81,21 @@ mat-select mat-option {
 
 mat-label {
     color: #004d90;
+}
+
+/*    Mobile */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+
+    .vacancyListsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-right: 0px;
+        list-style: none;
+    }
+
+
 }

@@ -58,3 +58,13 @@ mat-card-actions button:hover {
   color: #ffbb6d;
   border: #004d90;
 }
+
+@media only screen and (max-width: 600px) {
+
+
+  .vacancy-card {
+    margin: 10px;
+    width: 275px;
+  }
+
+}

@@ -77,18 +77,42 @@
         align-items: center;
         flex-direction: column;
         width: 100%;
-        height: 80%;
-        width: 100%;
-        height: 80%;
+        height: 90%;
         background-size: cover;
         background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
-        padding-top: -20px;
     }
 
     .titlePage img {
-        width: 85%;
+        width: 75%;
         height: auto;
-        padding-bottom: 100px;
+        padding-bottom: 30px;
     }
+
+    .subTitle {
+        color: rgb(255, 255, 255);
+        font-size: 250%;
+        margin: 20px;
+        text-align: center;
+        line-height: 1;
+    }
+
+    .aboutPage h2 {
+        font-size: 250%;
+    }
+    
+    .aboutPage p {
+        padding-top: 10px;
+        line-height: 2;
+        color: #004d90;
+        font-weight: 600;
+        font-size: 130%;
+        padding-bottom: 30px;
+    }
+    
+    .aboutPage {
+        padding: 30px;
+    }
+    
+    
 
   }
