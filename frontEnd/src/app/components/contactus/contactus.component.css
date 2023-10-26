@@ -1,0 +1,49 @@
+.titleRegister {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    background-color: #6299de;
+    color: white;
+    font-size: 330%;
+    padding: 30px;
+}
+
+.titleRegister h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 120%;
+}
+
+.contactus_details h1{
+    font-size: 170%;
+}
+
+.contactus_details{
+    color: #004d90;
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   font-size: 150%;
+   padding-top: 40px;
+   line-height: 1.5;
+}
+
+#contactInfo{
+    text-align: center;
+}
+
+#operations{
+    padding-top: 30px;
+}
+
+#contact_statement{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 100%;
+    padding: 40px;
+    line-height: 1.5;
+    font-weight: bold;
+
+}

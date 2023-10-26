@@ -1,3 +1,11 @@
+#footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top:20vh;
+  }
+
+
 .footerBar {
     display: flex;
     flex-direction: row;
@@ -5,6 +13,7 @@
     align-items: center;
     text-align: center;
     background-color: #fde5d1;
+    margin-top: auto;
 }
 
 .footerBar p {
@@ -24,6 +33,7 @@
     text-align: center;
     background-color: #fde5d1;
     padding-top: 10px;
+    margin-top: auto;
 }
 
 .socialMediaIcons a {
