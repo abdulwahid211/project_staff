@@ -9,9 +9,13 @@
 }
 
 #contactPreference {
-    padding-left: 200px;
-    padding-right: 100px;
-    padding-bottom: 30px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-content: center;
+ text-align: center;
+ font-size: 120%;
+ padding: 20px;
 }
 
 #contactPreference h2 {
@@ -31,6 +35,15 @@
     display: none;
 }
 
+.registerContiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
 .register-form input[type='text'],
 .register-form input[type='tel'] {
     display: flex;
@@ -42,8 +55,8 @@
     font-size: larger;
     margin-bottom: 10px;
     height: 35px;
-    padding: 20px;
-    width: 80%;
+    padding: 00px;
+    width: 100%;
 }
 
 .register-form input,
