@@ -30,7 +30,7 @@ namespace BackendService.Repository
         }
         public async Task<bool> CreateAppliedJobsAsync(AppliedJobs job)
         {
-            if (await VerifyAlreadyAppliedJobAsync(job.ApplicantID, job.VacancyID))
+            if (!await VerifyAlreadyAppliedJobAsync(job.ApplicantID, job.VacancyID))
             {
                 await _dbContext.AppliedJobs.AddAsync(job);
                 int result = await SaveAsync();

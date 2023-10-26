@@ -66,3 +66,15 @@ font-size: 120%;
   border-radius: 10%;
   font-size: 26px;
 }
+
+#jobAppliedSucessful h3{
+  font-size: 20px;
+  color: green;
+  font-weight: 600;
+}
+
+#jobAlreadyApplied h3{
+  font-size: 20px;
+  color: red;
+  font-weight: 600;
+}

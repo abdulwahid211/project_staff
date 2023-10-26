@@ -21,7 +21,7 @@
     <h2 class="vacancyPoints" id="goBack">
       <a href="/vacancies">
       <mat-icon> replay</mat-icon>
-      <span>   Go Back</span>
+      <span>Go Back</span>
     </a>
     </h2>
 
@@ -33,11 +33,11 @@
     </div>
     <p>Roles & Responsibilities:</p>
     <p class="description">{{ vacancy.description }}</p>
-    <div *ngIf="JobAlreadyApplied">
-      <h1>{{ TextAlreadyJobApplied }}</h1>
+    <div id="jobAlreadyApplied" *ngIf="JobAlreadyApplied">
+      <h3>{{ TextAlreadyJobApplied }}</h3>
     </div>
-    <div *ngIf="JobAppliedSucessful">
-      <h1>{{ TextJobAppliedSucess }}</h1>
+    <div id="jobAppliedSucessful" *ngIf="JobAppliedSucessful">
+      <h3>{{ TextJobAppliedSucess }}</h3>
     </div>
     <button
       [disabled]="disableButton ? 'disabled' : null"

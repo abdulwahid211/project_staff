@@ -153,8 +153,8 @@ export const GET_VACANCIES = gql`
 `;
 
 export const CREATE_APPLIED_JOBS = gql`
-  mutation Mutation($applicantID: Int!, $vacancyId: Int!) {
-    createAppliedJobs(jobs: {applicantID: $applicantID, vacancyID: $vacancyId})
+  mutation Mutation($applicantId: Int!, $vacancyId: Int!) {
+    createAppliedJobs(jobs: {applicantID: $applicantId, vacancyID: $vacancyId})
   }
 `;
 

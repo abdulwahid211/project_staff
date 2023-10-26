@@ -23,8 +23,8 @@ export class VacancyProfileComponent implements OnInit {
   JobAppliedSucessful = false;
   disableButton = false;
   TextJobAppliedSucess =
-    'Thank you for submitting your CV, we will contact you if you have been successful!';
-  TextAlreadyJobApplied = 'You have applied this job before!';
+    '(Thank you for submitting your CV, we will contact you if you have been successful!)';
+  TextAlreadyJobApplied = '(You have already applied for this job!)';
   applicantID!: string;
 
   constructor(
@@ -64,7 +64,7 @@ export class VacancyProfileComponent implements OnInit {
         query: CHECK_APPLIED_JOBS,
         variables: {
           vacancyId: vacancyId,
-          applicantID: Number(this.applicantID),
+          applicantId: Number(this.applicantID),
         },
       })
       .valueChanges.subscribe(({data}: any) => {
@@ -99,13 +99,14 @@ export class VacancyProfileComponent implements OnInit {
         .mutate({
           mutation: CREATE_APPLIED_JOBS,
           variables: {
-            applicantID: Number(this.applicantID),
+            applicantId: Number(this.applicantID),
             vacancyId: vacancyId,
           },
         })
         .subscribe((data: any) => {
+          console.log(data);
           this.JobAppliedSucessful = data.data.createAppliedJobs;
-          this.disableButton = true;
+          this.disableButton = this.JobAppliedSucessful;
         });
     } else {
       this.openDialog();
