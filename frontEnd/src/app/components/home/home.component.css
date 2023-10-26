@@ -13,6 +13,8 @@
     animation: fadeInAnimation ease 2s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+
+    -webkit-animation:fadeInAnimation ease 2s;
 }
 
 @keyframes fadeInAnimation {
@@ -90,7 +92,7 @@
         flex-direction: column;
         width: 100%;
         height: 90%;
-        background-size: cover;
+        background-size:800px 600px;
         background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5));
     }
 
