@@ -3,15 +3,15 @@
 }
 
 .titleVacancyProfile {
-  background-color: #6299de;
-  color: black;
+  background-color: #2b72b0;
+  color: white;
   padding: 40px;
 }
 
 .titleVacancyProfile h1 {
   font-size: 45px;
   padding-bottom: 20px;
-  color: rgb(24, 24, 98);
+  color: white;
 }
 
 mat-icon {
@@ -30,9 +30,39 @@ span {
 
 .info {
   padding: 40px;
+  color: #004d90;
+  font-weight: bold;
 }
+
+.info p {
+font-size: 120%;
+  font-weight:700;
+}
+
 
 .info h1 {
   font-size: 40px;
   padding-bottom: 20px;
+}
+#goBack {
+  padding-top: 40px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+} 
+#goBack span {
+  padding-top: 40px;
+  padding-left: 0px;
+} 
+#goBack a{
+  color: white;
+} 
+
+.info button {
+  background-color: #ffbb6d;
+  color: #004d90;
+  border: 0;
+  padding: 10px 50px;
+  font-weight: 800;
+  border-radius: 10%;
+  font-size: 26px;
 }
