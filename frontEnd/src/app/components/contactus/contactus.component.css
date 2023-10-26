@@ -34,15 +34,19 @@
 }
 
 #operations{
+    text-align: center;
     padding-top: 30px;
+    margin-bottom: -100px;
 }
-
+#operations p{
+    font-size: 90%;
+}
 #contact_statement{
     display: flex;
     flex-direction: column;
     text-align: center;
     font-size: 100%;
-    padding: 40px;
+    padding: 30px;
     line-height: 1.5;
     font-weight: bold;
 
