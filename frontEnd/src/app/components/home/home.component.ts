@@ -26,6 +26,6 @@ export class HomeComponent implements OnInit {
         this.changeBackgroundCounter = 0;
       }
       this.actualImage = this.images[this.changeBackgroundCounter];
-    }, 5000);
+    }, 2000);
   }
 }
