@@ -25,17 +25,13 @@ export class RegisterVacancyComponent implements OnInit {
   private _createdDate: any | undefined;
   public jobSectors = sectors;
 
-  private employerId: Number | undefined;
-
   constructor(
     private registerVacancyService: RegisterVacancyService,
     private route: ActivatedRoute,
     private datePipe: DatePipe,
   ) {}
 
-  ngOnInit(): void {
-    this.employerId = Number(this.route.snapshot.paramMap.get('id'));
-  }
+  ngOnInit(): void {}
 
   public selectedSector: string | undefined;
 
@@ -43,7 +39,6 @@ export class RegisterVacancyComponent implements OnInit {
     this._createdDate = Date.now();
     this.registerVacancy = await this.registerVacancyService.registerVacancy(
       result,
-      this.employerId,
       this.datePipe.transform(this._createdDate, 'yyyy-MM-dd'),
       this.selectedSector,
     );

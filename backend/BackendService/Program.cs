@@ -2,6 +2,7 @@ using AdminService.Data;
 using AppliedJobsService.Repository;
 using BackendService.Authentication;
 using BackendService.Graphql;
+using BackendService.Model;
 using BackendService.Repository;
 using BackendService.Repository.Interfaces;
 using HotChocolate.AspNetCore;
@@ -23,6 +24,8 @@ var signingKey = new SymmetricSecurityKey(
 var IsDevelopment = builder.Environment.IsDevelopment();
 
 builder.Services.AddDbContextPool<LandSeaDbContext>(options => options.UseMySql(dbConnectionString, ServerVersion.AutoDetect(dbConnectionString)));
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection(nameof(MailSettings)));
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options =>
@@ -69,6 +72,7 @@ builder.Services.AddScoped<IAppliedJobsRepository, AppliedJobsRepository>();
 builder.Services.AddScoped<IVacanciesRepository, VacanciesRepository>();
 builder.Services.AddScoped<IUserAuthLogins, UserAuthLogins>();
 builder.Services.AddScoped<ICVRepository, CVRepository>();
+builder.Services.AddScoped<IMailService, MailService>();
 builder.Services
 .AddHttpContextAccessor()
     .AddGraphQLServer().AllowIntrospection(false)

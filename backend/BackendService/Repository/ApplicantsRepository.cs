@@ -10,24 +10,38 @@ namespace BackendService.Repository
     {
         private readonly LandSeaDbContext _dbContext;
         private readonly ITokenUtil _tokenMethods;
-        public ApplicantsRepository(LandSeaDbContext dbContext, ITokenUtil tokenMethods)
+        private readonly IMailService _mailService;
+        private MailData mailData;
+
+        public ApplicantsRepository(LandSeaDbContext dbContext, ITokenUtil tokenMethods, IMailService mailService)
         {
             _dbContext = dbContext;
             _tokenMethods = tokenMethods;
+            _mailService = mailService;
+            mailData = new MailData();
         }
 
         public async Task<bool> CreateApplicantAsync(Applicants applicant)
         {
             if (await VerifyApplicantExistsAsync(applicant))
             {
-                var hashPassword = PasswordUtil.HashPassword(applicant.Password);
-                applicant.Password = hashPassword;
-                await _dbContext.Applicants.AddAsync(applicant);
-                int result = await SaveAsync();
-                return result != 0;
+                //var hashPassword = PasswordUtil.HashPassword(applicant.Password);
+                //applicant.Password = hashPassword;
+                //await _dbContext.Applicants.AddAsync(applicant);
+                //int result = await SaveAsync();
+                await SubmitWelcomeEmail(applicant);
+                return true;
             }
 
             return false;
+        }
+
+        public async Task SubmitWelcomeEmail(Applicants applicant)
+        {
+            mailData.To = applicant.Email;
+            mailData.Subject = "Welcome to Landseastaffing Recruitment!";
+            mailData.Body = _mailService.GetEmailTemplate("welcome", applicant);
+            await _mailService.SendAsync(mailData, default);
         }
 
         public async Task<bool> VerifyApplicantExistsAsync(Applicants applicant)

@@ -11,7 +11,6 @@ export class RegisterVacancyService {
 
   async registerVacancy(
     register: any,
-    employerId: any,
     created: any,
     sector: any,
   ): Promise<Observable<string>> {
@@ -19,7 +18,7 @@ export class RegisterVacancyService {
       .mutate({
         mutation: CREATE_VACANCY_PROFILE,
         variables: {
-          employerId: employerId,
+          employerId: register.value.employerId,
           title: register.value.title,
           description: register.value.description,
           created: created,

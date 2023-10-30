@@ -1,7 +1,29 @@
 export const sectors = [
   'All',
-  'Government',
+  'Catering and Hospitality',
+  'Health and Medicine',
+  'Engineering',
+  'IT',
+  'Administration',
+  'HR',
+  'Teaching',
   'Retail',
-  'Sports',
-  'Information Technology',
+  'Sales',
+  'Cleaning/Domestic',
+  'Logistics',
+  'Manufacturing',
+  'Social Care',
+  'Security',
 ];
+
+
+
+
+
+
+
+
+
+
+
+
