@@ -25,12 +25,12 @@ namespace BackendService.Repository
         {
             if (await VerifyApplicantExistsAsync(applicant))
             {
-                //var hashPassword = PasswordUtil.HashPassword(applicant.Password);
-                //applicant.Password = hashPassword;
-                //await _dbContext.Applicants.AddAsync(applicant);
-                //int result = await SaveAsync();
+                var hashPassword = PasswordUtil.HashPassword(applicant.Password);
+                applicant.Password = hashPassword;
+                await _dbContext.Applicants.AddAsync(applicant);
+                int result = await SaveAsync();
                 await SubmitWelcomeEmail(applicant);
-                return true;
+                return result != 0;
             }
 
             return false;

@@ -3,6 +3,7 @@ using BackendService.Repository.Interfaces;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using MimeKit.Utils;
 using RazorEngineCore;
 using System.Net.Mail;
 using System.Text;
@@ -40,11 +41,15 @@ namespace BackendService.Repository
                 // Add Content to Mime Message
                 var body = new BodyBuilder();
                 mail.Subject = mailData.Subject;
-                body.HtmlBody = mailData.Body;
-                mail.Body = body.ToMessageBody();
 
-                LinkedResource LinkedImage = new LinkedResource(@"J:\My Documents\Advika1.jpg");
-                LinkedImage.ContentId = "MyPic";
+                LinkedResource LinkedImage = new LinkedResource(GetImagePath("logo"));
+                LinkedImage.ContentId = "logo";
+
+                var image = body.LinkedResources.Add(GetImagePath("logo"));
+                image.ContentId = MimeUtils.GenerateMessageId();
+
+                body.HtmlBody = mailData.Body.Replace("LOGO", string.Format("cid:{0}", image.ContentId));
+                mail.Body = body.ToMessageBody();
 
                 #endregion
 

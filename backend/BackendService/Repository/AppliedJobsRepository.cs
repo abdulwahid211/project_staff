@@ -2,31 +2,25 @@
 using AppliedJobsService.Repository;
 using BackendService.Authentication;
 using BackendService.Model;
+using BackendService.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendService.Repository
 {
-    public class SimpleNameValueItem
-    {
-        public string Name { get; set; }
-
-        public int Uid { get; set; }
-
-        public int Id { get; set; }
-
-        public string Value { get; set; }
-
-    }
 
     public class AppliedJobsRepository : IAppliedJobsRepository
     {
         private readonly LandSeaDbContext _dbContext;
         private readonly ITokenUtil _tokenMethods;
+        private readonly IMailService _mailService;
+        private MailData mailData;
 
-        public AppliedJobsRepository(ITokenUtil tokenMethods, LandSeaDbContext dbContext)
+        public AppliedJobsRepository(ITokenUtil tokenMethods, LandSeaDbContext dbContext, IMailService mailService)
         {
             _tokenMethods = tokenMethods;
             _dbContext = dbContext;
+            _mailService = mailService;
+            mailData = new MailData();
         }
         public async Task<bool> CreateAppliedJobsAsync(AppliedJobs job)
         {
@@ -34,9 +28,19 @@ namespace BackendService.Repository
             {
                 await _dbContext.AppliedJobs.AddAsync(job);
                 int result = await SaveAsync();
+                await SubmitRecivedEmail(job.ApplicantID);
                 return result != 0;
             }
             return false;
+        }
+
+        public async Task SubmitRecivedEmail(int applicantId)
+        {
+            var applicant = await _dbContext.Applicants.FirstOrDefaultAsync(ap => ap.ApplicantID == applicantId);
+            mailData.To = applicant.Email;
+            mailData.Subject = "Thank you for applying with us!";
+            mailData.Body = _mailService.GetEmailTemplate("applying", applicant);
+            await _mailService.SendAsync(mailData, default);
         }
 
         public async Task<bool> DeleteAppliedJobsAsync(int id)
@@ -63,18 +67,6 @@ namespace BackendService.Repository
                      select new ApplicantApplied { ApplicantID = (int)applicants.ApplicantID, FirstName = applicants.FirstName, LastName = applicants.LastName, Telephone = applicants.Telephone, City = applicants.City, Email = applicants.Email, VacancyID = (int)vacancies.VacancyID, JobTitle = vacancies.Title };
 
             return ap.FirstOrDefault();
-
-            ///    select ( ap.ApplicantID = applicants.ApplicantID, applicants.FirstName, applicants.LastName, applicants.Telephone, applicants.City, applicants.Email, vacancies.VacancyID, JobTitle = vacancies.Title );
-            /***
-             * 
-             *  Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Telephone, A.City, A.Email 
-             *  from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
-                V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   
-                 AJ.VacancyID = V.VacancyID  where EM.EmployerID = ? order by A.ApplicantID ASC;`;
-             * 
-             * 
-             * 
-             */
         }
         public async Task<AppliedJobs> UpdateAppliedJobsAsync(AppliedJobs job)
         {
