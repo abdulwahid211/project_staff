@@ -73,8 +73,11 @@ namespace BackendService.Repository
                 return true;
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine("smtp FAILED!!!!!!!!!!!!!!!");
+                Console.WriteLine(e);
+                System.Diagnostics.Debug.WriteLine(e);
                 return false;
             }
         }
