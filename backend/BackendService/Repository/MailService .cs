@@ -1,9 +1,11 @@
 ﻿using BackendService.Model;
 using BackendService.Repository.Interfaces;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
-using PostmarkDotNet;
-using PostmarkDotNet.Legacy;
+using MimeKit;
+using MimeKit.Utils;
 using RazorEngineCore;
+using System.Net.Mail;
 using System.Text;
 
 namespace BackendService.Repository
@@ -11,40 +13,73 @@ namespace BackendService.Repository
     public class MailService : IMailService
     {
         private readonly MailSettings _settings;
-        PostmarkClient client;
-
-        public PostmarkMessage message = new PostmarkMessage()
-        {
-            From = "info@landseastaffing.com",
-            To = "abdulwahid211@gmail.com",
-            Subject = "Hello from Backend Sever",
-            HtmlBody = "<strong>Hello</strong> dear Postmark user.",
-            TextBody = "Hello dear postmark user.",
-            ReplyTo = "info@landseastaffing.com",
-            TrackOpens = true
-        };
 
         public MailService(IOptions<MailSettings> settings)
         {
             _settings = settings.Value;
-            client = new PostmarkClient("5c75e318-6074-41c8-8ddc-83c0680dc883");
         }
 
         public async Task<bool> SendAsync(MailData mailData, CancellationToken ct = default)
         {
-            PostmarkResponse response = client.SendMessage(message);
-
-            if (response.Status != PostmarkStatus.Success)
+            try
             {
-                Console.WriteLine("Response was: " + response.Message);
+                // Initialize a new instance of the MimeKit.MimeMessage class
+                var mail = new MimeMessage();
+
+                #region Sender / Receiver
+                // Sender
+                mail.From.Add(new MailboxAddress(_settings.DisplayName, mailData.From ?? _settings.From));
+                mail.Sender = new MailboxAddress(mailData.DisplayName ?? _settings.DisplayName, mailData.From ?? _settings.From);
+
+                // Receiver
+                mail.To.Add(MailboxAddress.Parse(mailData.To));
+
+                #endregion
+
+                #region Content
+
+                // Add Content to Mime Message
+                var body = new BodyBuilder();
+                mail.Subject = mailData.Subject;
+
+                LinkedResource LinkedImage = new LinkedResource(GetImagePath("logo"));
+                LinkedImage.ContentId = "logo";
+
+                var image = body.LinkedResources.Add(GetImagePath("logo"));
+                image.ContentId = MimeUtils.GenerateMessageId();
+
+                body.HtmlBody = mailData.Body.Replace("LOGO", string.Format("cid:{0}", image.ContentId));
+                mail.Body = body.ToMessageBody();
+
+                #endregion
+
+                #region Send Mail
+                using var smtp = new MailKit.Net.Smtp.SmtpClient();
+
+                if (_settings.UseSSL)
+                {
+                    await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.SslOnConnect, ct);
+                }
+                else if (_settings.UseStartTls)
+                {
+                    await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.StartTls, ct);
+                }
+                await smtp.AuthenticateAsync(_settings.UserName, _settings.Password, ct);
+                await smtp.SendAsync(mail, ct);
+                await smtp.DisconnectAsync(true, ct);
+
+                #endregion
+
+                return true;
+
             }
-            else
+            catch (Exception e)
             {
-
+                Console.WriteLine("smtp FAILED!!!!!!!!!!!!!!!");
+                Console.WriteLine(e);
+                System.Diagnostics.Debug.WriteLine(e);
+                return false;
             }
-
-            return response.Status == PostmarkStatus.Success;
-
         }
 
         public string GetEmailTemplate<T>(string emailTemplate, T emailTemplateModel)
