@@ -17,19 +17,8 @@ namespace BackendService.Repository
         public MailService(IOptions<MailSettings> settings)
         {
             _settings = settings.Value;
-            client = new PostmarkClient("5c75e318-6074-41c8-8ddc-83c0680dc883");
+            client = new PostmarkClient(_settings.APIKey);
         }
-
-        public PostmarkMessage message = new PostmarkMessage()
-        {
-            From = "info@landseastaffing.com",
-            To = "abdulwahid211@gmail.com",
-            Subject = "Hello from backend Server",
-            HtmlBody = "<strong>Hello</strong> dear Postmark user.",
-            TextBody = "Hello dear postmark user.",
-            ReplyTo = "info@landseastaffing.com",
-            TrackOpens = true
-        };
 
         public async Task<string> SendAsync(MailData mailData, CancellationToken ct = default)
         {
@@ -37,6 +26,7 @@ namespace BackendService.Repository
             PostmarkResponse response;
             try
             {
+                var message = CreateMessage(mailData, From: _settings.From);
 
                 response = client.SendMessage(message);
 
@@ -53,6 +43,22 @@ namespace BackendService.Repository
 
                 return e.Message;
             }
+        }
+
+        public PostmarkMessage CreateMessage(MailData mailData, string From)
+        {
+            return new PostmarkMessage()
+            {
+                From = From,
+                To = mailData.To,
+                Subject = mailData.Subject,
+                HtmlBody = mailData.Body,
+                TextBody = "",
+                ReplyTo = From,
+                TrackOpens = true
+            };
+
+
         }
 
         public string GetEmailTemplate<T>(string emailTemplate, T emailTemplateModel)
