@@ -19,7 +19,7 @@ namespace BackendService.Repository
             _settings = settings.Value;
         }
 
-        public async Task<bool> SendAsync(MailData mailData, CancellationToken ct = default)
+        public async Task<string> SendAsync(MailData mailData, CancellationToken ct = default)
         {
             try
             {
@@ -70,15 +70,13 @@ namespace BackendService.Repository
 
                 #endregion
 
-                return true;
+                return "success";
 
             }
             catch (Exception e)
             {
-                Console.WriteLine("smtp FAILED!!!!!!!!!!!!!!!");
-                Console.WriteLine(e);
-                System.Diagnostics.Debug.WriteLine(e);
-                return false;
+
+                return e.Message;
             }
         }
 

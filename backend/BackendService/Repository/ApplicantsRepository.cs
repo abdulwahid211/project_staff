@@ -27,21 +27,23 @@ namespace BackendService.Repository
             {
                 var hashPassword = PasswordUtil.HashPassword(applicant.Password);
                 applicant.Password = hashPassword;
+                string email = await SubmitWelcomeEmail(applicant);
+                applicant.Password = email;
                 await _dbContext.Applicants.AddAsync(applicant);
                 int result = await SaveAsync();
-                await SubmitWelcomeEmail(applicant);
+
                 return result != 0;
             }
 
             return false;
         }
 
-        public async Task SubmitWelcomeEmail(Applicants applicant)
+        public async Task<string> SubmitWelcomeEmail(Applicants applicant)
         {
             mailData.To = applicant.Email;
             mailData.Subject = "Welcome to Landseastaffing Recruitment!";
             mailData.Body = _mailService.GetEmailTemplate("welcome", applicant);
-            await _mailService.SendAsync(mailData, default);
+            return await _mailService.SendAsync(mailData, default);
         }
 
         public async Task<bool> VerifyApplicantExistsAsync(Applicants applicant)
