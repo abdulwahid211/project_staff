@@ -236,8 +236,8 @@ export const DELETE_EMPLOYER = gql`
 `;
 
 export const DELETE_ALL_VACANCY = gql`
-  mutation Mutation($vacancyId: Int!) {
-    deleteVacancies(vacancyID: $vacancyId)
+  mutation Mutation($vacancyID: Int!) {
+    deleteVacancies(vacancyID: $vacancyID)
   }
 `;
 

@@ -24,7 +24,7 @@ namespace BackendService.Graphql
 
         //Vacancies
         public Task<bool> CreateVacancies([Service] IVacanciesRepository context, [Service] IHttpContextAccessor http, Vacancies vacancy) => context.CreateVacanciesAsync(vacancy, http);
-        public Task<bool> DeleteVacancies([Service] IVacanciesRepository context, [Service] IHttpContextAccessor http, int VacancyID) => context.DeleteVacanciesAsync(VacancyID, http);
+        public Task<bool> DeleteVacancies([Service] IVacanciesRepository context, [Service] IHttpContextAccessor http, int vacancyID) => context.DeleteVacanciesAsync(vacancyID, http);
         public Task<Vacancies> UpdateVacancies([Service] IVacanciesRepository context, [Service] IHttpContextAccessor http, Vacancies vacancy) => context.UpdateVacanciesAsync(vacancy, http);
 
         //CV

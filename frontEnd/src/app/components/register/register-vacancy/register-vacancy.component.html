@@ -1,5 +1,5 @@
 <div class="registerVacancy">
-    <h2>Post a Vacancy</h2>
+    <h2>Register Vacancy</h2>
 </div>
 
 <form #newVacancy="ngForm" (ngSubmit)="onClickSubmit(newVacancy)" required>
@@ -9,10 +9,10 @@
             {{ registerErrorLabelText }}
         </div>
         <div *ngIf="formSuccessful">
-            <p>Form has been successfully submitted!</p>
+            <p style="color: green; font-weight: 400;">Form has been successfully submitted!</p>
         </div>
 
-        <input type="text" id="employerId" name="employerId" placeholder="Employer Id" ngModel required />
+        <input type="number" id="employerId" name="employerId" placeholder="Employer Id" ngModel required />
 
         <input type="text" name="title" placeholder="Title of the job" ngModel required />
 

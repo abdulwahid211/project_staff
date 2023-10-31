@@ -9,11 +9,13 @@ export const sectors = [
   'Teaching',
   'Retail',
   'Sales',
-  'Cleaning/Domestic',
+  'Cleaning and Domestic',
   'Logistics',
   'Manufacturing',
   'Social Care',
   'Security',
+  'Construction',
+  'Other',
 ];
 
 

@@ -47,6 +47,9 @@ export class RegisterVacancyComponent implements OnInit {
       data => {
         console.log(data);
         this.formSuccessful = data.data.createVacancies;
+        if( this.formSuccessful){
+          result.resetForm();
+        }
       },
       error => {
         console.log('Error ' + error);

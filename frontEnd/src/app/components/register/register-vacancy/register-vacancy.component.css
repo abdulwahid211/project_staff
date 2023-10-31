@@ -14,7 +14,7 @@
     flex-direction: column;
 }
 
-input[type='text'] {
+input[type='text'],input[type='number'] {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);

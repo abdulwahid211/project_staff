@@ -52,13 +52,13 @@ export class TableAllVacanciesComponent implements OnInit {
     return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
-  delete(vacancyId) {
-    console.log(vacancyId);
+  delete(vacancyID) {
+    console.log(vacancyID);
     this.apollo
       .mutate({
         mutation: DELETE_ALL_VACANCY,
         variables: {
-          vacancyId: vacancyId,
+          vacancyID: vacancyID,
         },
       })
       .subscribe(value => {

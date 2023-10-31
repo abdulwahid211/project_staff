@@ -79,7 +79,7 @@ import {TableAllVacanciesComponent} from './components/tables/table-vacancies/ta
       {path: 'register', component: RegisterApplicantComponent},
       {path: 'registerAdmin', component: RegisterAdminComponent},
       {path: 'registerEmployer', component: RegisterEmployerComponent},
-      {path: 'postVacancy/:id', component: RegisterVacancyComponent},
+      {path: 'postVacancy', component: RegisterVacancyComponent},
       {path: 'vacancies', component: VacancyListComponent},
       {path: 'vacancyProfile/:id', component: VacancyProfileComponent},
       {path: 'allApplicants', component: TableAllApplicantsComponent},
