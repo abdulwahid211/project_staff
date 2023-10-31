@@ -47,7 +47,7 @@ namespace BackendService.Repository
 
         public PostmarkMessage CreateMessage(MailData mailData, string From)
         {
-            return new PostmarkMessage()
+            PostmarkMessage message = new PostmarkMessage()
             {
                 From = From,
                 To = mailData.To,
@@ -58,7 +58,10 @@ namespace BackendService.Repository
                 TrackOpens = true
             };
 
+            var imageContent = File.ReadAllBytes(GetImagePath("logo"));
+            message.AddAttachment(imageContent, "logo.png", "image/png", "cid:logo.png");
 
+            return message;
         }
 
         public string GetEmailTemplate<T>(string emailTemplate, T emailTemplateModel)
