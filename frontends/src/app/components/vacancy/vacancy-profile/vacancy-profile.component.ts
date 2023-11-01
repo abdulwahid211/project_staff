@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Vacancy} from 'src/app/types/vacancy';
+
 import {
   GET_VACANCY_PROFILE,
   CREATE_APPLIED_JOBS,
@@ -43,8 +44,6 @@ export class VacancyProfileComponent implements OnInit {
         : '0';
     this.disableButton =
       localStorage.getItem(APPLICANT_ID) == null ? true : false;
-
-    console.log(vacancyId);
 
     this.apollo
       .watchQuery({
@@ -93,8 +92,7 @@ export class VacancyProfileComponent implements OnInit {
 
   onApplySubmit(vacancy: Vacancy) {
     const vacancyId = vacancy.vacancyID;
-
-    if (this.applicantID) {
+    if (this.applicantID !=='0') {
       this.apollo
         .mutate({
           mutation: CREATE_APPLIED_JOBS,

@@ -82,8 +82,9 @@ namespace BackendService.Repository
 
         public async Task<bool> VerifyAlreadyAppliedJobAsync(int ApplicantID, int VacancyID)
         {
-            var restult = await _dbContext.AppliedJobs.FirstOrDefaultAsync(x => x.VacancyID == VacancyID && x.ApplicantID == ApplicantID);
+            if (ApplicantID == 0) { return false; }
 
+            var restult = await _dbContext.AppliedJobs.FirstOrDefaultAsync(x => x.VacancyID == VacancyID && x.ApplicantID == ApplicantID);
             return (restult is not null);
         }
     }
