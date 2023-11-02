@@ -39,7 +39,7 @@ export class LoginFormsComponent implements OnInit {
         console.log(token);
         if (
           (token != 'Not Found' && id != '0') ||
-          (token != 'Incorrect Details' && id != '0')
+          (token != 'Incorrect Password' && id != '0')
         ) {
           this.dialog.closeAll();
           this.saveUserData(token, id, true, result.value.email);

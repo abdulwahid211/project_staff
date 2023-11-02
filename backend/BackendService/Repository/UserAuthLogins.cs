@@ -16,52 +16,79 @@ namespace BackendService.Repository
             _tokenMethods = tokenMethods;
         }
 
+        private AuthPayLoad payload = new AuthPayLoad
+        {
+            Token = "",
+            Id = 0
+        };
+
         public async Task<AuthPayLoad> AdminLoginAsync(string email, string password)
         {
-            var hashedPassword = PasswordUtil.HashPassword(password);
-            var validPassword = PasswordUtil.VerifyHashPassword(password, hashedPassword);
-            var admin = await _dbContext.Admins.SingleOrDefaultAsync(x => x.Email.Equals(email) && validPassword);
-            var payload = new AuthPayLoad
-            {
-                Token = "",
-                Id = 0
-            };
+            var admin = await _dbContext.Admins.SingleOrDefaultAsync(x => x.Email.Equals(email));
+
             if (admin is not null)
             {
-                payload.Id = (int)admin.AdminID;
-                payload.Token = _tokenMethods.GenerateAccessToken(email);
-                return payload;
+                if (PasswordUtil.VerifyHashPassword(password, admin.Password))
+                {
+                    payload.Id = (int)admin.AdminID;
+                    payload.Token = _tokenMethods.GenerateAccessToken(email);
+                    return payload;
+                }
+                else
+                {
+                    return IncorrectPasswordPayLoad();
+                }
+
             }
             else
             {
-                payload.Token = "Not Found";
-                return payload;
+                return NotFoundPayLoad();
             }
         }
 
         public async Task<AuthPayLoad> ApplicantLoginAsync(string email, string password)
         {
-            var hashedPassword = PasswordUtil.HashPassword(password);
-            var validPassword = PasswordUtil.VerifyHashPassword(password, hashedPassword);
-            var applicant = await _dbContext.Applicants.SingleOrDefaultAsync(x => x.Email.Equals(email) && validPassword);
-            var payload = new AuthPayLoad
-            {
-                Token = "",
-                Id = 0
-            };
+            var applicant = await _dbContext.Applicants.SingleOrDefaultAsync(x => x.Email.Equals(email));
+
             if (applicant is not null)
             {
-                payload.Token = _tokenMethods.GenerateAccessToken(email);
-                payload.Id = (int)applicant.ApplicantID;
-                return payload;
+                if (PasswordUtil.VerifyHashPassword(password, applicant.Password))
+                {
+                    payload.Token = _tokenMethods.GenerateAccessToken(email);
+                    payload.Id = (int)applicant.ApplicantID;
+                    return payload;
+                }
+                else
+                {
+                    return IncorrectPasswordPayLoad();
+                }
             }
             else
             {
-                payload.Token = "Not Found";
-                return payload;
+                return NotFoundPayLoad();
             }
         }
 
+        public AuthPayLoad NotFoundPayLoad()
+        {
+            var payload = new AuthPayLoad();
+            payload.Token = "Not Found";
+            return payload;
+        }
+
+        public AuthPayLoad IncorrectPasswordPayLoad()
+        {
+            var payload = new AuthPayLoad();
+            payload.Token = "Incorrect Password";
+            return payload;
+        }
+
+        /// <summary>
+        /// TO DO!! 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Task<bool> ForgottenPasswordLoginAsync(string email)
         {
             throw new NotImplementedException();
