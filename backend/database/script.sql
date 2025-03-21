@@ -1,119 +1,113 @@
-
+-- Applicants Table
 CREATE TABLE Applicants (
-    ApplicantID int SERIAL PRIMARY KEY,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255) NOT NULL,
-    Telephone varchar(255) NOT NULL,
-    City varchar(255) NOT NULL,
-    Email varchar(255) NOT NULL,
-    Password varchar(255) NOT NULL,
-    PRIMARY KEY (ApplicantID)
+    ApplicantID INT AUTO_INCREMENT PRIMARY KEY,
+    LastName VARCHAR(255) NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    Telephone VARCHAR(255) NOT NULL,
+    City VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL
 );
 
-
+-- CV Table
 CREATE TABLE CV (
-  Id int SERIAL PRIMARY KEY,
-  Email varchar(255) NOT NULL,
-  Filename varchar(255) NOT NULL,
-  Uploaded datetime NOT NULL,
-  File LONGTEXT NOT NULL,
-  Type varchar(255) NOT NULL,
-  Size int NOT NULL,
-  PRIMARY KEY (`Id`)
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Email VARCHAR(255) NOT NULL,
+    Filename VARCHAR(255) NOT NULL,
+    Uploaded DATETIME NOT NULL,
+    File LONGTEXT NOT NULL,
+    Type VARCHAR(255) NOT NULL,
+    Size INT NOT NULL
 );
 
+-- Admin Table
 CREATE TABLE Admin (
-    AdminID int SERIAL PRIMARY KEY,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255) NOT NULL,
-    Email varchar(255) NOT NULL,
-    Password varchar(255) NOT NULL,
-    PRIMARY KEY (AdminID)
+    AdminID INT AUTO_INCREMENT PRIMARY KEY,
+    LastName VARCHAR(255) NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL
 );
 
+-- Employer Table
+CREATE TABLE Employer (
+    EmployerID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    City VARCHAR(255) NOT NULL,
+    Postcode VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Telephone VARCHAR(255) NOT NULL
+);
+
+-- Vacancies Table
 CREATE TABLE Vacancies (
-    VacancyID int SERIAL PRIMARY KEY,
-    Title varchar(255),
-    Sector varchar(255),
-    EmployerID int,
-    Created datetime,
-    Salary varchar(255),
-    Location varchar(255),
-    Contract  varchar(255),
+    VacancyID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255),
+    Sector VARCHAR(255),
+    EmployerID INT,
+    Created DATETIME,
+    Salary VARCHAR(255),
+    Location VARCHAR(255),
+    Contract VARCHAR(255),
     Description LONGTEXT NOT NULL,
-    PRIMARY KEY (VacancyID),
     FOREIGN KEY (EmployerID) REFERENCES Employer(EmployerID)
 );
 
-CREATE TABLE Employer (
-    EmployerID int SERIAL PRIMARY KEY,
-    Name varchar(255),
-    Address varchar(255) NOT NULL,
-    City varchar(255) NOT NULL,
-    Postcode varchar(255) NOT NULL,
-    Email varchar(255) NOT NULL,
-    Telephone varchar(255) NOT NULL,
-    PRIMARY KEY (EmployerID)
-);
-
+-- AppliedJobs Table
 CREATE TABLE AppliedJobs (
-    AppliedJobsID int SERIAL PRIMARY KEY,
-    ApplicantID int,
-    VacancyID int,
-    PRIMARY KEY (AppliedJobsID),
-    UNIQUE  KEY uniq_id (ApplicantID,VacancyID)
+    AppliedJobsID INT AUTO_INCREMENT PRIMARY KEY,
+    ApplicantID INT,
+    VacancyID INT,
+    UNIQUE KEY uniq_id (ApplicantID, VacancyID),
+    FOREIGN KEY (ApplicantID) REFERENCES Applicants(ApplicantID),
+    FOREIGN KEY (VacancyID) REFERENCES Vacancies(VacancyID)
 );
 
-INSERT INTO Applicants ( LastName, FirstName, Address, City, Postcode, Email, Password)
-VALUES ( 'James', 'Robertson', 'Causeway', 'Manchester', 'EC1 ASD', 'ABDULK@GMAIL.COM', 'PASSWORD');
 
-INSERT INTO Applicants ( LastName, FirstName, Address, City, Postcode, Email, Password)
-VALUES ( 'Abdul', 'Wahid', 'Barking Causeway', 'London','EC9 ASD', 'absuhsuh@GMAIL.COM', 'PASSWORD123');
+-- Insert Data into Applicants Table
+INSERT INTO Applicants (LastName, FirstName, City, Email, Password, Telephone)
+VALUES ('James', 'Robertson', 'Manchester', 'ABDULK@GMAIL.COM', 'PASSWORD', '1234567890');
 
-INSERT INTO Employer ( Name, Address, City, Postcode, Email, Telephone)
-VALUES ( 'Next LTD', 'Peterbrough', 'London', 'E2 KIO', 'next@gmail.com', '0976654346676');
+INSERT INTO Applicants (LastName, FirstName, City, Email, Password, Telephone)
+VALUES ('Abdul', 'Wahid', 'London', 'absuhsuh@GMAIL.COM', 'PASSWORD123', '0987654321');
 
-INSERT INTO Employer ( Name, Address, City, Postcode, Email, Telephone)
-VALUES ( 'JD Sports', 'Peterbrough TYUS', 'London', 'E2 KIO', 'jd@gmail.com', '0976654346676');
+-- Insert Data into Employer Table
+INSERT INTO Employer (Name, Address, City, Postcode, Email, Telephone)
+VALUES ('Next LTD', 'Peterborough', 'London', 'E2 KIO', 'next@gmail.com', '0976654346676');
 
-INSERT INTO Admin ( LastName, FirstName, Email, Password)
-VALUES ( 'Haider', 'Ali','ali', 'pokemon');
+INSERT INTO Employer (Name, Address, City, Postcode, Email, Telephone)
+VALUES ('JD Sports', 'Peterborough TYUS', 'London', 'E2 KIO', 'jd@gmail.com', '0976654346676');
 
-INSERT INTO Admin ( LastName, FirstName, Email, Password)
-VALUES ( 'Roots', 'Ali','root', 'password');
+-- Insert Data into Admin Table
+INSERT INTO Admin (LastName, FirstName, Email, Password)
+VALUES ('Roots', 'Ali', 'root@gmail.com', 'password');
 
-INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
-VALUES ( 'Surgeon', 2, '2022-11-14', 'Responsibilities of Surgeon:
+-- Insert Data into Vacancies Table
+INSERT INTO Vacancies (Title, EmployerID, Created, Description, Salary, Location, Contract, Sector)
+VALUES ('Surgeon', 2, '2022-11-14', 'Responsibilities of Surgeon: \n Working across the service charge and rents team providing property accounting\n Setting rent and service charge for general needs housing to supported housing\n Calculating and inputting all rent charges in the system whilst supporting team to ensure all rents are set correctly and monitored.\n Reconciling all property expenditure ensuring it is coded against correct properties so service charges are reflecting the expenditures for compliance\n Carry out monthly variance reporting and supporting the service charge manager\n Ideal candidate:\n Experience working in service charge administration\n Experience using housing management and financial systems\n Knowledge of rent and service charge processes\n Understanding of Landlord and Tenant legislation\n Understanding of fixed and variable service charges', '£105k to £129k', 'Peterborough', 'Permanent', 'Government');
 
-Working across the service charge and rents team providing property accounting
-Setting rent and service charge for general needs housing to supported housing
-Calculating and inputting all rent charges in the system whilst supporting team to ensure all rents are set correctly and monitored.
-Reconciling all property expenditure ensuring it is coded against correct properties so service charges are reflecting the expenditures for compliance
-Carry out monthly variance reporting and supporting the service charge manager
-Ideal candidate:
+INSERT INTO Vacancies (Title, EmployerID, Created, Description, Salary, Location, Contract, Sector)
+VALUES ('Quality Engineer', 2, '2022-09-14', 'Responsibilities of Quality Engineer:\n Working across the service charge and rents team providing property accounting\n Understanding of fixed and variable service charges', '£10,000 an hour', 'London', 'Permanent', 'Information Technology');
 
-Experience working in service charge administration
-Experience using housing management and financial systems
-Knowledge of rent and service charge processes
-Understanding of Landlord and Tenant legislation
-Understanding of fixed and variable service charges','£105k to £129k','Peterborough','Permanent','Government');
+INSERT INTO Vacancies (Title, EmployerID, Created, Description, Salary, Location, Contract, Sector)
+VALUES ('Football Manager', 2, '2026-09-14', 'Responsibilities of Manager:\n Working across the service charge and rents team providing property accounting\n Understanding of fixed and variable service charges', '£90,000-£99,000', 'London', 'Permanent', 'Sports');
 
+-- Insert Data into AppliedJobs Table
+INSERT INTO AppliedJobs (ApplicantID, VacancyID)
+VALUES (1, 1);
 
-INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
-VALUES ( 'Qaulity Engineer', 2, '2022-09-14', 'Responsibilities of Qaulity Engineer:
-Working across the service charge and rents team providing property accounting
-Understanding of fixed and variable service charges','£10000 an hour','London','Permanent','Information Technology');
+-- Example Queries
+-- Get Vacancy Details with Employer Info
+SELECT * FROM Vacancies 
+INNER JOIN Employer ON Vacancies.EmployerID = Employer.EmployerID 
+WHERE Vacancies.VacancyID = 145;
 
-INSERT INTO Vacancies ( Title, EmployerID, Created, Description, Salary,Location,Contract, Sector )
-VALUES ( 'Football Manager', 2, '2026-09-14', 'Responsibilities of Manager:
-Working across the service charge and rents team providing property accounting
-Understanding of fixed and variable service charges','£90,000-£99,0000','London','Permanent','Sports');
-
-INSERT INTO AppliedJobs ( ApplicantID, VacancyID)
-VALUES ( 1,1);
-
-
--- SELECT * from Vacancies inner join Employer where Vacancies.VacancyID=145 and Vacancies.EmployerID = Employer.EmployerID;
-
--- Select V.VacancyID as VacancyID, V.Title as JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.Address, A.Postcode, A.City, A.Email from applicants AS A inner join vacancies AS V  inner join appliedJobs AS AJ inner join employer as EM on
--- V.EmployerId = EM.EmployerId and AJ.ApplicantID = A.ApplicantID and   AJ.VacancyID = V.VacancyID  where EM.EmployerID = 5 order by A.ApplicantID ASC;
+-- Get Applied Jobs with Applicant and Employer Info
+SELECT V.VacancyID AS VacancyID, V.Title AS JobTitle, A.ApplicantID, A.FirstName, A.LastName, A.City, A.Email 
+FROM Applicants AS A
+INNER JOIN AppliedJobs AS AJ ON AJ.ApplicantID = A.ApplicantID
+INNER JOIN Vacancies AS V ON AJ.VacancyID = V.VacancyID
+INNER JOIN Employer AS EM ON V.EmployerID = EM.EmployerID
+WHERE EM.EmployerID = 5 
+ORDER BY A.ApplicantID ASC;

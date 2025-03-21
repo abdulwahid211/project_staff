@@ -374,6 +374,11 @@ paket-files/
 __pycache__/
 *.pyc
 
+#c scopes
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+
 # Cake - Uncomment if you are using it
 # tools/
 
